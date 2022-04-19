@@ -3,7 +3,7 @@
     <modelVersion>4.0.0</modelVersion>
     <parent>
         <groupId>com.mycompany</groupId>
-        <artifactId>Test1PomProject</artifactId>
+        <artifactId>sportStats</artifactId>
         <version>1.0-SNAPSHOT</version>
     </parent>
     <artifactId>Domain</artifactId>
@@ -60,4 +60,5 @@
             <scope>test</scope>
         </dependency>
     </dependencies>
+    <name>Domain</name>
 </project>
