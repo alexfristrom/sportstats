@@ -10,6 +10,5 @@ module test.rest {
     requires spring.web;
     requires spring.beans;
     requires tests.domain;
-    requires DomainTesting.Domain;
 
 }
