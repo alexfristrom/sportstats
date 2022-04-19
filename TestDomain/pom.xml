@@ -6,7 +6,7 @@
         <artifactId>Test1PomProject</artifactId>
         <version>1.0-SNAPSHOT</version>
     </parent>
-    <artifactId>TestDomain</artifactId>
+    <artifactId>Domain</artifactId>
     <packaging>jar</packaging>
     <build>
         <plugins>

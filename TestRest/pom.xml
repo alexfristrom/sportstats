@@ -8,7 +8,7 @@
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>com.mycompany</groupId>
-    <artifactId>TestRest</artifactId>
+    <artifactId>Rest</artifactId>
     <version>1.0-SNAPSHOT</version>
     <packaging>jar</packaging>
     <dependencies>
@@ -61,8 +61,13 @@
         </dependency>
         <dependency>
             <groupId>${project.groupId}</groupId>
-            <artifactId>TestDomain</artifactId>
+            <artifactId>Domain</artifactId>
             <version>${project.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>digitman</groupId>
+            <artifactId>DomainTesting</artifactId>
+            <version>1.0</version>
         </dependency>
     </dependencies>
     <properties>
@@ -70,7 +75,7 @@
         <maven.compiler.source>17</maven.compiler.source>
         <maven.compiler.target>17</maven.compiler.target>
     </properties>
-    <name>TestRest</name>
+    <name>Rest</name>
     <build>
         <plugins>
             <plugin>
