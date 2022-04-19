@@ -8,6 +8,6 @@ module tests.domain {
     requires java.persistence;
     requires com.fasterxml.jackson.annotation;
     
-    exports test.domain;
+    exports sportstats.domain;
 
 }
