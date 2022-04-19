@@ -18,9 +18,9 @@ public class Results implements Listable {
     
     private Long awayteam_score;
     
-    private boolean overtime;
+    //  private boolean overtime;
     
-    private boolean penalties;
+   //   private boolean penalties;
     
     private Long overtime_minutes;
     
@@ -55,22 +55,22 @@ public class Results implements Listable {
         this.awayteam_score = awayteam_score;
     }
     
-    public boolean getResultPenalties() {
-        return penalties;
-    }
-
-    public void setResultPenalties(boolean penalties) {
-        this.penalties = penalties;
-    }
-    
-    public boolean getResultOvertime() {
-        return overtime;
-    }
-
-    public void setResultOvertime(boolean overtime) {
-        
-        this.overtime = overtime;
-    }
+//    public boolean getResultPenalties() {
+//        return penalties;
+//    }
+//
+//    public void setResultPenalties(boolean penalties) {
+//        this.penalties = penalties;
+//    }
+//    
+//    public boolean getResultOvertime() {
+//        return overtime;
+//    }
+//
+//    public void setResultOvertime(boolean overtime) {
+//        
+//        this.overtime = overtime;
+//    }
     
     public Long getResultOvertimeMinutes() {
         return overtime_minutes;
