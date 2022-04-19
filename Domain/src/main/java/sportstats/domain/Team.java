@@ -27,14 +27,14 @@ public class Team implements Listable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String name;
-
+/*
     @ManyToOne(targetEntity = Season.class)
     @JoinColumn(name = "season_id", referencedColumnName = "id")
     private Long season_id;
     @ManyToOne(targetEntity = Arena.class)
     @JoinColumn(name = "arena_id", referencedColumnName = "id")
     private Long arena_id;
-
+*/
     @Override
     public Long getId() {
         return id;
@@ -50,7 +50,7 @@ public class Team implements Listable {
     public void setName(String name) {
         this.name = name;
     }
-
+/*
     public void setSeasonId(Long season_id) {
         this.season_id = season_id;
     }
@@ -66,5 +66,5 @@ public class Team implements Listable {
     public Long getArenaId() {
         return arena_id;
     }
-
+*/
 }
