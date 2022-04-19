@@ -9,8 +9,6 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 
 /**
  *
@@ -37,14 +35,12 @@ public class Span implements Listable{
     public String getStartDate() {
         return start_date;
     }
-
     public void setStartDate(String date) {
         this.start_date = date;
     }
     public String getEndDate() {
         return end_date;
     }
-
     public void setEndDate(String date) {
         this.end_date= date;
     }
