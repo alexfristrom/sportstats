@@ -43,9 +43,6 @@ public class Season implements Listable {
     public Long getId() {
         return id;
     }
-    public void setId(Long id) {
-        this.id = id;
-    }
     
     public Long getSpanId() {
         return this.span_id;

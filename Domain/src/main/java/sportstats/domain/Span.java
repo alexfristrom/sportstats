@@ -29,9 +29,6 @@ public class Span implements Listable{
     public Long getId(){
         return id;
     }
-    public void setId(long id){
-        this.id = id;
-    }
     public String getStartDate() {
         return start_date;
     }
