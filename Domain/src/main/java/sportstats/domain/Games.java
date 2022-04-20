@@ -10,7 +10,7 @@ import javax.persistence.*;
  */
 @Entity
 @JsonIgnoreProperties("hibernateLazyInitializer")
-public class Match implements Listable {
+public class Games implements Listable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -26,14 +26,14 @@ public class Match implements Listable {
     
     private Byte round;
     
-    private Date date;
+    private Date dateMatch;
     
     private Long spectators;
     
-    public Match() {
+    public Games() {
     }
 
-    public Match(Long id) {
+    public Games(Long id) {
         this.id = id;
         
     }
@@ -86,11 +86,11 @@ public class Match implements Listable {
     }
     
     public Date getMatchDate() {
-        return date;
+        return dateMatch;
     }
 
-    public void setMatchDate(Date date) {
-        this.date = date;
+    public void setMatchDate(Date dateMatch) {
+        this.dateMatch = dateMatch;
     }
 
     public Long getMatchSpectators() {
