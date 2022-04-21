@@ -8,6 +8,7 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 import sportstats.domain.Arena;
 
+
 /**
  *
  * @author David Sjöblom
@@ -29,4 +30,5 @@ public class ArenaTest {
         assertEquals(testObject.getCapacity(),Integer.MAX_VALUE);
         assertNotEquals(testObject.getCapacity(),0);
     }
+
 }
