@@ -5,6 +5,7 @@
 package sportstats.domain;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import java.time.LocalDate;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -22,23 +23,23 @@ public class Span implements Listable{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String end_date;
-    private String start_date;
+    private LocalDate end_date;
+    private LocalDate start_date;
     
     @Override
     public Long getId(){
         return id;
     }
-    public String getStartDate() {
+    public LocalDate getStartDate() {
         return start_date;
     }
-    public void setStartDate(String date) {
-        this.start_date = date;
+    public void setStartDate(int year, int month, int day) {
+        start_date = LocalDate.of(year, month, month);
     }
-    public String getEndDate() {
+    public LocalDate getEndDate() {
         return end_date;
     }
-    public void setEndDate(String date) {
-        this.end_date= date;
+    public void setEndDate(int year, int month, int day) {
+        end_date = LocalDate.of(year, month, day);
     }
 }
