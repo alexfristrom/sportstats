@@ -6,13 +6,13 @@ package sportstats.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
-import sportstats.domain.Games;
+import sportstats.domain.Game;
 
 /**
  *
  * @author annjohansson
  */
 @Repository
-public interface GamesRepository extends JpaRepository<Games, Long>{
+public interface GameRepository extends JpaRepository<Game, Long>{
     
 }

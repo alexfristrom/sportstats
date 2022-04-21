@@ -8,7 +8,7 @@ import javax.persistence.*;
  */
 @Entity
 @JsonIgnoreProperties("hibernateLazyInitializer")
-public class Results implements Listable {
+public class Result implements Listable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -24,10 +24,10 @@ public class Results implements Listable {
     
     private Long overtime_minutes;
     
-    public Results() {
+    public Result() {
     }
 
-    public Results(Long id, Long hometeam_score, Long awayteam_score) {
+    public Result(Long id, Long hometeam_score, Long awayteam_score) {
         this.id = id;
         this.hometeam_score = hometeam_score;
         this.awayteam_score = awayteam_score;
