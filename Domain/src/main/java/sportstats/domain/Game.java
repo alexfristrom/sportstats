@@ -1,6 +1,7 @@
 package sportstats.domain;
 
 import com.fasterxml.jackson.annotation.*;
+import java.time.LocalDate;
 import java.util.Date;
 import javax.persistence.*;
 /**
@@ -26,7 +27,7 @@ public class Game implements Listable {
     
     private Byte round;
     
-    private Date dateMatch;
+    private LocalDate dateMatch;
     
     private Long spectators;
     
@@ -85,11 +86,11 @@ public class Game implements Listable {
         this.round = round;
     }
     
-    public Date getMatchDate() {
+    public LocalDate getMatchDate() {
         return dateMatch;
     }
 
-    public void setMatchDate(Date dateMatch) {
+    public void setMatchDate(LocalDate dateMatch) {
         this.dateMatch = dateMatch;
     }
 
