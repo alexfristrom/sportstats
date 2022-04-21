@@ -10,7 +10,7 @@ import javax.persistence.*;
  */
 @Entity
 @JsonIgnoreProperties("hibernateLazyInitializer")
-public class Games implements Listable {
+public class Game implements Listable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -30,10 +30,10 @@ public class Games implements Listable {
     
     private Long spectators;
     
-    public Games() {
+    public Game() {
     }
 
-    public Games(Long id) {
+    public Game(Long id) {
         this.id = id;
         
     }
