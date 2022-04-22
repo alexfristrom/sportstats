@@ -3,7 +3,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/module-info.java to edit this template
  */
 
-module tests.domain {
+module sportstats.domain {
     requires org.hibernate.orm.core;
     requires java.persistence;
     requires com.fasterxml.jackson.annotation;

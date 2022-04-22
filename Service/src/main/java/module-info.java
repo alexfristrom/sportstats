@@ -3,12 +3,11 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/module-info.java to edit this template
  */
 
-module Service {
+module sportstats.service {
     exports sportstats.service;
     
-    
     requires spring.context;
-    requires Repository;
-    requires transitive tests.domain;
+    requires sportstats.repository;
+    requires transitive sportstats.domain;
 
 }

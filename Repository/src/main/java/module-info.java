@@ -3,10 +3,10 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/module-info.java to edit this template
  */
 
-module Repository {
+module sportstats.repository {
     requires spring.context;
     requires spring.data.jpa;
-    requires tests.domain;
+    requires sportstats.domain;
     
     exports sportstats.repository;
 }
