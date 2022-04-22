@@ -36,6 +36,8 @@ public class League implements Listable {
     public Long getId(){
         return id;
     }
+    
+    @Override
     public String getName() {
         return name;
     }

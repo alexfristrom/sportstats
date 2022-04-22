@@ -12,4 +12,7 @@ import java.io.Serializable;
  */
 public interface Listable extends Serializable {
     public Long getId();
+    
+    public String getName();
+    
 }
