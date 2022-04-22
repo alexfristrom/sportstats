@@ -13,6 +13,7 @@ import javax.persistence.Id;
 
 /**
  *
+ * 
  * @author max
  */
 @Entity
@@ -33,13 +34,13 @@ public class Span implements Listable{
     public LocalDate getStartDate() {
         return start_date;
     }
-    public void setStartDate(int year, int month, int day) {
-        start_date = LocalDate.of(year, month, month);
+    public void setStartDate(LocalDate start_date) {
+        this.start_date = start_date;
     }
     public LocalDate getEndDate() {
         return end_date;
     }
-    public void setEndDate(int year, int month, int day) {
-        end_date = LocalDate.of(year, month, day);
+    public void setEndDate(LocalDate end_date) {
+        this.end_date = end_date;
     }
 }
