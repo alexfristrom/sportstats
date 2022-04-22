@@ -111,8 +111,59 @@ public class DateHandlerTest {
     }
 
     @Test
-    public void test() {
+    public void exceptionThrowTime() {
 
+        assertThrows(IllegalArgumentException.class,
+                () -> {
+                    byte hour = 25;
+                    byte minute = 15;
+                    byte second = 0;
+                    DateHandler dateHandler = new DateHandler();
+                    dateHandler.addTime(hour, minute, second);
+                });
+        assertThrows(IllegalArgumentException.class,
+                () -> {
+                    byte hour = 24;
+                    byte minute = -2;
+                    byte second = 0;
+                    DateHandler dateHandler = new DateHandler();
+                    dateHandler.addTime(hour, minute, second);
+                });
+        assertThrows(IllegalArgumentException.class,
+                () -> {
+                    byte hour = 23;
+                    byte minute = 15;
+                    byte second = 70;
+                    DateHandler dateHandler = new DateHandler();
+                    dateHandler.addTime(hour, minute, second);
+                });
     }
+     @Test
+    public void exceptionThrowDate() {
 
+        assertThrows(IllegalArgumentException.class,
+                () -> {
+                    short year = 25;
+                    byte month = 12;
+                    byte day = 1;
+                    DateHandler dateHandler = new DateHandler();
+                    dateHandler.addDate(year, month, day);
+                });
+        assertThrows(IllegalArgumentException.class,
+                () -> {
+                    short year = 2000;
+                    byte month = 14;
+                    byte day = 1;
+                    DateHandler dateHandler = new DateHandler();
+                    dateHandler.addDate(year, month, day);
+                });
+        assertThrows(IllegalArgumentException.class,
+                () -> {
+                    short year = 2000;
+                    byte month = 11;
+                    byte day = 0;
+                    DateHandler dateHandler = new DateHandler();
+                    dateHandler.addDate(year, month, day);
+                });
+    }
 }
