@@ -7,7 +7,9 @@ import javax.persistence.*;
 /**
  *
  * @author thomas
- */
+ * 
+ */ 
+
 @Entity
 @JsonIgnoreProperties("hibernateLazyInitializer")
 public class Sport implements Listable {
@@ -15,6 +17,7 @@ public class Sport implements Listable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    @Column(unique=true)
     private String name;
 
     public Sport() {

@@ -6,6 +6,7 @@ package sportstats.domain;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import java.io.Serializable;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -25,6 +26,7 @@ public class League implements Listable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    @Column(unique=true)
     private String name;
     @ManyToOne(targetEntity = Sport.class)
     @JoinColumn(name = "sport_id", referencedColumnName = "id")
