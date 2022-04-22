@@ -25,7 +25,10 @@ public class SpanTest {
     public void testSpanSetGetStartDate(){
         Span span = new Span();
         DateHandler handler = new DateHandler();
-        handler.addDate(2022, 5, 19);
+        short year = 2022;
+        byte month = 5;
+        byte day = 15;
+        handler.addDate(year, month, day);
         span.setStartDate(handler.getDate());
         assertEquals(handler.getDate(), span.getStartDate()); 
     }
@@ -34,7 +37,10 @@ public class SpanTest {
     public void testSpanSetGetEndDate(){
         Span span = new Span();
         DateHandler handler = new DateHandler();
-        handler.addDate(2022, 5, 19);
+        short year = 2022;
+        byte month = 5;
+        byte day = 15;
+        handler.addDate(year, month, day);
         span.setStartDate(handler.getDate());
         assertEquals(handler.getDate(), span.getStartDate()); 
     }

@@ -22,7 +22,10 @@ public class DateHandlerTest {
     @Test
     public void testDate() {
         DateHandler handler = new DateHandler();
-        handler.addDate(2022, 5, 15);
+        short year = 2022;
+        byte month = 5;
+        byte day = 15;
+        handler.addDate(year, month, day);
         LocalDate date = handler.getDate();
 
         LocalDate refferenceDate = LocalDate.of(2022, 5, 15);
@@ -35,7 +38,10 @@ public class DateHandlerTest {
     @Test
     public void testTime() {
         DateHandler handler = new DateHandler();
-        handler.addTime(20, 15, 0);
+        byte hour = 20;
+        byte minute = 15;
+        byte second = 0;
+        handler.addTime(hour, minute, second);
         LocalTime time = handler.getTime();
 
         LocalTime refferenceTime = LocalTime.of(20, 15, 0);
@@ -47,8 +53,14 @@ public class DateHandlerTest {
     @Test
     public void testDateTime() {
         DateHandler handler = new DateHandler();
-        handler.addTime(20, 15, 0);
-        handler.addDate(2022, 5, 15);
+        byte hour = 20;
+        byte minute = 15;
+        byte second = 0;
+        handler.addTime(hour, minute, second);
+        short year = 2022;
+        byte month = 5;
+        byte day = 15;
+        handler.addDate(year, month, day);
         LocalDateTime dateTime = handler.getDateTime();
 
         LocalDateTime refferenceDateTime = LocalDateTime.of(2022, 5, 15, 20, 15, 0);
@@ -61,34 +73,46 @@ public class DateHandlerTest {
     @Test
     public void getDateExcludeTimeFromDateTime() {
         DateHandler handler = new DateHandler();
-        handler.addTime(20, 15, 0);
-        handler.addDate(2022, 5, 15);
+        byte hour = 20;
+        byte minute = 15;
+        byte second = 0;
+        handler.addTime(hour, minute, second);
+        short year = 2022;
+        byte month = 5;
+        byte day = 15;
+        handler.addDate(year, month, day);
         LocalDateTime dateTime = handler.getDateTime();
-        
+
         LocalDate refferenceDate = LocalDate.of(2022, 5, 15);
         LocalDate date = dateTime.toLocalDate();
         assertEquals(refferenceDate, date);
-        
+
         System.out.println("Date only from DateTime: " + date);
     }
-    
+
     @Test
-    public void getTimeExcludeDateFromDateTime(){
+    public void getTimeExcludeDateFromDateTime() {
         DateHandler handler = new DateHandler();
-        handler.addTime(20, 15, 0);
-        handler.addDate(2022, 5, 15);
+        byte hour = 20;
+        byte minute = 15;
+        byte second = 0;
+        handler.addTime(hour, minute, second);
+        short year = 2022;
+        byte month = 5;
+        byte day = 15;
+        handler.addDate(year, month, day);
         LocalDateTime dateTime = handler.getDateTime();
-        
+
         LocalTime refferenceTime = LocalTime.of(20, 15, 0);
         LocalTime time = dateTime.toLocalTime();
         assertEquals(refferenceTime, time);
-        
+
         System.out.println("Time only from DateTime: " + time);
     }
-    
+
     @Test
-    public void test(){
-        
+    public void test() {
+
     }
 
 }

@@ -48,7 +48,7 @@ public class ResultTest {
     }
     
     @Test
-    public void setAndGet(){
+    public void setAndGetPenalty(){
         var testObject = new Result();
         testObject.setPenalty(true);
         assertTrue(testObject.getPenalty());
