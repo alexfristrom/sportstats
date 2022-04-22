@@ -5,6 +5,7 @@ package tests.domain;
  * Click nbfs://nbhost/SystemFileSystem/Templates/UnitTests/JUnit5TestClass.java to edit this template
  */
 
+import java.time.LocalDate;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeEach;
@@ -12,6 +13,7 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 import sportstats.domain.Span;
+import sportstats.handler.DateHandler;
 
 /**
  *
@@ -22,6 +24,19 @@ public class SpanTest {
     @Test
     public void testSpanSetGetStartDate(){
         Span span = new Span();
+        DateHandler handler = new DateHandler();
+        handler.addDate(2022, 5, 19);
+        span.setStartDate(handler.getDate());
+        assertEquals(handler.getDate(), span.getStartDate()); 
+    }
+    
+    @Test
+    public void testSpanSetGetEndDate(){
+        Span span = new Span();
+        DateHandler handler = new DateHandler();
+        handler.addDate(2022, 5, 19);
+        span.setStartDate(handler.getDate());
+        assertEquals(handler.getDate(), span.getStartDate()); 
     }
     
 }
