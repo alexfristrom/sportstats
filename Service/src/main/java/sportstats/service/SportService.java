@@ -8,8 +8,10 @@ import java.util.List;
 import org.hibernate.service.spi.ServiceException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import sportstats.domain.Listable;
 import sportstats.domain.Sport;
 import sportstats.repository.SportRepository;
+import sportstats.service.util.ListableProxy;
 
 /**
  *
@@ -35,8 +37,9 @@ public class SportService {
         return repository.getById(id);
     }
     
-    public List<Sport> getAll() {
-        return repository.findAll();
+    public List<Listable> getAllSport() {
+        return ListableProxy.listOf(repository.findAll());       
+                
     }
 
 }

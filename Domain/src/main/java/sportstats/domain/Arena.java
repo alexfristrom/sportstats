@@ -32,6 +32,7 @@ public class Arena implements Listable{
         return id;
     }
     
+    @Override
      public String getName() {
         return name;
     }

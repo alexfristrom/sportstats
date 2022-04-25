@@ -1,6 +1,7 @@
 package sportstats.domain;
 
 import com.fasterxml.jackson.annotation.*;
+import java.io.Serializable;
 import javax.persistence.*;
 
 /**
@@ -8,7 +9,7 @@ import javax.persistence.*;
  */
 @Entity
 @JsonIgnoreProperties("hibernateLazyInitializer")
-public class Result implements Listable {
+public class Result implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -33,7 +34,6 @@ public class Result implements Listable {
         this.awayteam_score = awayteam_score;
     }
 
-    @Override
     public Long getId() {
         return id;
     }

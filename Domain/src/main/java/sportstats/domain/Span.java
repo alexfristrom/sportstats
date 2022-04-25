@@ -5,6 +5,7 @@
 package sportstats.domain;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import java.io.Serializable;
 import java.time.LocalDate;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -18,7 +19,7 @@ import javax.persistence.Id;
  */
 @Entity
 @JsonIgnoreProperties("hibernateLazyInitializer")
-public class Span implements Listable{
+public class Span implements Serializable{
     public Span() {
     }
     @Id
@@ -27,7 +28,6 @@ public class Span implements Listable{
     private LocalDate end_date;
     private LocalDate start_date;
     
-    @Override
     public Long getId(){
         return id;
     }
