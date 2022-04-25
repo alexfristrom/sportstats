@@ -5,7 +5,9 @@
 package sportstats.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
+import java.util.List;
 import sportstats.domain.Sport;
 
 /**
@@ -15,4 +17,7 @@ import sportstats.domain.Sport;
 @Repository
 public interface SportRepository extends JpaRepository<Sport, Long>{
     
+    @Query("FROM Sport s WHERE name LIKE CONCAT(?1,'%')")
+        List<Sport> findByName(String name);
+
 }
