@@ -1,6 +1,7 @@
 package sportstats.domain;
 
 import com.fasterxml.jackson.annotation.*;
+import java.io.Serializable;
 import java.time.LocalDateTime;
 import javax.persistence.*;
 
@@ -11,7 +12,7 @@ import javax.persistence.*;
  */
 @Entity
 @JsonIgnoreProperties("hibernateLazyInitializer")
-public class Game implements Listable {
+public class Game implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
