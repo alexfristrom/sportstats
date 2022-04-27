@@ -12,11 +12,13 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import sportstats.domain.League;
+import sportstats.domain.Listable;
 import sportstats.service.LeagueService;
 import sportstats.service.util.LeagueBySport;
 
 /**
- *
+ * Servlet class for Leagueservice
+ * 
  * @author alexf
  */
 
@@ -31,14 +33,19 @@ public class LeagueResource {
         this.service = service;
     }
     
-    @PostMapping("{sportId}")
-    public League saveLeague(@PathVariable Long sportId){
-        return service.saveLeague(sportId);
+    @PostMapping("/{sportId}/{leagueName}")
+    public League saveLeague(@PathVariable Long sportId, @PathVariable String leagueName){
+        return service.saveLeague(sportId, leagueName);
     }
     
     @GetMapping("sport/{sportId}")
     public List<LeagueBySport> listByRoom(@PathVariable Long sportId){
         return service.listBySport(sportId);
+    }
+    
+    @GetMapping
+    public List<Listable> getAllLeague(){
+        return service.getAllLeague();
     }
     
 }

@@ -8,7 +8,8 @@ import sportstats.domain.League;
 import sportstats.domain.Sport;
 
 /**
- *
+ * Ties Sport and league to a class so it can be used to show information
+ * 
  * @author alexf
  */
 public class LeagueBySport {
@@ -23,11 +24,16 @@ public class LeagueBySport {
         return delegate.getId();
     }
     
-    public String getSportName(){
-        Sport newSport = delegate.getSport();
-        return newSport.getName();
+    public String getLeagueName(){
+        return delegate.getName();
     }
     
+//Kan användas för att visa sportnament också
+//    public String getSportName(){
+//        Sport newSport = delegate.getSport();
+//        return newSport.getName();
+//    }
+//    
     
 
     

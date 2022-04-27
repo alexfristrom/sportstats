@@ -11,7 +11,8 @@ import org.springframework.stereotype.Repository;
 import sportstats.domain.League;
 
 /**
- *
+ * Egen Query metod för att kunna söka efter specfik data
+ * 
  * @author annjohansson
  */
 @Repository

@@ -9,12 +9,15 @@ import org.hibernate.service.spi.ServiceException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import sportstats.domain.League;
+import sportstats.domain.Listable;
 import sportstats.domain.Sport;
 import sportstats.repository.LeagueRepository;
 import sportstats.repository.SportRepository;
 import sportstats.service.util.LeagueBySport;
+import sportstats.service.util.ListableProxy;
 
 /**
+ * Functions for that refclets the backlog for league 
  *
  * @author alexf
  */
@@ -32,9 +35,10 @@ public class LeagueService {
         this.sportRepository = sportRepository;
     }
     
-    public League saveLeague(Long sportId){
+    public League saveLeague(Long sportId, String name){
          sport = sportRepository.getById(sportId);
          league = new League(sport);
+         league.setName(name);
         return repository.save(league);
     }
     
@@ -42,6 +46,11 @@ public class LeagueService {
         return repository.listBySport(sportId).stream()
                 .map(LeagueBySport::new)
                 .toList();
+    }
+    
+    public List<Listable> getAllLeague() {
+        return ListableProxy.listOf(repository.findAll());       
+                
     }
     
     
