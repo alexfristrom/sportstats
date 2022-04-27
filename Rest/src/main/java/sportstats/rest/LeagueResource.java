@@ -9,14 +9,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
-import sportstats.domain.Listable;
-import sportstats.domain.Sport;
-import sportstats.service.SportService;
+import sportstats.domain.League;
+import sportstats.service.LeagueService;
+import sportstats.service.util.LeagueBySport;
 
 /**
  *
@@ -24,29 +21,24 @@ import sportstats.service.SportService;
  */
 
 @RestController
-@RequestMapping("sport")
-public class SportResource {
+@RequestMapping("league")
+public class LeagueResource {
     
-    private final SportService service;
+    private final LeagueService service;
     
     @Autowired
-    public SportResource(SportService service){
+    public LeagueResource(LeagueService service){
         this.service = service;
     }
     
-    @PostMapping
-    public Sport saveSport(@RequestBody Sport sport){
-        return service.saveSport(sport);
+    @PostMapping("{sportId}")
+    public League saveLeague(@PathVariable Long sportId){
+        return service.saveLeague(sportId);
     }
     
-    @GetMapping("{id}")
-    public Sport getSportById(@PathVariable Long id){
-        return service.getSport(id);
-    }
-    
-    @GetMapping
-    public List<Listable> getAllSport(){
-        return service.getAllSport();
+    @GetMapping("sport/{sportId}")
+    public List<LeagueBySport> listByRoom(@PathVariable Long sportId){
+        return service.listBySport(sportId);
     }
     
 }

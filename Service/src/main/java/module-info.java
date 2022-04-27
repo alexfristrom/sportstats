@@ -5,6 +5,7 @@
 
 module sportstats.service {
     exports sportstats.service;
+    exports sportstats.service.util;
     
     requires spring.context;
     requires sportstats.repository;
