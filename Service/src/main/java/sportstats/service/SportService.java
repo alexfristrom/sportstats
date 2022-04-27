@@ -30,6 +30,9 @@ public class SportService {
         if (s.getId() != null) {
             throw new ServiceException("New Sport object can not have ID prior to persistence");
         }
+        if(this.isUnique(s) != null){
+              throw new ServiceException("Dubplcate name!");
+        }
         return repository.save(s);
     }
     
@@ -41,5 +44,9 @@ public class SportService {
         return ListableProxy.listOf(repository.findAll());       
                 
     }
-
+    
+    public String isUnique(Sport s){
+        return repository.isUnique(s.getName());
+        
+    }
 }
