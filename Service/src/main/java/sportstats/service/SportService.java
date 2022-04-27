@@ -30,6 +30,14 @@ public class SportService {
         if (s.getId() != null) {
             throw new ServiceException("New Sport object can not have ID prior to persistence");
         }
+        try{
+          if (s.getName().equals(repository.findByName(s.getName()).get(0).getName())){
+             throw new ServiceException("New Sport object can not have dublicated name persistence");
+        }  
+        }catch(IndexOutOfBoundsException e){
+            
+        }
+        
         return repository.save(s);
     }
     
