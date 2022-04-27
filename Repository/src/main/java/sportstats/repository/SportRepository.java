@@ -17,7 +17,9 @@ import sportstats.domain.Sport;
 @Repository
 public interface SportRepository extends JpaRepository<Sport, Long>{
     
+//    @Query("FROM Sport s WHERE name LIKE CONCAT(?1,'%')")
+//        List<Sport> findByName(String name);
     @Query("FROM Sport s WHERE name LIKE CONCAT(?1,'%')")
-        List<Sport> findByName(String name);
+       String findByName(String name);
 
 }
