@@ -4,7 +4,9 @@
  */
 package sportstats.repository;
 
+import java.util.List;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 import sportstats.domain.Season;
 
@@ -14,5 +16,6 @@ import sportstats.domain.Season;
  */
 @Repository
 public interface SeasonRepository extends JpaRepository<Season, Long> {
-    
+    @Query("FROM Season season WHERE season.league.id = ?1")
+    List<Season> listByLeague(Long leagueId);
 }

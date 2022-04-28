@@ -27,35 +27,42 @@ public class Season implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @ManyToOne(targetEntity = Span.class)
-    @JoinColumn(name = "span_id", referencedColumnName = "id")
-    private Long span_id;
-    @ManyToOne(targetEntity = League.class)
-    @JoinColumn(name = "league_id", referencedColumnName = "id")
-    private Long league_id;
+    @ManyToOne
+    @JoinColumn(name = "span_id")
+    private Span span;
+    @ManyToOne
+    @JoinColumn(name = "league_id")
+    private League league;
 
     private int round_tot;
-
-    public Season() {
-
+    
+    public Season(){
+        
     }
 
+    public Season(int round_tot, League league, Span span) {
+        this.round_tot = round_tot;
+        this.league = league;
+        this.span = span;
+    }
+    
+    
     public Long getId() {
         return id;
     }
     
-    public Long getSpanId() {
-        return this.span_id;
+    public Span getSpan() {
+        return this.span;
     }
-    public void setSpanId(Long span_id) {
-        this.span_id = span_id;
+    public void setSpan(Span span) {
+        this.span = span;
     }
     
-    public Long getLeagueId() {
-        return this.league_id;
+    public League getLeague() {
+        return this.league;
     }
-    public void setLeagueId(Long league_id) {
-        this.league_id = league_id;
+    public void setLeague(League league) {
+        this.league = league;
     }
 
     public int getRoundTot() {

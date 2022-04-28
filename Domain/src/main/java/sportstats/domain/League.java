@@ -21,15 +21,22 @@ import javax.persistence.ManyToOne;
 @Entity
 @JsonIgnoreProperties("hibernateLazyInitializer")
 public class League implements Listable {
-    public League() {
-    }
+    
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String name;
-    @ManyToOne(targetEntity = Sport.class)
-    @JoinColumn(name = "sport_id", referencedColumnName = "id")
-    private Long sport_id;
+    
+    @ManyToOne
+    @JoinColumn(name = "sport_id")
+    private Sport sport;
+    
+    public League() {
+    }
+    
+    public League(Sport sport) {
+        this.sport = sport;
+    }
     
     @Override
     public Long getId(){
@@ -45,12 +52,12 @@ public class League implements Listable {
         this.name = name;
     }
     
-    public Long getSportId(){
-        return sport_id;
+    public Sport getSport(){
+        return this.sport;
     }
     
-    public void setSportId(Long id){
-        this.sport_id = id;
+    public void setSport(Sport sport){
+        this.sport = sport;
     }
     
 

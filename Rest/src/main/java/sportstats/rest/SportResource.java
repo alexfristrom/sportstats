@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import sportstats.domain.Listable;
 import sportstats.domain.Sport;
@@ -33,16 +34,16 @@ public class SportResource {
         this.service = service;
     }
     
-    @PostMapping("{saveSport}")
+    @PostMapping
     public Sport saveSport(@RequestBody Sport sport){
-        
-       return service.saveSport(sport);
+        return service.saveSport(sport);
     }
     
-    @GetMapping("getid/{id}")
-    public Sport getSportById(@PathVariable("id") Long id){
+    @GetMapping("{id}")
+    public Sport getSportById(@PathVariable Long id){
         return service.getSport(id);
-    }   
+    }
+    
     @GetMapping
     public List<Listable> getAllSport(){
         return service.getAllSport();
