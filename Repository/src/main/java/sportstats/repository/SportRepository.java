@@ -19,7 +19,7 @@ public interface SportRepository extends JpaRepository<Sport, Long>{
     
 //    @Query("FROM Sport s WHERE name LIKE CONCAT(?1,'%')")
 //        List<Sport> findByName(String name);
-    @Query("FROM Sport s WHERE name LIKE CONCAT(?1,'%')")
-       String findByName(String name);
+    @Query(value = "SELECT name FROM sport WHERE name = ?1",nativeQuery = true)
+    String findByName(String name);
 
 }

@@ -28,14 +28,14 @@ public class SportService {
         this.repository = repository;
     }
 
-    public Sport saveSport(Sport s) {
-        CheckId.checkId(s.getId());
-        //String fixedName = CheckName.checkNameContent(s.getName());
-        //s.setName(fixedName);
+    public Sport saveSport(Sport sport) {
+        CheckId.checkId(sport.getId());
+        String fixedName = CheckName.checkNameContent(sport.getName());
+        sport.setName(fixedName);
         CheckName.checkName(
-                repository.findByName(s.getName()) != null);
+                repository.findByName(sport.getName()) != null);
           
-        return repository.save(s);
+        return repository.save(sport);
     }
 
     public Sport getSport(Long id) {
