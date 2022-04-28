@@ -11,6 +11,7 @@ import java.io.Serializable;
  * @author David Sjöblom
  */
 public interface Listable extends Serializable {
+    
     public Long getId();
     
     public String getName();

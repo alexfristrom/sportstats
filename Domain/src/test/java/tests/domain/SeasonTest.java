@@ -15,28 +15,28 @@ import sportstats.domain.Season;
  * @author alexf
  */
 public class SeasonTest {
-    
-    @Test
-    public void spanIdTest(){
-        var testSeason = new Season();
-        Long testValue = 1L;
-        testSeason.setSpanId(testValue);
-        assertEquals(testValue, testSeason.getSpanId());
-    }
-    
-    @Test
-    public void leagueIdTest(){
-        var testSeason = new Season();
-        Long testValue = 1L;
-        testSeason.setLeagueId(testValue);
-        assertEquals(testValue, testSeason.getLeagueId());
-    }
-    
-    @Test
-    public void roundTotTest(){
-        var testSeason = new Season();
-        int testValue = 1;
-        testSeason.setRoundTot(testValue);
-        assertEquals(testValue, testSeason.getRoundTot());
-    }
+//    
+//    @Test
+//    public void spanIdTest(){
+//        var testSeason = new Season();
+//        Long testValue = 1L;
+//        testSeason.setSpanId(testValue);
+//        assertEquals(testValue, testSeason.getSpanId());
+//    }
+//    
+//    @Test
+//    public void leagueIdTest(){
+//        var testSeason = new Season();
+//        Long testValue = 1L;
+//        testSeason.setLeagueId(testValue);
+//        assertEquals(testValue, testSeason.getLeagueId());
+//    }
+//    
+//    @Test
+//    public void roundTotTest(){
+//        var testSeason = new Season();
+//        int testValue = 1;
+//        testSeason.setRoundTot(testValue);
+//        assertEquals(testValue, testSeason.getRoundTot());
+//    }
 }

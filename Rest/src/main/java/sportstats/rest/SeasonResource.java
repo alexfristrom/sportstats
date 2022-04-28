@@ -4,6 +4,7 @@
  */
 package sportstats.rest;
 
+import java.io.Serializable;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -13,8 +14,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import sportstats.domain.League;
 import sportstats.domain.Listable;
+import sportstats.domain.Season;
 import sportstats.service.LeagueService;
+import sportstats.service.SeasonService;
 import sportstats.service.util.LeagueBySport;
+import sportstats.service.util.SeasonByLeague;
 
 /**
  * Servlet class for Leagueservice
@@ -23,29 +27,29 @@ import sportstats.service.util.LeagueBySport;
  */
 
 @RestController
-@RequestMapping("league")
-public class LeagueResource {
+@RequestMapping("season")
+public class SeasonResource {
     
-    private final LeagueService service;
+    private final SeasonService service;
     
     @Autowired
-    public LeagueResource(LeagueService service){
+    public SeasonResource(SeasonService service){
         this.service = service;
     }
     
-    @PostMapping("/{sportId}/{leagueName}")
-    public League saveLeague(@PathVariable Long sportId, @PathVariable String leagueName){
-        return service.saveLeague(sportId, leagueName);
+    @PostMapping("/{roundTot}/{leagueId}/{spanId}")
+    public Season saveSeason(@PathVariable int roundTot, @PathVariable Long leagueId, @PathVariable Long spanId){
+        return service.saveSeason(roundTot, leagueId, spanId);
     }
     
-    @GetMapping("listBySport/{sportId}")
-    public List<LeagueBySport> listBySport(@PathVariable Long sportId){
-        return service.listBySport(sportId);
+    @GetMapping("listByLeague/{leagueId}")
+    public List<SeasonByLeague> listByLeague(@PathVariable Long leagueId){
+        return service.listByLeague(leagueId);
     }
     
     @GetMapping
-    public List<Listable> getAllLeague(){
-        return service.getAllLeague();
+    public List<Season> getAllSeason(){
+        return service.getAllSeason();
     }
     
 }

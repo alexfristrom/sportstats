@@ -17,46 +17,41 @@ import sportstats.service.util.LeagueBySport;
 import sportstats.service.util.ListableProxy;
 
 /**
- * Functions for that refclets the backlog for league 
+ * Functions for that refclets the backlog for league
  *
  * @author alexf
  */
 @Service
 public class LeagueService {
+
     private Sport sport;
     private League league;
-    
+
     private LeagueRepository repository;
     private SportRepository sportRepository;
-    
+
     @Autowired
-    public LeagueService(LeagueRepository repository, SportRepository sportRepository){
+    public LeagueService(LeagueRepository repository, SportRepository sportRepository) {
         this.repository = repository;
         this.sportRepository = sportRepository;
     }
-    
-    public League saveLeague(Long sportId, String name){
-         sport = sportRepository.getById(sportId);
-         league = new League(sport);
-         league.setName(name);
+
+    public League saveLeague(Long sportId, String name) {
+        sport = sportRepository.getById(sportId);
+        league = new League(sport);
+        league.setName(name);
         return repository.save(league);
     }
-    
-    public List<LeagueBySport> listBySport(Long sportId){
+
+    public List<LeagueBySport> listBySport(Long sportId) {
         return repository.listBySport(sportId).stream()
                 .map(LeagueBySport::new)
                 .toList();
     }
-    
+
     public List<Listable> getAllLeague() {
-        return ListableProxy.listOf(repository.findAll());       
-                
+        return ListableProxy.listOf(repository.findAll());
+
     }
-    
-    
-    
-    
-    
-    
-    
+
 }
