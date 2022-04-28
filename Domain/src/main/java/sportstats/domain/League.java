@@ -26,7 +26,6 @@ public class League implements Listable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @Column(unique=true)
     private String name;
     @ManyToOne(targetEntity = Sport.class)
     @JoinColumn(name = "sport_id", referencedColumnName = "id")
