@@ -7,7 +7,9 @@ package tests.domain;
 
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
+import sportstats.domain.League;
 import sportstats.domain.Season;
+import sportstats.domain.Span;
 
 /**
  * Test for Domain object Season
@@ -15,28 +17,28 @@ import sportstats.domain.Season;
  * @author alexf
  */
 public class SeasonTest {
-//    
-//    @Test
-//    public void spanIdTest(){
-//        var testSeason = new Season();
-//        Long testValue = 1L;
-//        testSeason.setSpanId(testValue);
-//        assertEquals(testValue, testSeason.getSpanId());
-//    }
-//    
-//    @Test
-//    public void leagueIdTest(){
-//        var testSeason = new Season();
-//        Long testValue = 1L;
-//        testSeason.setLeagueId(testValue);
-//        assertEquals(testValue, testSeason.getLeagueId());
-//    }
-//    
-//    @Test
-//    public void roundTotTest(){
-//        var testSeason = new Season();
-//        int testValue = 1;
-//        testSeason.setRoundTot(testValue);
-//        assertEquals(testValue, testSeason.getRoundTot());
-//    }
+    
+    @Test
+    public void getAndSetSpanTest(){
+        var testSeason = new Season();
+        Span span = new Span();
+        testSeason.setSpan(span);
+        assertEquals(span, testSeason.getSpan());
+    }
+    
+    @Test
+    public void getAndSetLeagueTest(){
+        var testSeason = new Season();
+        League league = new League();
+        testSeason.setLeague(league);
+        assertEquals(league, testSeason.getLeague());
+    }
+    
+    @Test
+    public void roundTotTest(){
+        var testSeason = new Season();
+        int testValue = 1;
+        testSeason.setRoundTot(testValue);
+        assertEquals(testValue, testSeason.getRoundTot());
+    }
 }
