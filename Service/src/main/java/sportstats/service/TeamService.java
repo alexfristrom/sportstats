@@ -6,11 +6,7 @@ package sportstats.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import sportstats.domain.Arena;
-import sportstats.domain.Season;
-import sportstats.domain.Sport;
 import sportstats.domain.Team;
-import sportstats.repository.SportRepository;
 import sportstats.repository.TeamRepository;
 import sportstats.service.util.CheckId;
 import sportstats.service.util.CheckName;
@@ -34,9 +30,9 @@ public class TeamService {
         String fixedName = CheckName.checkNameContent(team.getName());
         team.setName(fixedName);
         
-        if(team.getSport()== null){
-         throw new NullPointerException("A team must include a sport");
-        }  
+//        if(team.getSport().getId()== null){
+//         throw new NullPointerException("A team must include a sport");
+//        }  
         
         return repository.save(team);
     }
