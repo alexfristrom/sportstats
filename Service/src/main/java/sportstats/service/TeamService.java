@@ -6,36 +6,38 @@ package sportstats.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import sportstats.domain.Arena;
 import sportstats.domain.Season;
+import sportstats.domain.Sport;
 import sportstats.domain.Team;
-import sportstats.repository.SeasonRepository;
+import sportstats.repository.SportRepository;
 import sportstats.repository.TeamRepository;
+import sportstats.service.util.CheckId;
+import sportstats.service.util.CheckName;
 
 /**
  *
- * @author David Sjöblom
+ * @author annjohansson
  */
 @Service
 public class TeamService {
 
-    private final TeamRepository teamRepo;
-    private final SeasonRepository seasonRepo;
+    private final TeamRepository repository;
 
     @Autowired
-    public TeamService(TeamRepository teamRepo,SeasonRepository seasonRepo) {
-        this.teamRepo = teamRepo;
-        this.seasonRepo = seasonRepo;
+    public TeamService(TeamRepository repository) {
+        this.repository = repository;
     }
-    
-    public Team addSeasonToTeam(String teamName,Long seasonId){
-        Season season = seasonRepo.getById(seasonId);
-        Team team = teamRepo.findByName(teamName);
-        team.setSeason(season);
-        return teamRepo.save(team);
-    }
-    
-    
-    
-    
 
+    public Team saveTeam(Team team) {
+        CheckId.checkId(team.getId());
+        String fixedName = CheckName.checkNameContent(team.getName());
+        team.setName(fixedName);
+        
+//        if (team.getSport().getId() == null) {
+//            throw new NullPointerException("A team must include a sport");
+//        }
+
+        return repository.save(team);
+    }
 }

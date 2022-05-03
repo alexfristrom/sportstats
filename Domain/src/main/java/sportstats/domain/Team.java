@@ -28,7 +28,10 @@ public class Team implements Listable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String name;
-
+    
+    @ManyToOne
+    @JoinColumn(name = "sport_id")
+    private Sport sport;
     @ManyToOne
     @JoinColumn(name = "season_id")
     private Season season;
@@ -49,6 +52,10 @@ public class Team implements Listable {
     public void setName(String name) {
         this.name = name;
     }
+    
+     public void setSport(Sport sport) {
+        this.sport = sport;
+    }
 
     public void setSeason(Season season) {
         this.season = season;
@@ -56,6 +63,10 @@ public class Team implements Listable {
 
     public void setArena(Arena arena) {
         this.arena = arena;
+    }
+    
+    public Sport getSport() {
+        return sport;
     }
 
     public Season getSeason() {
