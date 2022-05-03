@@ -7,6 +7,8 @@ package tests.domain;
 
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
+import sportstats.domain.Arena;
+import sportstats.domain.Season;
 import sportstats.domain.Team;
 
 /**
@@ -18,9 +20,10 @@ public class TeamTest {
     @Test
     public void setAndSetArenaId() {
         var testObject = new Team();
-        testObject.setArenaId(Long.MAX_VALUE);
-        assertEquals(Long.MAX_VALUE, testObject.getArenaId());
-        assertNotEquals(Long.MIN_VALUE, testObject.getArenaId());
+        Arena arena = new Arena();
+        testObject.setArena(arena);
+        assertEquals(arena, testObject.getArena());
+        assertNotEquals(null, testObject.getArena());
     }
 
     @Test
@@ -34,9 +37,10 @@ public class TeamTest {
     @Test
     public void setAndGetSeasonId() {
         var testObject = new Team();
-        testObject.setSeasonId(Long.MIN_VALUE);
-        assertEquals(Long.MIN_VALUE, testObject.getSeasonId());
-        assertNotEquals(Long.MAX_VALUE, testObject.getSeasonId());
+        Season season = new Season();
+        testObject.setSeason(season);
+        assertEquals(season, testObject.getSeason());
+        assertNotEquals(null, testObject.getSeason());
     }
 
 }

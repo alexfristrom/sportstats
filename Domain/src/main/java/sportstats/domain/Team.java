@@ -29,12 +29,12 @@ public class Team implements Listable {
     private Long id;
     private String name;
 
-    @ManyToOne(targetEntity = Season.class)
-    @JoinColumn(name = "season_id", referencedColumnName = "id")
-    private Long season_id;
-    @ManyToOne(targetEntity = Arena.class)
-    @JoinColumn(name = "arena_id", referencedColumnName = "id")
-    private Long arena_id;
+    @ManyToOne
+    @JoinColumn(name = "season_id")
+    private Season season;
+    @ManyToOne
+    @JoinColumn(name = "arena_id")
+    private Arena arena;
 
     @Override
     public Long getId() {
@@ -50,19 +50,19 @@ public class Team implements Listable {
         this.name = name;
     }
 
-    public void setSeasonId(Long season_id) {
-        this.season_id = season_id;
+    public void setSeason(Season season) {
+        this.season = season;
     }
 
-    public void setArenaId(Long arena_id) {
-        this.arena_id = arena_id;
+    public void setArena(Arena arena) {
+        this.arena = arena;
     }
 
-    public Long getSeasonId() {
-        return season_id;
+    public Season getSeason() {
+        return season;
     }
 
-    public Long getArenaId() {
-        return arena_id;
+    public Arena getArena() {
+        return arena;
     }
 }
