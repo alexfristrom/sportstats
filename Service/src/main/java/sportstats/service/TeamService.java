@@ -6,6 +6,7 @@ package sportstats.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import sportstats.domain.Season;
 import sportstats.domain.Sport;
 import sportstats.domain.Team;
 import sportstats.repository.SeasonRepository;
@@ -20,20 +21,17 @@ import sportstats.service.util.CheckName;
  */
 @Service
 public class TeamService {
-    
-    private Team temp;
 
     private final TeamRepository teamRepo;
     private final SeasonRepository seasonRepo;
+    private final SportRepository sportRepo;
 
     @Autowired
-    public TeamService(TeamRepository repository, SeasonRepository seasonRepo) {
+    public TeamService(TeamRepository repository, SeasonRepository seasonRepo, SportRepository sportRepo) {
         this.teamRepo = repository;
-        if (seasonRepo == null) {
-            this.seasonRepo = seasonRepo;
-        } else {
-            this.seasonRepo = seasonRepo;
-        }
+        this.seasonRepo = seasonRepo;
+        this.sportRepo = sportRepo;
+   
     }
 
     public Team addSeasonToTeam(String teamName, Long seasonId) {
@@ -47,14 +45,18 @@ public class TeamService {
         return teamRepo.save(team);
     }
 
-    public Team saveTeam(Team team) {
-    }
-}
+    public Team createTeam(long sportId, Team team) {
         CheckId.checkId(team.getId());
         String fixedName = CheckName.checkNameContent(team.getName());
         team.setName(fixedName);
+        Sport sport = sportRepo.findById(sportId).orElseThrow();
+        team.setSport(sport);
 
 //        if (team.getSport().getId() == null) {
 //            throw new NullPointerException("A team must include a sport");
 //        }
         return teamRepo.save(team);
+
+    }
+}
+       
