@@ -12,8 +12,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import sportstats.domain.Team;
 import sportstats.service.TeamService;
-import sportstats.service.TeamService2;
-
 /**
  *
  * @author David Sjöblom
@@ -27,15 +25,17 @@ public class TeamResource {
     public TeamResource(TeamService service){
         this.service = service;
     }
-//    
-//    @PostMapping("/{seasonId}/{teamName}")
-//    public Team addSeasonToTeam(@PathVariable Long seasonId,@PathVariable String teamName){
-//        
-//        return service.addSeasonToTeam(teamName, seasonId);
-//    }
+    
+    @PostMapping("addSeasonToTeam/{seasonId}/{teamName}")
+    public Team addSeasonToTeam(@PathVariable Long seasonId,@PathVariable String teamName){
+        
+        return service.addSeasonToTeam(teamName, seasonId);
+    }
     
     @PostMapping
     public Team saveTeam(@RequestBody Team team){
         return service.saveTeam(team);
     }
+    
+
 }

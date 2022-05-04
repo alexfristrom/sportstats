@@ -18,4 +18,7 @@ public interface TeamRepository extends JpaRepository<Team, Long>{
     @Query(value = "SELECT * FROM team WHERE name = ?1",nativeQuery = true)
     public Team findByName(String teamName);
     
+    @Query(value = "SELECT count(*) FROM team WHERE season_id = ?1",nativeQuery = true)
+    public int countAllTeamsInSeason(Long season_id);
+    
 }
