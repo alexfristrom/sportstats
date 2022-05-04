@@ -26,11 +26,12 @@ public class LeagueTest {
         assertNotEquals("",testObject.getName());
     }
     
-//    @Test
-//    public void setAndGetSportId(){
-//        var testObject = new League();
-//        testObject.setSport(Long.MIN_VALUE);
-//        assertEquals(Long.MIN_VALUE,testObject.getSportId());
-//        assertNotEquals(Long.MAX_VALUE,testObject.getSportId());
-//    }
+    @Test
+    public void setAndGetSport(){
+        var testObject = new League();
+        Sport sport = new Sport();
+        testObject.setSport(sport);
+        assertEquals(sport,testObject.getSport());
+        assertNotEquals(null,testObject.getSport());
+    }
 }
