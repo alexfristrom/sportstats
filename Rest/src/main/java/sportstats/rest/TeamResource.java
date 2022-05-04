@@ -32,9 +32,9 @@ public class TeamResource {
         return service.addSeasonToTeam(teamName, seasonId);
     }
     
-    @PostMapping
-    public Team saveTeam(@RequestBody Team team){
-        return service.saveTeam(team);
+    @PostMapping("{sportId}")
+    public Team createTeam(@PathVariable Long sportId, @RequestBody Team team){
+        return service.createTeam(sportId, team);
     }
     
 
