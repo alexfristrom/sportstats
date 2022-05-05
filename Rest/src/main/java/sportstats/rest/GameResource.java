@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import sportstats.domain.Game;
 import sportstats.service.GameService;
+import sportstats.service.util.GameByTeam;
 
 /**
  *
@@ -43,5 +44,10 @@ public class GameResource {
     @GetMapping
     public List<Game> getAllGame(){
         return service.getAllGame();
+    }
+    
+    @GetMapping("listByTeam/{teamId}")
+    public List<GameByTeam> listByTeam(@PathVariable Long teamId){
+        return service.listByTeam(teamId);
     }
 }

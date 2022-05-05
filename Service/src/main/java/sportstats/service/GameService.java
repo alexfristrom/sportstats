@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import sportstats.domain.Game;
 import sportstats.repository.GameRepository;
+import sportstats.service.util.GameByTeam;
 
 /**
  *
@@ -33,5 +34,11 @@ public class GameService {
 
     public List<Game> getAllGame(){
         return gameRepo.findAll();
+    }
+    
+    public List<GameByTeam> listByTeam(Long teamId){
+        return gameRepo.listByTeam(teamId).stream()
+                .map(GameByTeam::new)
+                .toList();
     }
 }
