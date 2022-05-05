@@ -5,6 +5,7 @@
 package sportstats.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 import sportstats.domain.Arena;
 
@@ -15,4 +16,6 @@ import sportstats.domain.Arena;
 @Repository
 public interface ArenaRepository extends JpaRepository<Arena, Long>{
     
+     @Query(value = "SELECT name FROM arena WHERE name = ?1",nativeQuery = true)
+    String findByName(String name);
 }
