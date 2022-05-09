@@ -18,41 +18,41 @@ import sportstats.handler.DateHandler;
  */
 public class GameTest {
 
-    @Test
-    public void homeTeamTest() {
-        Game game = new Game();
-        Long id = 1L;
-
-        game.setHomeTeamId(id);
-        assertEquals(id, game.getHomeTeamId());
-    }
-
-    @Test
-    public void awayTeamTest() {
-        Game game = new Game();
-        Long id = 1L;
-
-        game.setAwayTeamId(id);
-        assertEquals(id, game.getAwayTeamId());
-    }
-
-    @Test
-    public void seasonIdTest() {
-        Game game = new Game();
-        Long id = 1L;
-
-        game.setMatchSeasonId(id);
-        assertEquals(id, game.getMatchSeasonId());
-    }
-
-    @Test
-    public void resultIdTest() {
-        Game game = new Game();
-        Long id = 1L;
-
-        game.setMatchResultId(id);
-        assertEquals(id, game.getMatchResultId());
-    }
+//    @Test
+//    public void homeTeamTest() {
+//        Game game = new Game();
+//        Long id = 1L;
+//
+//        game.setHomeTeamId(id);
+//        assertEquals(id, game.getHomeTeamId());
+//    }
+//
+//    @Test
+//    public void awayTeamTest() {
+//        Game game = new Game();
+//        Long id = 1L;
+//
+//        game.setAwayTeamId(id);
+//        assertEquals(id, game.getAwayTeamId());
+//    }
+//
+//    @Test
+//    public void seasonIdTest() {
+//        Game game = new Game();
+//        Long id = 1L;
+//
+//        game.setMatchSeasonId(id);
+//        assertEquals(id, game.getMatchSeasonId());
+//    }
+//
+//    @Test
+//    public void resultIdTest() {
+//        Game game = new Game();
+//        Long id = 1L;
+//
+//        game.setMatchResultId(id);
+//        assertEquals(id, game.getMatchResultId());
+//    }
 
     @Test
     public void roundTest() {

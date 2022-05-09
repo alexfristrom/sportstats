@@ -17,14 +17,22 @@ public class Game implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
-    private Long hometeam_id;
-
-    private Long awayteam_id;
-
-    private Long season_id;
-
-    private Long result_id;
+    
+    @ManyToOne
+    @JoinColumn(name = "hometeam_id")
+    private Team hometeam;
+    
+    @ManyToOne
+    @JoinColumn(name = "awayteam_id")
+    private Team awayteam;
+    
+    @ManyToOne
+    @JoinColumn(name = "season_id")
+    private Season season;
+    
+    @ManyToOne
+    @JoinColumn(name = "result_id")
+    private Result result;
 
     private Byte round;
 
@@ -44,37 +52,37 @@ public class Game implements Serializable {
         return id;
     }
 
-    public Long getHomeTeamId() {
-        return hometeam_id;
+    public Team getHomeTeam() {
+        return hometeam;
     }
 
-    public void setHomeTeamId(Long hometeam_score) {
-        this.hometeam_id = hometeam_score;
+    public void setHomeTeam(Team hometeam) {
+        this.hometeam = hometeam;
     }
 
-    public Long getAwayTeamId() {
-        return awayteam_id;
+    public Team getAwayTeam() {
+        return awayteam;
     }
 
-    public void setAwayTeamId(Long awayteam_score) {
-        this.awayteam_id = awayteam_score;
+    public void setAwayTeam(Team awayteam) {
+        this.awayteam = awayteam;
     }
 
-    public Long getMatchSeasonId() {
-        return season_id;
+    public Season getMatchSeason() {
+        return season;
     }
 
-    public void setMatchSeasonId(Long season_id) {
-        this.season_id = season_id;
+    public void setMatchSeason(Season season) {
+        this.season = season;
     }
 
-    public Long getMatchResultId() {
-        return result_id;
+    public Result getMatchResult() {
+        return result;
     }
 
-    public void setMatchResultId(Long result_id) {
+    public void setMatchResult(Result result) {
 
-        this.result_id = result_id;
+        this.result = result;
     }
 
     public Byte getMatchRound() {
