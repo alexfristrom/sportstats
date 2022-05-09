@@ -36,8 +36,20 @@ public class GameService {
         return gameRepo.findAll();
     }
     
-    public List<GameByTeam> listByTeam(Long teamId){
-        return gameRepo.listByTeam(teamId).stream()
+    public List<GameByTeam> listAllByTeam(Long teamId){
+        return gameRepo.listAllByTeam(teamId).stream()
+                .map(GameByTeam::new)
+                .toList();
+    }
+    
+     public List<GameByTeam> listAwayByTeam(Long teamId){
+        return gameRepo.listAwayByTeam(teamId).stream()
+                .map(GameByTeam::new)
+                .toList();
+    }
+     
+      public List<GameByTeam> listHomeByTeam(Long teamId){
+        return gameRepo.listHomeByTeam(teamId).stream()
                 .map(GameByTeam::new)
                 .toList();
     }

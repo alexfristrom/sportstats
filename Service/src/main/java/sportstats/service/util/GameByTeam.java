@@ -4,7 +4,10 @@
  */
 package sportstats.service.util;
 
+import java.time.LocalDateTime;
 import sportstats.domain.Game;
+import sportstats.domain.Result;
+import sportstats.domain.Season;
 import sportstats.domain.Team;
 
 /**
@@ -21,6 +24,34 @@ public class GameByTeam {
     
     public Long getId() {
         return delegate.getId();
+    }
+    
+    public Team getHomeTeam() {
+        return delegate.getHomeTeam();
+    }
+    
+    public Team getAwayTeam() {
+        return delegate.getAwayTeam();
+    }
+    
+    public Season getSeason() {
+        return delegate.getSeason();
+    }
+    
+    public Result getResult() {
+        return delegate.getResult();
+    }
+    
+    public Byte getRound() {
+        return delegate.getRound();
+    }
+     
+    public LocalDateTime getDate() {
+        return delegate.getDate();
+    }
+      
+    public Long getSpectators() {
+        return delegate.getSpectators();
     }
     
 // public String getTeamName(){

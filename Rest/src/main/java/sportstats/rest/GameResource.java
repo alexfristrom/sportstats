@@ -46,8 +46,18 @@ public class GameResource {
         return service.getAllGame();
     }
     
-    @GetMapping("listByTeam/{teamId}")
-    public List<GameByTeam> listByTeam(@PathVariable Long teamId){
-        return service.listByTeam(teamId);
+    @GetMapping("listAllByTeam/{teamId}")
+    public List<GameByTeam> listAllByTeam(@PathVariable Long teamId){
+        return service.listAllByTeam(teamId);
+    }
+    
+    @GetMapping("listAwayByTeam/{teamId}")
+    public List<GameByTeam> listAwayByTeam(@PathVariable Long teamId){
+        return service.listAwayByTeam(teamId);
+    }
+    
+    @GetMapping("listHomeByTeam/{teamId}")
+    public List<GameByTeam> listHomeByTeam(@PathVariable Long teamId){
+        return service.listHomeByTeam(teamId);
     }
 }

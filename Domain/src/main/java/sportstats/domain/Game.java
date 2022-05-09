@@ -68,44 +68,44 @@ public class Game implements Serializable {
         this.awayteam = awayteam;
     }
 
-    public Season getMatchSeason() {
+    public Season getSeason() {
         return season;
     }
 
-    public void setMatchSeason(Season season) {
+    public void setSeason(Season season) {
         this.season = season;
     }
 
-    public Result getMatchResult() {
+    public Result getResult() {
         return result;
     }
 
-    public void setMatchResult(Result result) {
+    public void setResult(Result result) {
 
         this.result = result;
     }
 
-    public Byte getMatchRound() {
+    public Byte getRound() {
         return round;
     }
 
-    public void setMatchRound(Byte round) {
+    public void setRound(Byte round) {
         this.round = round;
     }
 
-    public LocalDateTime getMatchDate() {
+    public LocalDateTime getDate() {
         return dateMatch;
     }
 
-    public void setMatchDate(LocalDateTime dateMatch) {
+    public void setDate(LocalDateTime dateMatch) {
         this.dateMatch = dateMatch;
     }
 
-    public Long getMatchSpectators() {
+    public Long getSpectators() {
         return spectators;
     }
 
-    public void setMatchSpectators(Long spectators) {
+    public void setSpectators(Long spectators) {
         this.spectators = spectators;
     }
 

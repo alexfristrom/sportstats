@@ -18,5 +18,11 @@ import sportstats.domain.Game;
 public interface GameRepository extends JpaRepository<Game, Long>{
     
     @Query("FROM Game game WHERE game.hometeam.id = ?1 OR game.awayteam.id = ?1")
-    List<Game> listByTeam(Long teamId);
+    List<Game> listAllByTeam(Long teamId);
+    
+    @Query("FROM Game game WHERE game.awayteam.id = ?1")
+    List<Game> listAwayByTeam(Long teamId);
+    
+    @Query("FROM Game game WHERE game.hometeam.id = ?1")
+    List<Game> listHomeByTeam(Long teamId);
 }
