@@ -4,9 +4,7 @@
  */
 package sportstats.service.util;
 
-import sportstats.domain.League;
 import sportstats.domain.Season;
-import sportstats.domain.Sport;
 
 /**
  * Ties Sport and league to a class so it can be used to show information

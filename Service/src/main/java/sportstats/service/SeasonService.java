@@ -4,13 +4,10 @@
  */
 package sportstats.service;
 
-import java.io.Serializable;
 import java.util.List;
-import org.hibernate.service.spi.ServiceException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import sportstats.domain.League;
-import sportstats.domain.Listable;
 import sportstats.domain.Season;
 import sportstats.domain.Span;
 
@@ -18,8 +15,6 @@ import sportstats.repository.LeagueRepository;
 import sportstats.repository.SeasonRepository;
 import sportstats.repository.SpanRepository;
 
-import sportstats.service.util.LeagueBySport;
-import sportstats.service.util.ListableProxy;
 import sportstats.service.util.SeasonByLeague;
 
 /**
