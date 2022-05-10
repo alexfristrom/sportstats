@@ -30,7 +30,7 @@ public class Game implements Serializable {
     @JoinColumn(name = "season_id")
     private Season season;
     
-    @ManyToOne
+    @OneToOne
     @JoinColumn(name = "result_id")
     private Result result;
 
@@ -43,10 +43,15 @@ public class Game implements Serializable {
     public Game() {
     }
 
-    public Game(Long id) {
-        this.id = id;
-
+    public Game(Byte round){
+        this.round = round;
     }
+    public Game(Byte round,LocalDateTime dateMatch){
+        this.round = round;
+        this.dateMatch = dateMatch;
+    }
+    
+    
 
     public Long getId() {
         return id;

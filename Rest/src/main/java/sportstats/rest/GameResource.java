@@ -50,7 +50,7 @@ public class GameResource {
     public List<GameByTeam> listAllByTeam(@PathVariable Long teamId){
         return service.listAllByTeam(teamId);
     }
-    
+        
     @GetMapping("listAwayByTeam/{teamId}")
     public List<GameByTeam> listAwayByTeam(@PathVariable Long teamId){
         return service.listAwayByTeam(teamId);
@@ -60,4 +60,37 @@ public class GameResource {
     public List<GameByTeam> listHomeByTeam(@PathVariable Long teamId){
         return service.listHomeByTeam(teamId);
     }
+    
+//    @PostMapping("/addPlannedMatches/{homeTeam}/{awayTeam}")
+//    public List<Game> saveAllGames(@PathVariable List<Long> homeTeam,@PathVariable List<Long> awayTeam
+//            ,@RequestBody List<Game> games){
+//        return service.saveAllGames(homeTeam,awayTeam,games);
+//    }
+    
+    @PostMapping("/addPlanned/{homeTeamId}/{awayTeamId}/{seasonId}")
+    public Game saveAll(@PathVariable Long homeTeamId,@PathVariable Long awayTeamId,@PathVariable Long seasonId ,@RequestBody Game games){
+        return service.saveAllGames(homeTeamId, awayTeamId,seasonId,games);
+    }
+    
+//    
+//    public class homeWrapper{
+//        List<Long> team;
+//        
+//        public void set(Long homeTeam){
+//            this.team.add(homeTeam);
+//        }
+//        public Long get(int index){
+//            return this.team.get(index);
+//        }
+//    }
+//    
+//    public class awayWrapper{
+//        List<Long> team;
+//        public void set(Long awayTeam){
+//            this.team.add(awayTeam);
+//        }
+//        public Long get(int index){
+//            return this.team.get(index)
+//        }
+//    }
 }
