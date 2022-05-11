@@ -9,7 +9,6 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import sportstats.domain.Game;
-import sportstats.domain.Result;
 import sportstats.domain.Season;
 import sportstats.domain.Team;
 import sportstats.repository.GameRepository;
@@ -75,15 +74,21 @@ public class GameService {
         List<Long> awayTeam = tgWrap.getAwayTeam();
         List<Game> games = tgWrap.getGame();
         List<Long> homeTeam = tgWrap.getHomeTeam();
+        Long seasonId = tgWrap.getSeasonId();
+        Season season = seasonRepo.findById(seasonId).orElseThrow();
         if (!(homeTeam.size() == awayTeam.size()) && !(homeTeam.size() == games.size())) {
             throw new IllegalArgumentException("One of the input lists are out of sync, one list is larger then the other.");
         }
-
+        //Might not be a necessary 
         for (int i = 0; i < games.size(); i++) {
             CheckId.checkId(games.get(i).getId());
         }
 
         for (int i = 0; i < homeTeam.size(); i++) {
+            if(season.getRoundTot() < games.get(i).getRound()){
+                throw new IllegalArgumentException("Game list index: " + i + " has illegal round value, can't be above 50.(Hardcoded)");
+            }
+            games.get(i).setSeason(season);
             Team homTeam = teamRepo.findById(homeTeam.get(i)).orElseThrow();
             Team awaTeam = teamRepo.findById(awayTeam.get(i)).orElseThrow();
             String fixedName = CheckName.checkNameContent(homTeam.getName());

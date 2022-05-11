@@ -16,6 +16,7 @@ public class TeamGameWrapper {
     private List<Game> game;
     private List<Long> homeTeam;
     private List<Long> awayTeam;
+    private Long seasonId;
 
     public TeamGameWrapper() {
 
@@ -43,5 +44,12 @@ public class TeamGameWrapper {
 
     public List<Long> getAwayTeam() {
         return awayTeam;
+    }
+    
+    public void setSeasonId(Long seasonId){
+        this.seasonId = seasonId;
+    }
+    public Long getSeasonId(){
+        return seasonId;
     }
 }
