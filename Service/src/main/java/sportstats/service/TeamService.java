@@ -25,6 +25,7 @@ public class TeamService {
     private final TeamRepository teamRepo;
     private final SeasonRepository seasonRepo;
     private final SportRepository sportRepo;
+    private Sport sport;
 
     @Autowired
     public TeamService(TeamRepository repository, SeasonRepository seasonRepo, SportRepository sportRepo) {
@@ -36,7 +37,7 @@ public class TeamService {
 
     public Team addSeasonToTeam(String teamName, Long seasonId) {
         Season season = seasonRepo.getById(seasonId);
-        System.out.println(teamRepo.countAllTeamsInSeason(seasonId));
+  
         if(teamRepo.countAllTeamsInSeason(seasonId) > 50){
             throw new IndexOutOfBoundsException("There may only be at most 50 teams in a season.");
         }
@@ -45,11 +46,12 @@ public class TeamService {
         return teamRepo.save(team);
     }
 
-    public Team createTeam(long sportId, Team team) {
+    public Team createTeam(Long sportId, Team team) {
         CheckId.checkId(team.getId());
         String fixedName = CheckName.checkNameContent(team.getName());
         team.setName(fixedName);
-        Sport sport = sportRepo.findById(sportId).orElseThrow();
+        System.out.println(team.getName() + "ajsdfjasjdfj");
+        sport = sportRepo.getById(sportId);
         team.setSport(sport);
 
 //        if (team.getSport().getId() == null) {
