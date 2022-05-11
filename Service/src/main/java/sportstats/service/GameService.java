@@ -9,6 +9,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import sportstats.domain.Game;
+import sportstats.domain.Result;
 import sportstats.domain.Season;
 import sportstats.domain.Team;
 import sportstats.repository.GameRepository;
@@ -71,12 +72,14 @@ public class GameService {
     }
 
     public List<Game> saveAllGames(TeamGameWrapper tgWrap) {
-        List<Long> awayTeam = tgWrap.getAwayTeam();
+        List<Long> awayTeamId = tgWrap.getAwayTeam();
         List<Game> games = tgWrap.getGame();
-        List<Long> homeTeam = tgWrap.getHomeTeam();
+        List<Long> homeTeamId = tgWrap.getHomeTeam();
         Long seasonId = tgWrap.getSeasonId();
+        Result result = new Result();
+        resultRepo.save(result);
         Season season = seasonRepo.findById(seasonId).orElseThrow();
-        if (!(homeTeam.size() == awayTeam.size()) && !(homeTeam.size() == games.size())) {
+        if (!(homeTeamId.size() == awayTeamId.size()) && !(homeTeamId.size() == games.size())) {
             throw new IllegalArgumentException("One of the input lists are out of sync, one list is larger then the other.");
         }
         //Might not be a necessary 
@@ -84,20 +87,30 @@ public class GameService {
             CheckId.checkId(games.get(i).getId());
         }
 
-        for (int i = 0; i < homeTeam.size(); i++) {
+        for (int i = 0; i < homeTeamId.size(); i++) {
+            System.out.println(season.getRoundTot() + " . " + games.get(i).getRound());
             if(season.getRoundTot() < games.get(i).getRound()){
-                throw new IllegalArgumentException("Game list index: " + i + " has illegal round value, can't be above 50.(Hardcoded)");
+                throw new IllegalArgumentException("Game list index: " + i + " has larger round value then the season round tot.");
+            }
+            Team homeTeam = teamRepo.findById(homeTeamId.get(i)).orElseThrow();
+            Team awayTeam = teamRepo.findById(awayTeamId.get(i)).orElseThrow();
+            if( gameRepo.checkIfHomeTeamAlreadyHaveMatchInRound(games.get(i).getRound(),homeTeamId.get(i)) != 0){
+                throw new IllegalArgumentException(homeTeam.getName() + " already exist in this round.");
+            }
+            if(gameRepo.checkIfAwayTeamAlreadyHaveMatchInRound(games.get(i).getRound(), awayTeamId.get(i)) != 0){
+                throw new IllegalArgumentException(awayTeam.getName() + " already exist in this round.");
             }
             games.get(i).setSeason(season);
-            Team homTeam = teamRepo.findById(homeTeam.get(i)).orElseThrow();
-            Team awaTeam = teamRepo.findById(awayTeam.get(i)).orElseThrow();
-            String fixedName = CheckName.checkNameContent(homTeam.getName());
-            homTeam.setName(fixedName);
-            fixedName = CheckName.checkNameContent(awaTeam.getName());
-            awaTeam.setName(fixedName);
+            games.get(i).setResult(result);
 
-            games.get(i).setHomeTeam(homTeam);
-            games.get(i).setAwayTeam(awaTeam);
+            String fixedName = CheckName.checkNameContent(homeTeam.getName());
+            homeTeam.setName(fixedName);
+            fixedName = CheckName.checkNameContent(awayTeam.getName());
+            awayTeam.setName(fixedName);
+            
+            games.get(i).setHomeTeam(homeTeam);
+            games.get(i).setAwayTeam(awayTeam);
+            
         }
         return gameRepo.saveAll(games);
     }
