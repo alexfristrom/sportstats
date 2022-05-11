@@ -14,6 +14,9 @@ import static org.mockito.Mockito.mock;
 import sportstats.domain.Game;
 
 import sportstats.repository.GameRepository;
+import sportstats.repository.ResultRepository;
+import sportstats.repository.SeasonRepository;
+import sportstats.repository.TeamRepository;
 import sportstats.service.GameService;
 import sportstats.service.util.GameByTeam;
 
@@ -24,12 +27,15 @@ import sportstats.service.util.GameByTeam;
 public class GameServiceTest {
 
     private GameRepository gameRepository;
-
+    private TeamRepository teamRepository;
+    private ResultRepository resultRepository;
+    private SeasonRepository seasonRepository;
     GameService gameService;
 
     private void mockSetup() {
         gameRepository = mock(GameRepository.class);
-        gameService = new GameService(gameRepository);
+        gameService = new GameService(gameRepository,teamRepository
+                                ,resultRepository,seasonRepository);
     }
 
     /**

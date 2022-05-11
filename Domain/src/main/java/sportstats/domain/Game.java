@@ -30,7 +30,7 @@ public class Game implements Serializable {
     @JoinColumn(name = "season_id")
     private Season season;
     
-    @ManyToOne
+    @OneToOne
     @JoinColumn(name = "result_id")
     private Result result;
 
@@ -43,10 +43,30 @@ public class Game implements Serializable {
     public Game() {
     }
 
-    public Game(Long id) {
-        this.id = id;
-
+    public Game(Byte round){
+        this.round = round;
     }
+    //Needed for the TeamGamWrapper +  saveAllGames() in resources to work / D.S.
+    public Game(int round){
+        if(round <= 127 && round > 0)
+            this.round = Integer.valueOf(round).byteValue();
+        else
+            throw new IllegalArgumentException("Round is out of bounds, should be between 0 - 127.");
+    }
+    //Needed for the TeamGamWrapper +  saveAllGames() in resources to work / D.S
+    public Game(int round,LocalDateTime dateMatch){
+        if(round <= 127 && round > 0)
+            this.round = Integer.valueOf(round).byteValue();
+        else
+            throw new IllegalArgumentException("Round is out of bounds, should be between 0 - 127.");
+        this.dateMatch = dateMatch;
+    }
+    public Game(Byte round,LocalDateTime dateMatch){
+        this.round = round;
+        this.dateMatch = dateMatch;
+    }
+    
+    
 
     public Long getId() {
         return id;
