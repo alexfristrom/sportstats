@@ -25,7 +25,7 @@ import sportstats.service.SportService;
  * @author alexf
  */
 //@RunWith(MockitoJUnitRunner.class)
-public class SeasonTest {
+public class SportServiceTest {
     
     @Mock
    
