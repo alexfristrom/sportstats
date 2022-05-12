@@ -4,7 +4,10 @@
  */
 package sportstats.service;
 
+import java.util.ArrayList;
 import java.util.List;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 import sportstats.domain.Game;
 import sportstats.domain.Result;
 import sportstats.domain.Team;
@@ -12,11 +15,13 @@ import sportstats.repository.GameRepository;
 import sportstats.repository.ResultRepository;
 import sportstats.repository.SeasonRepository;
 import sportstats.repository.TeamRepository;
+import sportstats.service.util.SeasonSummaryHolder;
 
 /**
  *
  * @author alexf
  */
+@Service
 public class SeasonSummaryService {
 
     private SeasonRepository seasonR;
@@ -24,31 +29,35 @@ public class SeasonSummaryService {
     private GameRepository gameR;
     private ResultRepository resultR;
 
-    public SeasonSummaryService() {
-        List<Team> teamList = getAllTeamsInSeason(22L);
-        for (Team team : teamList) {
-            Long teamId = team.getId();
-            String name = team.getName();
-
-            List<Game> gameList = getAllGamesForTeam(teamId);
-
-            calculateTeamGames(gameList, teamId, name);
-
-        }
-    }
-
-    public SeasonSummaryService(SeasonRepository season, TeamRepository team, GameRepository game, ResultRepository result) {
+    @Autowired
+     public SeasonSummaryService(SeasonRepository season, TeamRepository team, GameRepository game, ResultRepository result) {
         this.seasonR = season;
         this.teamR = team;
         this.gameR = game;
         this.resultR = result;
     }
+     
+     public List<SeasonSummaryHolder> getSeasonSummary(Long seasonId) {
+        List<Team> teamList = getAllTeamsInSeason(seasonId);
+        List<SeasonSummaryHolder> summaryHolder = new ArrayList<>();
+        for (Team team : teamList) {
+            Long teamId = team.getId();
+            String name = team.getName();
 
+            List<Game> gameList = getAllGamesForTeam(teamId);
+           
+            summaryHolder.add(calculateTeamGames(gameList, teamId, name));
+
+        }
+        return summaryHolder;
+    }
+    
+     
     private List<Team> getAllTeamsInSeason(Long seasonId) {
         List<Team> listOfTeams = teamR.listBySeason(seasonId);
         return listOfTeams;
     }
-
+    
     private List<Game> getAllGamesForTeam(Long teamId) {
         return gameR.listAllByTeam(teamId);
     }
@@ -56,10 +65,10 @@ public class SeasonSummaryService {
 //    private Result getResultForGamesByTeams(Long resultId) {
 //        return resultR.getById(resultId);
 //    }
-
-    private void calculateTeamGames(List<Game> gameList, Long teamID, String teamName) {
+    private SeasonSummaryHolder calculateTeamGames(List<Game> gameList, Long teamID, String teamName) {
         var listOfGame = gameList;
         int numberOfGamesm = listOfGame.size();
+        SeasonSummaryHolder tempHolder = new SeasonSummaryHolder();
 
         String teamN = teamName;
         int gamesWon = 0;
@@ -72,9 +81,7 @@ public class SeasonSummaryService {
 
         for (Game game : listOfGame) {
             Long gameId = game.getId();
-
             Result tempReult = game.getResult();
-
             Long teamScore = null;
             Long otherTeamScore = null;
 
@@ -99,9 +106,19 @@ public class SeasonSummaryService {
             } else {
                 gamesLost++;
             }
+
         }
         goalDiff = scoredGoals - concededGoals;
 
+        tempHolder.setConcededGoals(concededGoals);
+        tempHolder.setGamesLost(gamesLost);
+        tempHolder.setGamesTied(gamesTied);
+        tempHolder.setGamesWon(gamesWon);
+        tempHolder.setGoalDiff(goalDiff);
+        tempHolder.setScoredGoals(scoredGoals);
+        tempHolder.setTeamname(teamName);
+
+        return tempHolder;
     }
 
 }
