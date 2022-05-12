@@ -2,89 +2,95 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package sportstats.service.util;
+package sportstats.service.holders;
 
 /**
  *
  * @author alexf
  */
-public class SeasonSummaryHolder {
+public abstract class AbstractSeasonSumHolder implements SeasonSumHolderType {
 
+    //Standard för alla sporter
     private String teamName;
     private int gamesWon;
-    private int gamesTied;
     private int gamesLost;
-
     private int scoredGoals;
     private int concededGoals;
     private int goalDiff;
-    
-    //Ska fixas
-    private int points;
-    private int winsOverTimeOrPenalties;
-    private int losesOverTimeOrPenalites;
 
-    public SeasonSummaryHolder() {
+    public AbstractSeasonSumHolder(String teamName, int gamesWon, int gamesLost,
+            int scoredGoals, int concededGoals, int goalDiff) {
 
+        this.teamName = teamName;
+        this.gamesWon = gamesWon;
+        this.gamesLost = gamesLost;
+        this.scoredGoals = scoredGoals;
+        this.concededGoals = concededGoals;
+        this.goalDiff = goalDiff;
     }
     
-    public void setTeamname(String teamName){
+    public AbstractSeasonSumHolder(){
+        
+    }
+
+    @Override
+    public void setTeamname(String teamName) {
         this.teamName = teamName;
     }
-    
-    public void setGamesWon(int gamesWon){
+
+    @Override
+    public void setGamesWon(int gamesWon) {
         this.gamesWon = gamesWon;
     }
-    
-    public void setGamesTied(int gamesTied){
-        this.gamesTied = gamesTied;
-    }
-    
-    public void setGamesLost(int gamesLost){
+
+    @Override
+    public void setGamesLost(int gamesLost) {
         this.gamesLost = gamesLost;
     }
-    
-    public void setScoredGoals(int scoredGoals){
+
+    @Override
+    public void setScoredGoals(int scoredGoals) {
         this.scoredGoals = scoredGoals;
     }
-    
-    public void setConcededGoals(int concededGoals){
+
+    @Override
+    public void setConcededGoals(int concededGoals) {
         this.concededGoals = concededGoals;
     }
-    
-    public void setGoalDiff(int goalDiff){
+
+    @Override
+    public void setGoalDiff(int goalDiff) {
         this.goalDiff = goalDiff;
     }
 
+    @Override
     public String getTeamName() {
         return teamName;
     }
 
+    @Override
     public int getGamesWon() {
         return gamesWon;
     }
 
-    public int getGamesTied() {
-        return gamesTied;
-    }
-
+    @Override
     public int getGamesLost() {
         return gamesLost;
     }
 
+    @Override
     public int getScoredGoals() {
         return scoredGoals;
     }
 
+    @Override
     public int getConcededGoals() {
         return concededGoals;
     }
 
+    @Override
     public int getGoalDiff() {
         return goalDiff;
     }
-    
-    
-    
 
 }

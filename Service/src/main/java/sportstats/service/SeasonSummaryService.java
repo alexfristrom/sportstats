@@ -15,7 +15,8 @@ import sportstats.repository.GameRepository;
 import sportstats.repository.ResultRepository;
 import sportstats.repository.SeasonRepository;
 import sportstats.repository.TeamRepository;
-import sportstats.service.util.SeasonSummaryHolder;
+import sportstats.service.holders.FotballSummaryHolder;
+import sportstats.service.holders.SeasonSumHolderType;
 
 /**
  *
@@ -28,6 +29,8 @@ public class SeasonSummaryService {
     private TeamRepository teamR;
     private GameRepository gameR;
     private ResultRepository resultR;
+    
+    private String fotboll = "fotboll";
 
     @Autowired
      public SeasonSummaryService(SeasonRepository season, TeamRepository team, GameRepository game, ResultRepository result) {
@@ -37,16 +40,17 @@ public class SeasonSummaryService {
         this.resultR = result;
     }
      
-     public List<SeasonSummaryHolder> getSeasonSummary(Long seasonId) {
+     public List<SeasonSumHolderType> getSeasonSummary(Long seasonId) {
         List<Team> teamList = getAllTeamsInSeason(seasonId);
-        List<SeasonSummaryHolder> summaryHolder = new ArrayList<>();
+        List<SeasonSumHolderType> summaryHolder = new ArrayList<>();
         for (Team team : teamList) {
             Long teamId = team.getId();
-            String name = team.getName();
+            String teamName = team.getName();
+            String sportName = team.getSport().getName();
 
             List<Game> gameList = getAllGamesForTeam(teamId);
            
-            summaryHolder.add(calculateTeamGames(gameList, teamId, name));
+            summaryHolder.add(calculateTeamGames(gameList, teamId, teamName, sportName));
 
         }
         return summaryHolder;
@@ -65,19 +69,22 @@ public class SeasonSummaryService {
 //    private Result getResultForGamesByTeams(Long resultId) {
 //        return resultR.getById(resultId);
 //    }
-    private SeasonSummaryHolder calculateTeamGames(List<Game> gameList, Long teamID, String teamName) {
+    private SeasonSumHolderType calculateTeamGames(List<Game> gameList, Long teamID, String teamName, String sportName) {
         var listOfGame = gameList;
         int numberOfGamesm = listOfGame.size();
-        SeasonSummaryHolder tempHolder = new SeasonSummaryHolder();
+        String sportN = sportName;
+        
 
         String teamN = teamName;
         int gamesWon = 0;
-        int gamesTied = 0;
         int gamesLost = 0;
-
         int scoredGoals = 0;
         int concededGoals = 0;
         int goalDiff = 0;
+        
+        //Kankse måste flyttas
+        int gamesTied = 0;
+        
 
         for (Game game : listOfGame) {
             Long gameId = game.getId();
@@ -109,16 +116,22 @@ public class SeasonSummaryService {
 
         }
         goalDiff = scoredGoals - concededGoals;
+        
+        if(sportN.equalsIgnoreCase(fotboll)){
+            FotballSummaryHolder tempHolder = new FotballSummaryHolder(teamName, 
+                gamesWon, gamesLost, scoredGoals, concededGoals, goalDiff);
+            tempHolder.setGamesTied(gamesTied);
+            
+            return tempHolder;
+        }
+        
+        
+        
+        
+        
+        
 
-        tempHolder.setConcededGoals(concededGoals);
-        tempHolder.setGamesLost(gamesLost);
-        tempHolder.setGamesTied(gamesTied);
-        tempHolder.setGamesWon(gamesWon);
-        tempHolder.setGoalDiff(goalDiff);
-        tempHolder.setScoredGoals(scoredGoals);
-        tempHolder.setTeamname(teamName);
-
-        return tempHolder;
+        return null;
     }
 
 }
