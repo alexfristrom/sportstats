@@ -88,7 +88,6 @@ public class GameService {
         }
 
         for (int i = 0; i < homeTeamId.size(); i++) {
-            System.out.println(season.getRoundTot() + " . " + games.get(i).getRound());
             if(season.getRoundTot() < games.get(i).getRound()){
                 throw new IllegalArgumentException("Game list index: " + i + " has larger round value then the season round tot.");
             }
