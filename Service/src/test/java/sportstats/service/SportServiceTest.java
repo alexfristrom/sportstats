@@ -6,7 +6,6 @@ package sportstats.service;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 import static org.junit.jupiter.api.Assertions.*;
 
 import org.junit.jupiter.api.Test;
@@ -14,7 +13,6 @@ import sportstats.repository.SportRepository;
 import org.mockito.Mockito;
 import static org.mockito.Mockito.mock;
 import sportstats.domain.Sport;
-import sportstats.service.util.ListableProxy;
 
 /**
  *

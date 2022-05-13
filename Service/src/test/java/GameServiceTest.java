@@ -11,7 +11,7 @@ import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.Test;
 import static org.mockito.ArgumentMatchers.any;
 import org.mockito.Mockito;
-import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.*;
 import sportstats.domain.Game;
 import sportstats.domain.Result;
 import sportstats.domain.Season;
@@ -234,6 +234,27 @@ public class GameServiceTest {
             gameService.saveAllGames(tgWrap);
         });
 
+    }
+
+    @Test
+    public void testlistMatchesWithResultByRoundAndSeason() {
+        mockSetup();
+        List<Game> list = new ArrayList();
+
+        Mockito.when(gameRepository.listMatchesByRoundAndSeasonId(Byte.valueOf("1"), 1L)).thenReturn(list);
+        assertEquals(gameService.listMatchesWithResultByRoundAndSeason(Byte.valueOf("1"), 1L), list);
+        verify(gameRepository, times(1)).listMatchesByRoundAndSeasonId(Byte.valueOf("1"), 1L);
+
+    }
+
+    @Test
+    public void testlistMatchesWithoutResultByRoundAndSeason() {
+        mockSetup();
+        List<Game> list = new ArrayList();
+
+        Mockito.when(gameRepository.listMatchesByRoundAndSeasonId(Byte.valueOf("1"), 1L)).thenReturn(list);
+        assertEquals(gameService.listMatchesWithoutResultByRoundAndSeason(Byte.valueOf("1"), 1L), list);
+        verify(gameRepository, times(1)).listMatchesByRoundAndSeasonId(Byte.valueOf("1"), 1L);
     }
 
 }

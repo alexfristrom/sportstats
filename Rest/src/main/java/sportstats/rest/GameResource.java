@@ -16,6 +16,8 @@ import sportstats.domain.Game;
 import sportstats.service.GameService;
 import sportstats.service.util.TeamGameWrapper;
 import sportstats.service.util.GameByTeam;
+import sportstats.service.util.GameWithResult;
+import sportstats.service.util.GameWithoutResult;
 
 /**
  *
@@ -65,6 +67,18 @@ public class GameResource {
     @PostMapping("/addPlannedMatches")
     public List<Game> saveAllGames(@RequestBody TeamGameWrapper wrap) {
         return service.saveAllGames(wrap);
+    }
+    
+    @GetMapping("listMatchesWithResultByRoundAndSeason/{round}/{seasonId}")
+    public List<GameWithResult> listMatchesWithResultByRoundAndSeason(@PathVariable byte round
+                                                ,@PathVariable Long seasonId){
+        return service.listMatchesWithResultByRoundAndSeason(round,seasonId);
+    }
+    
+    @GetMapping("listMatchesWithoutResultByRoundAndSeason/{round}/{seasonId}")
+    public List<GameWithoutResult> listMatchesWithoutByRoundAndSeason(@PathVariable byte round
+                                                ,@PathVariable Long seasonId){
+        return service.listMatchesWithoutResultByRoundAndSeason(round,seasonId);
     }
 
 }
