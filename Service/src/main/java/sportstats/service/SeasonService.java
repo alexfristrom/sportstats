@@ -38,7 +38,7 @@ public class SeasonService {
         this.leagueRepository = leagueRepository;
         this.spanRepository = spanRepository;
     }
-    //fixa i efterhand
+    
     public Season saveSeason(int roundTot, Long leagueId, Long spanId){
          league = leagueRepository.getById(leagueId);
          span = spanRepository.getById(spanId);
