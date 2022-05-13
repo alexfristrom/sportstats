@@ -2,13 +2,13 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package sportstats.service.holders;
+package sportstats.service.season.holders;
 
 /**
  *
  * @author alexf
  */
-public abstract class AbstractSeasonSumHolder implements SeasonSumHolderType {
+public abstract class AbstractSeasonSum implements SeasonSumType {
 
     //Standard för alla sporter
     private String teamName;
@@ -17,9 +17,10 @@ public abstract class AbstractSeasonSumHolder implements SeasonSumHolderType {
     private int scoredGoals;
     private int concededGoals;
     private int goalDiff;
+    private int points;
 
-    public AbstractSeasonSumHolder(String teamName, int gamesWon, int gamesLost,
-            int scoredGoals, int concededGoals, int goalDiff) {
+    public AbstractSeasonSum(String teamName, int gamesWon, int gamesLost,
+            int scoredGoals, int concededGoals, int goalDiff, int points) {
 
         this.teamName = teamName;
         this.gamesWon = gamesWon;
@@ -27,12 +28,14 @@ public abstract class AbstractSeasonSumHolder implements SeasonSumHolderType {
         this.scoredGoals = scoredGoals;
         this.concededGoals = concededGoals;
         this.goalDiff = goalDiff;
-    }
-    
-    public AbstractSeasonSumHolder(){
-        
+        this.points = points;
     }
 
+    public AbstractSeasonSum() {
+
+    }
+
+    //Setters
     @Override
     public void setTeamname(String teamName) {
         this.teamName = teamName;
@@ -62,7 +65,13 @@ public abstract class AbstractSeasonSumHolder implements SeasonSumHolderType {
     public void setGoalDiff(int goalDiff) {
         this.goalDiff = goalDiff;
     }
+    
+    @Override
+    public void setPoints(int points) {
+        this.points = points;
+    }
 
+    //Getters
     @Override
     public String getTeamName() {
         return teamName;
@@ -91,6 +100,11 @@ public abstract class AbstractSeasonSumHolder implements SeasonSumHolderType {
     @Override
     public int getGoalDiff() {
         return goalDiff;
+    }
+
+    @Override
+    public int getPoints() {
+        return this.points;
     }
 
 }

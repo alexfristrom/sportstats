@@ -2,13 +2,13 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Interface.java to edit this template
  */
-package sportstats.service.holders;
+package sportstats.service.season.holders;
 
 /**
  *
  * @author alexf
  */
-public interface SeasonSumHolderType {
+public interface SeasonSumType {
 
     void setTeamname(String teamName);
 
@@ -21,6 +21,8 @@ public interface SeasonSumHolderType {
     void setConcededGoals(int concededGoals);
 
     void setGoalDiff(int goalDiff);
+    
+    void setPoints(int points);
 
     String getTeamName();
 
@@ -33,5 +35,7 @@ public interface SeasonSumHolderType {
     int getConcededGoals();
 
     int getGoalDiff();
+    
+    int getPoints();
 
 }

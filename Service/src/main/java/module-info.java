@@ -6,7 +6,7 @@
 module sportstats.service {
     exports sportstats.service;
     exports sportstats.service.util;
-    exports sportstats.service.holders;
+    exports sportstats.service.season.holders;
     
     requires spring.context;
     requires sportstats.repository;

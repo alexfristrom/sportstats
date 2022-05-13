@@ -11,8 +11,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import sportstats.service.SeasonSummaryService;
-import sportstats.service.holders.FotballSummaryHolder;
-import sportstats.service.holders.SeasonSumHolderType;
+import sportstats.service.season.holders.SeasonSumType;
 
 /**
  *
@@ -30,7 +29,7 @@ public class SeasonSummaryResource {
     }
     
     @GetMapping("getSeasonSummary/{seasonId}")
-    public List<SeasonSumHolderType> getSeasonSummary(@PathVariable Long seasonId){
+    public List<SeasonSumType> getSeasonSummary(@PathVariable Long seasonId){
         return service.getSeasonSummary(seasonId);
     }    
 }

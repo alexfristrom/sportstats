@@ -2,26 +2,29 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package sportstats.service.holders;
+package sportstats.service.season.holders;
 
 /**
  *
  * @author alexf
  */
-public class HockeySummaryHolder extends AbstractSeasonSumHolder implements SeasonSumHolderType{
+public class SummarWithOvertimesAndTies extends AbstractSeasonSum {
 
-    //Ska fixas för individuella sporter
+    private int gamesTied;
     private int winsOverTimeOrPenalties;
     private int losesOverTimeOrPenalites;
-    
-    //Baserat på poängsystem för spcifika sporter
-    private int points;
-    
-    public HockeySummaryHolder(String teamName, int gamesWon, int gamesLost, int scoredGoals, int concededGoals, int goalDiff) {
-        super(teamName, gamesWon, gamesLost, scoredGoals, concededGoals, goalDiff);
+
+    public SummarWithOvertimesAndTies(String teamName, int gamesWon, int gamesLost, int scoredGoals, int concededGoals, int goalDiff, int points) {
+        super(teamName, gamesWon, gamesLost, scoredGoals, concededGoals, goalDiff, points);
     }
 
-    public HockeySummaryHolder() {
+    public SummarWithOvertimesAndTies() {
+
+    }
+
+    //Getters
+    public int getGamesTied() {
+        return this.gamesTied;
     }
 
     public int getWinsOverTimeOrPenalties() {
@@ -32,6 +35,11 @@ public class HockeySummaryHolder extends AbstractSeasonSumHolder implements Seas
         return losesOverTimeOrPenalites;
     }
 
+    //Setters
+    public void setGamesTied(int gamesTied) {
+        this.gamesTied = gamesTied;
+    }
+
     public void setWinsOverTimeOrPenalties(int winsOverTimeOrPenalties) {
         this.winsOverTimeOrPenalties = winsOverTimeOrPenalties;
     }
@@ -39,7 +47,5 @@ public class HockeySummaryHolder extends AbstractSeasonSumHolder implements Seas
     public void setLosesOverTimeOrPenalites(int losesOverTimeOrPenalites) {
         this.losesOverTimeOrPenalites = losesOverTimeOrPenalites;
     }
-    
-    
-    
+
 }
