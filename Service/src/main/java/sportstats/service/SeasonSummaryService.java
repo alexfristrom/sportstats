@@ -19,6 +19,7 @@ import sportstats.service.season.holders.SeasonSumType;
 import sportstats.service.season.holders.Summary;
 import sportstats.service.season.holders.SummaryWithOvertime;
 import sportstats.service.season.holders.SummaryWithTies;
+import sportstats.service.season.holders.SportRuleHandler;
 
 /**
  *
@@ -74,9 +75,6 @@ public class SeasonSummaryService {
         return gameR.listAllByTeam(teamId);
     }
 
-//    private Result getResultForGamesByTeams(Long resultId) {
-//        return resultR.getById(resultId);
-//    }
     private SeasonSumType calculateTeamGames(List<Game> gameList,
             Long teamID, String teamName, String sportName) {
 
@@ -89,12 +87,22 @@ public class SeasonSummaryService {
         int gamesLost = 0;
         int scoredGoals = 0;
         int concededGoals = 0;
+
+        //Används vid sortering
         int goalDiff = 0;
-        
+
         //Beroende på sport
         int winsOverTime = 0;
         int losesOverTime = 0;
         int gamesTied = 0;
+        
+        // Enbart för volleyball
+        int wins3to0 = 0;
+        int wins3to1 = 0;
+        int wins3to2 = 0;
+        int lose2to3 = 0;
+        int lose1to3 = 0;
+        int lose0to3 = 0;
 
         for (Game game : listOfGame) {
             Long gameId = game.getId();
@@ -116,8 +124,19 @@ public class SeasonSummaryService {
 
             if (teamScore > otherTeamScore) {
                 gamesWon++;
-                if (tempResult.getOvertime()||tempResult.getPenalty()) {
+                if (tempResult.getOvertime() || tempResult.getPenalty()) {
                     winsOverTime++;
+                }
+                
+                //Bara för volleyball. kankse kan implemnteras på ett annats sätt
+                if (sportN.equalsIgnoreCase("volleball")) {
+                    if ((teamScore == 3)&&(otherTeamScore == 0)) {
+                        wins3to0++;
+                    } else if ((teamScore == 3)&&(otherTeamScore == 1)) {
+                        wins3to1++;
+                    } else {
+                        wins3to2++;
+                    } 
                 }
 
             } else if (teamScore == otherTeamScore) {
@@ -125,59 +144,29 @@ public class SeasonSummaryService {
 
             } else {
                 gamesLost++;
-                if (tempResult.getOvertime()||tempResult.getPenalty()) {
+                if (tempResult.getOvertime() || tempResult.getPenalty()) {
                     losesOverTime++;
                 }
                 
+                //Bara för volleyball
+                if (sportN.equalsIgnoreCase("volleball")) {
+                    if ((teamScore == 2)&&(otherTeamScore == 3)) {
+                        lose2to3++;
+                    } else if ((teamScore == 1)&&(otherTeamScore == 3)) {
+                        lose1to3++;
+                    } else {
+                        lose0to3++;
+                    } 
+                }
             }
-
         }
         goalDiff = scoredGoals - concededGoals;
 
-        if (sportN.equalsIgnoreCase(fotball)) {
-            SummaryWithTies tempHolder = new SummaryWithTies(teamName,
-                    gamesWon, gamesLost, scoredGoals, concededGoals, goalDiff, 0);
-            tempHolder.setGamesTied(gamesTied);
-            return tempHolder;
+        SportRuleHandler ruleHandler = new SportRuleHandler(sportN);
+        return ruleHandler.getPointsByRules(teamName, gamesWon, gamesLost, scoredGoals,
+                concededGoals, goalDiff, winsOverTime, losesOverTime, gamesTied,
+                wins3to0, wins3to1, wins3to2, lose2to3, lose1to3, lose0to3);
 
-        } else if (sportN.equalsIgnoreCase(hocckey)) {
-            SummaryWithOvertime tempHolder = new SummaryWithOvertime(teamName, 
-                    gamesWon, gamesLost, scoredGoals, concededGoals, goalDiff, 0);
-            tempHolder.setLosesOverTimeOrPenalites(losesOverTime);
-            tempHolder.setWinsOverTimeOrPenalties(winsOverTime);
-            return tempHolder;
-
-        } else if (sportN.equalsIgnoreCase(bandy)) {
-            SummaryWithTies tempHolder = new SummaryWithTies(teamName, 
-                    gamesWon, gamesLost, scoredGoals, concededGoals, goalDiff, 0);
-            tempHolder.setGamesTied(gamesTied);
-            return tempHolder;
-
-        } else if (sportN.equalsIgnoreCase(floorball)) {
-            SummaryWithOvertime tempHolder = new SummaryWithOvertime(teamName, 
-                    gamesWon, gamesLost, scoredGoals, concededGoals, goalDiff, 0);
-            tempHolder.setLosesOverTimeOrPenalites(losesOverTime);
-            tempHolder.setWinsOverTimeOrPenalties(winsOverTime);
-            return tempHolder;
-
-        } else if (sportN.equalsIgnoreCase(basket)) {
-            Summary tempHolder = new Summary(teamName, gamesWon, gamesLost, 
-                    scoredGoals, concededGoals, goalDiff, 0);
-            return tempHolder;
-            
-        } else if (sportN.equalsIgnoreCase(handboll)) {
-            SummaryWithTies tempHolder = new SummaryWithTies(teamName, gamesWon,
-                    gamesLost, scoredGoals, concededGoals, goalDiff, 0);
-            tempHolder.setGamesTied(gamesTied);
-            return tempHolder;
-
-        } else if (sportN.equalsIgnoreCase(volleyball)) {
-            Summary tempholder = new Summary(teamName, gamesWon, gamesLost,
-                    scoredGoals, concededGoals, goalDiff, 0);
-            return tempholder;
-        }
-
-        return null;
     }
 
 }
