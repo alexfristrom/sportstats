@@ -36,7 +36,32 @@ public class CheckNameTest {
      */
     @Test
     public void testCheckNameContent() {
-        
+        CheckName cn = new CheckName();
+        assertThrows(IllegalArgumentException.class,
+                () -> {
+                    cn.checkNameContent(" ");
+                }
+        );
+        assertThrows(NullPointerException.class,
+                () -> {
+                    cn.checkNameContent(null);
+                }
+        );
+        assertThrows(IllegalArgumentException.class,
+                () -> {
+                    cn.checkNameContent("-.-");
+                }
+        );
+        assertThrows(IllegalArgumentException.class,
+                () -> {
+                    cn.checkNameContent("123");
+                }
+        );
+        assertThrows(IllegalArgumentException.class,
+                () -> {
+                    cn.checkNameContent("aaa");
+                }
+        );
     }
 
 }
