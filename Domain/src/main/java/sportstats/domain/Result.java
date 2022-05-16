@@ -15,9 +15,9 @@ public class Result implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private Long hometeam_score;
+    private int hometeam_score;
 
-    private Long awayteam_score;
+    private int awayteam_score;
 
     private boolean overtime;
 
@@ -28,7 +28,7 @@ public class Result implements Serializable {
     public Result() {
     }
 
-    public Result(Long id, Long hometeam_score, Long awayteam_score) {
+    public Result(Long id, int hometeam_score, int awayteam_score) {
         this.id = id;
         this.hometeam_score = hometeam_score;
         this.awayteam_score = awayteam_score;
@@ -38,19 +38,19 @@ public class Result implements Serializable {
         return id;
     }
 
-    public Long getHomeTeamScore() {
+    public int getHomeTeamScore() {
         return hometeam_score;
     }
 
-    public void setHomeTeamScore(Long hometeam_score) {
+    public void setHomeTeamScore(int hometeam_score) {
         this.hometeam_score = hometeam_score;
     }
 
-    public Long getAwayTeamScore() {
+    public int getAwayTeamScore() {
         return awayteam_score;
     }
 
-    public void setAwayTeamScore(Long awayteam_score) {
+    public void setAwayTeamScore(int awayteam_score) {
         this.awayteam_score = awayteam_score;
     }
 

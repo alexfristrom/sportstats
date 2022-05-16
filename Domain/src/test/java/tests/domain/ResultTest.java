@@ -17,17 +17,17 @@ public class ResultTest {
     @Test
     public void setAndGetHometeamScore(){
         var testObject = new Result();
-        testObject.setHomeTeamScore(Long.MAX_VALUE);
-        assertEquals(testObject.getHomeTeamScore(),Long.MAX_VALUE);
-        assertNotEquals(testObject.getHomeTeamScore(),Long.MIN_VALUE);
+        testObject.setHomeTeamScore(2);
+        assertEquals(testObject.getHomeTeamScore(), 2);
+        assertNotEquals(testObject.getHomeTeamScore(),1);
     }
     
     @Test
     public void setAndGetAwayteam_score(){
         var testObject = new Result();
-        testObject.setAwayTeamScore(Long.MAX_VALUE);
-        assertEquals(testObject.getAwayTeamScore(),Long.MAX_VALUE);
-        assertNotEquals(testObject.getAwayTeamScore(),Long.MIN_VALUE); 
+        testObject.setAwayTeamScore(10);
+        assertEquals(testObject.getAwayTeamScore(),10);
+        assertNotEquals(testObject.getAwayTeamScore(),5); 
     }
     
     @Test
