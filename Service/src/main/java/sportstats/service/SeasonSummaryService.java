@@ -5,6 +5,9 @@
 package sportstats.service;
 
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -63,6 +66,10 @@ public class SeasonSummaryService {
             summaryHolder.add(calculateTeamGames(gameList, teamId, teamName, sportName));
 
         }
+
+        //Sorting and points
+        summaryHolder = sort(summaryHolder);
+
         return summaryHolder;
     }
 
@@ -73,6 +80,30 @@ public class SeasonSummaryService {
 
     private List<Game> getAllGamesForTeam(Long teamId) {
         return gameR.listAllByTeam(teamId);
+    }
+
+    private List<SeasonSumType> sort(List<SeasonSumType> listOfHolders) {
+        List<SeasonSumType> newListOfHolders = new ArrayList<>();
+        List<Integer> intList = new ArrayList<>();
+
+        for (int i = 0; i < listOfHolders.size(); i++) {
+            intList.add(listOfHolders.get(i).getPoints());
+        }
+
+        Collections.sort(intList);
+
+        for (int i = 0; i < listOfHolders.size(); i++) {
+
+            for (int j = 0; j < listOfHolders.size(); j++) {
+                if (intList.get(i) == listOfHolders.get(j).getPoints()) {
+                    newListOfHolders.add(listOfHolders.get(j));
+                    newListOfHolders.get(i).setRank(listOfHolders.size() - j);
+                }
+            }
+
+        }
+
+        return newListOfHolders;
     }
 
     private SeasonSumType calculateTeamGames(List<Game> gameList,
@@ -95,7 +126,7 @@ public class SeasonSummaryService {
         int winsOverTime = 0;
         int losesOverTime = 0;
         int gamesTied = 0;
-        
+
         // Enbart för volleyball
         int wins3to0 = 0;
         int wins3to1 = 0;
@@ -127,16 +158,16 @@ public class SeasonSummaryService {
                 if (tempResult.getOvertime() || tempResult.getPenalty()) {
                     winsOverTime++;
                 }
-                
+
                 //Bara för volleyball. kankse kan implemnteras på ett annats sätt
                 if (sportN.equalsIgnoreCase("volleball")) {
-                    if ((teamScore == 3)&&(otherTeamScore == 0)) {
+                    if ((teamScore == 3) && (otherTeamScore == 0)) {
                         wins3to0++;
-                    } else if ((teamScore == 3)&&(otherTeamScore == 1)) {
+                    } else if ((teamScore == 3) && (otherTeamScore == 1)) {
                         wins3to1++;
                     } else {
                         wins3to2++;
-                    } 
+                    }
                 }
 
             } else if (teamScore == otherTeamScore) {
@@ -147,16 +178,16 @@ public class SeasonSummaryService {
                 if (tempResult.getOvertime() || tempResult.getPenalty()) {
                     losesOverTime++;
                 }
-                
+
                 //Bara för volleyball
                 if (sportN.equalsIgnoreCase("volleball")) {
-                    if ((teamScore == 2)&&(otherTeamScore == 3)) {
+                    if ((teamScore == 2) && (otherTeamScore == 3)) {
                         lose2to3++;
-                    } else if ((teamScore == 1)&&(otherTeamScore == 3)) {
+                    } else if ((teamScore == 1) && (otherTeamScore == 3)) {
                         lose1to3++;
                     } else {
                         lose0to3++;
-                    } 
+                    }
                 }
             }
         }

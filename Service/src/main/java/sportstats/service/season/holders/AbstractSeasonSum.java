@@ -18,6 +18,9 @@ public abstract class AbstractSeasonSum implements SeasonSumType {
     private int concededGoals;
     private int goalDiff;
     private int points;
+    
+    private int rank;
+
 
     public AbstractSeasonSum(String teamName, int gamesWon, int gamesLost,
             int scoredGoals, int concededGoals, int goalDiff, int points) {
@@ -106,5 +109,25 @@ public abstract class AbstractSeasonSum implements SeasonSumType {
     public int getPoints() {
         return this.points;
     }
+    
+    @Override
+    public void setRank(int rank) {
+        this.rank = rank;
+    }
+    
+    @Override
+    public int getRank() {
+        return rank;
+    }
+
+    @Override
+    public int compareTo(SeasonSumType o) {
+        Integer tmpPoints = points;
+        Integer tmpPoints2 = o.getPoints();
+        
+        return tmpPoints.compareTo(tmpPoints2);
+    }
+    
+    
 
 }

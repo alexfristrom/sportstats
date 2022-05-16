@@ -8,7 +8,7 @@ package sportstats.service.season.holders;
  *
  * @author alexf
  */
-public class Summary extends AbstractSeasonSum{
+public class Summary extends AbstractSeasonSum {
 
     public Summary(String teamName, int gamesWon, int gamesLost,
             int scoredGoals, int concededGoals, int goalDiff, int points) {
@@ -18,5 +18,7 @@ public class Summary extends AbstractSeasonSum{
     public Summary() {
         
     }
+
+    
     
 }
