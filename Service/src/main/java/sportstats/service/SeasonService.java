@@ -18,22 +18,23 @@ import sportstats.repository.SpanRepository;
 import sportstats.service.util.SeasonByLeague;
 
 /**
- * Functions for that refclets the backlog for league 
+ * Functions for that refclets the backlog for league
  *
  * @author alexf
  */
 @Service
 public class SeasonService {
+
     private Season season;
     private League league;
     private Span span;
-    
+
     private SpanRepository spanRepository;
     private LeagueRepository leagueRepository;
     private SeasonRepository repository;
-    
+
     @Autowired
-    public SeasonService(LeagueRepository leagueRepository, SeasonRepository repository, SpanRepository spanRepository){
+    public SeasonService(LeagueRepository leagueRepository, SeasonRepository repository, SpanRepository spanRepository) {
         this.repository = repository;
         this.leagueRepository = leagueRepository;
         this.spanRepository = spanRepository;
@@ -45,22 +46,16 @@ public class SeasonService {
         season = new Season(roundTot, league, span);
         return repository.save(season);
     }
-    
-    public List<SeasonByLeague> listByLeague(Long leagueId){
+
+    public List<SeasonByLeague> listByLeague(Long leagueId) {
         return repository.listByLeague(leagueId).stream()
                 .map(SeasonByLeague::new)
                 .toList();
     }
-    
+
     public List<Season> getAllSeason() {
-        return repository.findAll();       
-                
+        return repository.findAll();
+
     }
-    
-    
-    
-    
-    
-    
-    
+
 }
