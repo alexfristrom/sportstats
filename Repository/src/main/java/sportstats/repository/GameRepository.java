@@ -31,4 +31,10 @@ public interface GameRepository extends JpaRepository<Game, Long>{
     
     @Query(value = "SELECT count(*) FROM game WHERE round = ?1 AND awayteam_id = ?2",nativeQuery = true)
     public int checkIfAwayTeamAlreadyHaveMatchInRound(Byte round,Long teamId);
+    
+    @Query("FROM Game game WHERE game.round = ?1 AND game.season.id = ?2")
+    List<Game> listMatchesByRoundAndSeasonId(byte round,Long seasonId);
+    
+    @Query("FROM Game game WHERE game.season.id = ?1")
+    List<Game> listMatchesBySeasonId(Long seasonId);
 }

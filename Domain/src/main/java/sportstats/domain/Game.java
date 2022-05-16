@@ -40,20 +40,18 @@ public class Game implements Serializable {
 
     private int spectators;
 
-    private int defaultSpectatorValue = 0;
-
     public Game() {
-        this.setSpectators(defaultSpectatorValue);
+        this.setSpectators(0);
     }
 
     public Game(Byte round) {
         this.round = round;
-        this.setSpectators(defaultSpectatorValue);
+        this.setSpectators(0);
     }
 
     //Needed for the TeamGamWrapper +  saveAllGames() in resources to work / D.S.
     public Game(int round) {
-        this.setSpectators(defaultSpectatorValue);
+        this.setSpectators(0);
         if (round <= 127 && round > 0) {
             this.round = Integer.valueOf(round).byteValue();
         } else {
@@ -63,7 +61,7 @@ public class Game implements Serializable {
 
     //Needed for the TeamGamWrapper +  saveAllGames() in resources to work / D.S
     public Game(int round, LocalDateTime dateMatch) {
-        this.setSpectators(defaultSpectatorValue);
+        this.setSpectators(0);
         if (round <= 127 && round > 0) {
             this.round = Integer.valueOf(round).byteValue();
         } else {
@@ -73,7 +71,7 @@ public class Game implements Serializable {
     }
 
     public Game(Byte round, LocalDateTime dateMatch) {
-        this.setSpectators(defaultSpectatorValue);
+        this.setSpectators(0);
         this.round = round;
         this.dateMatch = dateMatch;
     }

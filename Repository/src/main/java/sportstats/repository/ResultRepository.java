@@ -15,4 +15,6 @@ import sportstats.domain.Result;
 @Repository
 public interface ResultRepository extends JpaRepository<Result, Long>{
     
+    
+    
 }

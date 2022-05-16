@@ -233,7 +233,19 @@ public class GameServiceTest {
         assertThrows(IllegalArgumentException.class, () -> {
             gameService.saveAllGames(tgWrap);
         });
+        
 
+    }
+    
+    public void testAddSpectator(){
+        mockSetup();
+        Game game = new Game();
+        Mockito.when(gameRepository.getById(1L)).thenReturn(game);
+        Mockito.when(gameRepository.save(any(Game.class))).
+                thenReturn(game);
+        game.setSpectators(34000);
+        assertEquals(game.getSpectators(),
+                gameService.add(1L, 34000));
     }
 
 }
