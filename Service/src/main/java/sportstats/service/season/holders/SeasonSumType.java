@@ -8,7 +8,7 @@ package sportstats.service.season.holders;
  *
  * @author alexf
  */
-public interface SeasonSumType extends Comparable<SeasonSumType>{
+public interface SeasonSumType {
 
     void setTeamname(String teamName);
 
@@ -25,8 +25,12 @@ public interface SeasonSumType extends Comparable<SeasonSumType>{
     void setPoints(int points);
     
     void setRank(int rank);
+    
+    int getRank();
 
     String getTeamName();
+    
+    int getPoints();
 
     int getGamesWon();
 
@@ -38,9 +42,4 @@ public interface SeasonSumType extends Comparable<SeasonSumType>{
 
     int getGoalDiff();
     
-    int getPoints();
-    
-    int getRank();
-    
-
 }

@@ -11,16 +11,14 @@ package sportstats.service.season.holders;
 public abstract class AbstractSeasonSum implements SeasonSumType {
 
     //Standard för alla sporter
+    private int rank;
+    private int points;
     private String teamName;
     private int gamesWon;
     private int gamesLost;
     private int scoredGoals;
     private int concededGoals;
     private int goalDiff;
-    private int points;
-    
-    private int rank;
-
 
     public AbstractSeasonSum(String teamName, int gamesWon, int gamesLost,
             int scoredGoals, int concededGoals, int goalDiff, int points) {
@@ -68,16 +66,31 @@ public abstract class AbstractSeasonSum implements SeasonSumType {
     public void setGoalDiff(int goalDiff) {
         this.goalDiff = goalDiff;
     }
-    
+
     @Override
     public void setPoints(int points) {
         this.points = points;
     }
 
+    @Override
+    public void setRank(int rank) {
+        this.rank = rank;
+    }
+
     //Getters
+    @Override
+    public int getRank() {
+        return rank;
+    }
+
     @Override
     public String getTeamName() {
         return teamName;
+    }
+
+    @Override
+    public int getPoints() {
+        return this.points;
     }
 
     @Override
@@ -104,30 +117,5 @@ public abstract class AbstractSeasonSum implements SeasonSumType {
     public int getGoalDiff() {
         return goalDiff;
     }
-
-    @Override
-    public int getPoints() {
-        return this.points;
-    }
-    
-    @Override
-    public void setRank(int rank) {
-        this.rank = rank;
-    }
-    
-    @Override
-    public int getRank() {
-        return rank;
-    }
-
-    @Override
-    public int compareTo(SeasonSumType o) {
-        Integer tmpPoints = points;
-        Integer tmpPoints2 = o.getPoints();
-        
-        return tmpPoints.compareTo(tmpPoints2);
-    }
-    
-    
 
 }

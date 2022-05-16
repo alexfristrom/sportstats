@@ -36,14 +36,6 @@ public class SeasonSummaryService {
     private GameRepository gameR;
     private ResultRepository resultR;
 
-    private String hocckey = "hockey";
-    private String bandy = "bandy";
-    private String floorball = "floorball";
-    private String fotball = "fotball";
-    private String basket = "basket";
-    private String handboll = "handboll";
-    private String volleyball = "volleyball";
-
     @Autowired
     public SeasonSummaryService(SeasonRepository season, TeamRepository team,
             GameRepository game, ResultRepository result) {
@@ -68,7 +60,10 @@ public class SeasonSummaryService {
         }
 
         //Sorting and points
-        summaryHolder = sort(summaryHolder);
+        Collections.sort(summaryHolder, new SortByPoints());
+        for (int i = 0; i < summaryHolder.size(); i++) {
+            summaryHolder.get(i).setRank(i+1);
+        }
 
         return summaryHolder;
     }
@@ -82,29 +77,6 @@ public class SeasonSummaryService {
         return gameR.listAllByTeam(teamId);
     }
 
-    private List<SeasonSumType> sort(List<SeasonSumType> listOfHolders) {
-        List<SeasonSumType> newListOfHolders = new ArrayList<>();
-        List<Integer> intList = new ArrayList<>();
-
-        for (int i = 0; i < listOfHolders.size(); i++) {
-            intList.add(listOfHolders.get(i).getPoints());
-        }
-
-        Collections.sort(intList);
-
-        for (int i = 0; i < listOfHolders.size(); i++) {
-
-            for (int j = 0; j < listOfHolders.size(); j++) {
-                if (intList.get(i) == listOfHolders.get(j).getPoints()) {
-                    newListOfHolders.add(listOfHolders.get(j));
-                    newListOfHolders.get(i).setRank(listOfHolders.size() - j);
-                }
-            }
-
-        }
-
-        return newListOfHolders;
-    }
 
     private SeasonSumType calculateTeamGames(List<Game> gameList,
             Long teamID, String teamName, String sportName) {
@@ -200,4 +172,28 @@ public class SeasonSummaryService {
 
     }
 
+    private class SortByPoints implements Comparator<SeasonSumType> {
+
+        @Override
+        public int compare(SeasonSumType type1, SeasonSumType type2) {
+            if (type1.getPoints() < type2.getPoints()) {
+                return 1;
+
+            } else if (type1.getPoints() > type2.getPoints()) {
+                return -1;
+
+            } else {
+
+                if (type1.getGoalDiff() > type2.getGoalDiff()) {
+                    return -1;
+
+                } else {
+                    return 1;
+                }
+
+            }
+
+        }
+
+    }
 }
