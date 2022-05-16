@@ -19,6 +19,8 @@ import sportstats.repository.TeamRepository;
 import sportstats.service.util.CheckId;
 import sportstats.service.util.CheckName;
 import sportstats.service.util.GameByTeam;
+import sportstats.service.util.GameWithResult;
+import sportstats.service.util.GameWithoutResult;
 
 /**
  *
@@ -42,6 +44,9 @@ public class GameService {
     }
 
     public Game saveGame(Game game) {
+        Result result = new Result();
+        resultRepo.save(result);
+        game.setResult(result);
         return gameRepo.save(game);
     }
 
@@ -114,4 +119,30 @@ public class GameService {
         return gameRepo.saveAll(games);
     }
 
+    public List<GameWithResult> listMatchesWithResultByRoundAndSeason(byte round, Long seasonId) {
+        return gameRepo.listMatchesByRoundAndSeasonId(round, seasonId).stream()
+                .map(GameWithResult::new)
+                .toList();
+    }
+    
+    public List<GameWithoutResult> listMatchesWithoutResultByRoundAndSeason(byte round,Long seasonId){
+        return gameRepo.listMatchesByRoundAndSeasonId(round, seasonId).stream()
+                .map(GameWithoutResult::new)
+                .toList();
+    }
+
+    public List<GameWithResult> listMatchesWithResultBySeason(Long seasonId) {
+        return gameRepo.listMatchesBySeasonId(seasonId).stream()
+                .map(GameWithResult::new)
+                .toList();
+    }
+
+    public List<GameWithoutResult> listMatchesWithoutResultBySeason(Long seasonId) {
+        return gameRepo.listMatchesBySeasonId(seasonId).stream()
+                .map(GameWithoutResult::new)
+                .toList();
+    }
+
+    
+    
 }

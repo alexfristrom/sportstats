@@ -11,7 +11,7 @@ import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.Test;
 import static org.mockito.ArgumentMatchers.any;
 import org.mockito.Mockito;
-import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.*;
 import sportstats.domain.Game;
 import sportstats.domain.Result;
 import sportstats.domain.Season;
@@ -236,4 +236,44 @@ public class GameServiceTest {
 
     }
 
+    @Test
+    public void testlistMatchesWithResultByRoundAndSeason() {
+        mockSetup();
+        List<Game> list = new ArrayList();
+
+        Mockito.when(gameRepository.listMatchesByRoundAndSeasonId(Byte.valueOf("1"), 1L)).thenReturn(list);
+        assertEquals(gameService.listMatchesWithResultByRoundAndSeason(Byte.valueOf("1"), 1L), list);
+        verify(gameRepository, times(1)).listMatchesByRoundAndSeasonId(Byte.valueOf("1"), 1L);
+
+    }
+
+    @Test
+    public void testlistMatchesWithoutResultByRoundAndSeason() {
+        mockSetup();
+        List<Game> list = new ArrayList();
+
+        Mockito.when(gameRepository.listMatchesByRoundAndSeasonId(Byte.valueOf("1"), 1L)).thenReturn(list);
+        assertEquals(gameService.listMatchesWithoutResultByRoundAndSeason(Byte.valueOf("1"), 1L), list);
+        verify(gameRepository, times(1)).listMatchesByRoundAndSeasonId(Byte.valueOf("1"), 1L);
+    }
+
+    @Test
+    public void testlistMatchesWithResultBySeason(){
+        mockSetup();
+        List<Game> list = new ArrayList();
+
+        Mockito.when(gameRepository.listMatchesBySeasonId(1L)).thenReturn(list);
+        assertEquals(gameService.listMatchesWithResultBySeason(1L), list);
+        verify(gameRepository, times(1)).listMatchesBySeasonId(1L);
+    }
+    
+    @Test
+    public void testlistMatchesWithoutResultBySeason(){
+        mockSetup();
+        List<Game> list = new ArrayList();
+
+        Mockito.when(gameRepository.listMatchesBySeasonId(1L)).thenReturn(list);
+        assertEquals(gameService.listMatchesWithoutResultBySeason(1L), list);
+        verify(gameRepository, times(1)).listMatchesBySeasonId(1L);
+    }
 }
