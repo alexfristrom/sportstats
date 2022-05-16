@@ -23,8 +23,14 @@ public interface SeasonSumType {
     void setGoalDiff(int goalDiff);
     
     void setPoints(int points);
+    
+    void setRank(int rank);
+    
+    int getRank();
 
     String getTeamName();
+    
+    int getPoints();
 
     int getGamesWon();
 
@@ -36,6 +42,4 @@ public interface SeasonSumType {
 
     int getGoalDiff();
     
-    int getPoints();
-
 }

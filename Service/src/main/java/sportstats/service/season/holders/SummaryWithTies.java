@@ -30,6 +30,6 @@ public class SummaryWithTies extends AbstractSeasonSum {
     public void setGamesTied(int gamesTied) {
         this.gamesTied = gamesTied;
     }
-
+    
     
 }

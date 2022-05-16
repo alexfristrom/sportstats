@@ -47,5 +47,7 @@ public class SummarWithOvertimesAndTies extends AbstractSeasonSum {
     public void setLosesOverTimeOrPenalites(int losesOverTimeOrPenalites) {
         this.losesOverTimeOrPenalites = losesOverTimeOrPenalites;
     }
+    
+   
 
 }
