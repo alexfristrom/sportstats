@@ -50,7 +50,7 @@ public class GameByTeam {
         return delegate.getDate();
     }
       
-    public Long getSpectators() {
+    public int getSpectators() {
         return delegate.getSpectators();
     }
     

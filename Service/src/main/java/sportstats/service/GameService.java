@@ -113,5 +113,12 @@ public class GameService {
         }
         return gameRepo.saveAll(games);
     }
+    
+    public int add(Long gameId, int spectators){
+        Game game = gameRepo.getById(gameId);
+        game.setSpectators(spectators);
+        gameRepo.save(game);
+        return game.getSpectators();
+    };
 
 }

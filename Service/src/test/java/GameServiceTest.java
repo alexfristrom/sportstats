@@ -100,8 +100,8 @@ public class GameServiceTest {
         Game game = new Game();
         Game game2 = new Game();
 
-        game.setSpectators(2L);
-        game2.setSpectators(3L);
+        game.setSpectators(1000);
+        game2.setSpectators(2000);
 
         List<Game> gameList = new ArrayList();
         gameList.add(game);
@@ -125,8 +125,8 @@ public class GameServiceTest {
         Game game = new Game();
         Game game2 = new Game();
 
-        game.setSpectators(2L);
-        game2.setSpectators(3L);
+        game.setSpectators(1000);
+        game2.setSpectators(2000);
 
         List<Game> gameList = new ArrayList();
         gameList.add(game);
@@ -151,8 +151,8 @@ public class GameServiceTest {
         Game game = new Game();
         Game game2 = new Game();
 
-        game.setSpectators(2L);
-        game2.setSpectators(3L);
+        game.setSpectators(1000);
+        game2.setSpectators(2000);
 
         List<Game> gameList = new ArrayList();
         gameList.add(game);

@@ -17,19 +17,19 @@ public class Game implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    
+
     @ManyToOne
     @JoinColumn(name = "hometeam_id")
     private Team hometeam;
-    
+
     @ManyToOne
     @JoinColumn(name = "awayteam_id")
     private Team awayteam;
-    
+
     @ManyToOne
     @JoinColumn(name = "season_id")
     private Season season;
-    
+
     @OneToOne
     @JoinColumn(name = "result_id")
     private Result result;
@@ -38,35 +38,45 @@ public class Game implements Serializable {
 
     private LocalDateTime dateMatch;
 
-    private Long spectators;
+    private int spectators;
+
+    private int defaultSpectatorValue = 0;
 
     public Game() {
+        this.setSpectators(defaultSpectatorValue);
     }
 
-    public Game(Byte round){
+    public Game(Byte round) {
         this.round = round;
+        this.setSpectators(defaultSpectatorValue);
     }
+
     //Needed for the TeamGamWrapper +  saveAllGames() in resources to work / D.S.
-    public Game(int round){
-        if(round <= 127 && round > 0)
+    public Game(int round) {
+        this.setSpectators(defaultSpectatorValue);
+        if (round <= 127 && round > 0) {
             this.round = Integer.valueOf(round).byteValue();
-        else
+        } else {
             throw new IllegalArgumentException("Round is out of bounds, should be between 0 - 127.");
+        }
     }
+
     //Needed for the TeamGamWrapper +  saveAllGames() in resources to work / D.S
-    public Game(int round,LocalDateTime dateMatch){
-        if(round <= 127 && round > 0)
+    public Game(int round, LocalDateTime dateMatch) {
+        this.setSpectators(defaultSpectatorValue);
+        if (round <= 127 && round > 0) {
             this.round = Integer.valueOf(round).byteValue();
-        else
+        } else {
             throw new IllegalArgumentException("Round is out of bounds, should be between 0 - 127.");
+        }
         this.dateMatch = dateMatch;
     }
-    public Game(Byte round,LocalDateTime dateMatch){
+
+    public Game(Byte round, LocalDateTime dateMatch) {
+        this.setSpectators(defaultSpectatorValue);
         this.round = round;
         this.dateMatch = dateMatch;
     }
-    
-    
 
     public Long getId() {
         return id;
@@ -121,11 +131,11 @@ public class Game implements Serializable {
         this.dateMatch = dateMatch;
     }
 
-    public Long getSpectators() {
+    public int getSpectators() {
         return spectators;
     }
 
-    public void setSpectators(Long spectators) {
+    public void setSpectators(int spectators) {
         this.spectators = spectators;
     }
 

@@ -66,5 +66,10 @@ public class GameResource {
     public List<Game> saveAllGames(@RequestBody TeamGameWrapper wrap) {
         return service.saveAllGames(wrap);
     }
+    
+    @PostMapping("/addSpectators/{gameId}/{spectators}")
+    public int addSpectators(@PathVariable Long gameId,@PathVariable int spectators){
+        return service.add(gameId, spectators);
+    };
 
 }
