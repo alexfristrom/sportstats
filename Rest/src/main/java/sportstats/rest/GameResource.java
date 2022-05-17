@@ -16,6 +16,7 @@ import sportstats.domain.Game;
 import sportstats.service.GameService;
 import sportstats.service.util.TeamGameWrapper;
 import sportstats.service.util.GameByTeam;
+import sportstats.service.util.GameWithResult;
 
 /**
  *
@@ -62,11 +63,11 @@ public class GameResource {
         return service.listHomeByTeam(teamId);
     }
     
-     @GetMapping("getGoalDiff/{team1Id}/{team2Id}/{seasonId}")
-     public Game getGoalDiff(@PathVariable Long team1Id,
+     @GetMapping("getBiggestGoalDiff/{team1Id}/{team2Id}/{seasonId}")
+     public GameWithResult getBiggestGoalDiff(@PathVariable Long team1Id,
              @PathVariable Long team2Id,
              @PathVariable Long seasonId){
-         return service.findGoalDiff(team1Id, team2Id, seasonId);
+         return service.findBiggestGoalDiff(team1Id, team2Id, seasonId);
      }
 
     @PostMapping("/addPlannedMatches")

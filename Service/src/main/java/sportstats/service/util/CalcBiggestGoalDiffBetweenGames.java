@@ -12,31 +12,29 @@ import sportstats.domain.Game;
  * and returns the game with the biggest goal difference.
  * @author annjohansson
  */
-public class GoalDiff {
+public class CalcBiggestGoalDiffBetweenGames {
     
-    public GoalDiff(){
+    public CalcBiggestGoalDiffBetweenGames(){
         
     }
     
     public Game findBiggestGoalDiff(List<Game> list){
         Game game = null;
-        Game curr;
+        Game current;
         int diff = 0;
         int biggestDiff = 0;
         
         for(int i = 0; i < list.size(); i++){
-        curr = list.get(i);
-        int home = curr.getResult().getHomeTeamScore();
-        int away = curr.getResult().getAwayTeamScore();
+        current = list.get(i);
+        int home = current.getResult().getHomeTeamScore();
+        int away = current.getResult().getAwayTeamScore();
         diff = Math.abs(home-away);
             if(biggestDiff < diff){
             biggestDiff = diff;
-            game = curr;
+            game = current;
             }
         }
-        System.out.println(diff);
        return game;
-       
     }
    
             

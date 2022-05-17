@@ -19,7 +19,8 @@ import sportstats.repository.TeamRepository;
 import sportstats.service.util.CheckId;
 import sportstats.service.util.CheckName;
 import sportstats.service.util.GameByTeam;
-import sportstats.service.util.GoalDiff;
+import sportstats.service.util.CalcBiggestGoalDiffBetweenGames;
+import sportstats.service.util.GameWithResult;
 
 /**
  *
@@ -72,12 +73,17 @@ public class GameService {
                 .map(GameByTeam::new)
                 .toList();
     }
-//finns ingen felhantering för om lagena existerar innan man skickar hämtar data.
-    public Game findGoalDiff(Long team1Id, Long team2Id, Long seasonId) {
-     List<Game> games = gameRepo.listDiffBySeason(team1Id, team2Id, seasonId);
-     GoalDiff calc = new GoalDiff();
-     Game game =  calc.findBiggestGoalDiff(games);
-     return game; 
+
+    public GameWithResult findBiggestGoalDiff(Long team1Id, Long team2Id, Long seasonId) {
+        teamRepo.findById(team2Id).orElseThrow();
+        teamRepo.findById(team1Id).orElseThrow();
+        seasonRepo.findById(seasonId).orElseThrow();
+    
+        List<Game> games = gameRepo.listBiggestGoalDiffBySeason(team1Id, team2Id, seasonId);
+        CalcBiggestGoalDiffBetweenGames calc = new CalcBiggestGoalDiffBetweenGames();
+        Game game =  calc.findBiggestGoalDiff(games);
+        GameWithResult gameWResult = new GameWithResult(game);
+        return gameWResult; 
     }
 
     public List<Game> saveAllGames(TeamGameWrapper tgWrap) {
