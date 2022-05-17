@@ -6,39 +6,37 @@ package sportstats.service.util;
 
 import java.util.List;
 import sportstats.domain.Game;
-import sportstats.domain.Result;
 
 /**
- *
+ * A help class that only calculates the biggest goal difference
+ * and returns the game with the biggest goal difference.
  * @author annjohansson
  */
 public class GoalDiff {
     
-    private List<Game> list;
-    private Result result;
-    
-    public GoalDiff(List<Game> list){
-        this.list = list;
+    public GoalDiff(){
         
     }
     
-    public Game test(List<Game> list){
-        Game big;
+    public Game findBiggestGoalDiff(List<Game> list){
+        Game game = null;
         Game curr;
-        int diff;
-        int bigDiff= 0;
+        int diff = 0;
+        int biggestDiff = 0;
         
         for(int i = 0; i < list.size(); i++){
         curr = list.get(i);
         int home = curr.getResult().getHomeTeamScore();
         int away = curr.getResult().getAwayTeamScore();
-        diff = Math.abs((home-away)*(home-away));
-            if(bigDiff < diff){
-            bigDiff = diff;
-            big = curr;
+        diff = Math.abs(home-away);
+            if(biggestDiff < diff){
+            biggestDiff = diff;
+            game = curr;
             }
         }
-       return big; 
+        System.out.println(diff);
+       return game;
+       
     }
    
             

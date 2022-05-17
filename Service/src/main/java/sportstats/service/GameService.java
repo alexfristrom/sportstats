@@ -5,12 +5,12 @@
 package sportstats.service;
 
 import java.util.List;
-import java.util.stream.Collectors;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import sportstats.domain.Game;
 import sportstats.repository.GameRepository;
 import sportstats.service.util.GameByTeam;
+import sportstats.service.util.GoalDiff;
 
 /**
  *
@@ -55,14 +55,11 @@ public class GameService {
                 .map(GameByTeam::new)
                 .toList();
     }
-
-    public Game getGoalDiff(Long team1Id, Long team2Id, Long seasonId) {
-     
-       
-      //x.getResult.getHomeTeamScore() - y.getResult.getAwayTeamScore())
-        Game diff = gameRepo.listDiffBySeason(team1Id, team2Id, seasonId)).stream()
-                .collect(Collectors.maxBy((x, y)
-                        -> );
-        return; 
+//finns ingen felhantering för om lagena existerar innan man skickar hämtar data.
+    public Game findGoalDiff(Long team1Id, Long team2Id, Long seasonId) {
+     List<Game> games = gameRepo.listDiffBySeason(team1Id, team2Id, seasonId);
+     GoalDiff calc = new GoalDiff();
+     Game game =  calc.findBiggestGoalDiff(games);
+     return game; 
     }
 }

@@ -26,7 +26,7 @@ public interface GameRepository extends JpaRepository<Game, Long>{
     @Query("FROM Game game WHERE game.hometeam.id = ?1")
     List<Game> listHomeByTeam(Long teamId);
     
-    @Query("WHERE (game.hometeam.id  = ?1 OR game.awayteam.id = ?1)" 
+    @Query("FROM Game game WHERE (game.hometeam.id  = ?1 OR game.awayteam.id = ?1)" 
             + "AND (game.hometeam.id  = ?2 OR game.awayteam.id = ?2)" 
             + "AND (game.season.id = ?3)")
     List<Game> listDiffBySeason(Long team1Id, Long team2Id, Long seasonId);

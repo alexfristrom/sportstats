@@ -60,4 +60,11 @@ public class GameResource {
     public List<GameByTeam> listHomeByTeam(@PathVariable Long teamId){
         return service.listHomeByTeam(teamId);
     }
+    
+     @GetMapping("getGoalDiff/{team1Id}/{team2Id}/{seasonId}")
+     public Game getGoalDiff(@PathVariable Long team1Id,
+             @PathVariable Long team2Id,
+             @PathVariable Long seasonId){
+         return service.findGoalDiff(team1Id, team2Id, seasonId);
+     }
 }
