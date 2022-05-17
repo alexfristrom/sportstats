@@ -152,4 +152,38 @@ public class GameService {
         return game.getSpectators();
     };
 
+    public List<GameWithResult> listMatchesWithResultBySeason(Long seasonId) {
+        return gameRepo.listMatchesBySeasonId(seasonId).stream()
+                .map(GameWithResult::new)
+                .toList();
+    }
+
+    public List<GameWithoutResult> listMatchesWithoutResultBySeason(Long seasonId) {
+        return gameRepo.listMatchesBySeasonId(seasonId).stream()
+                .map(GameWithoutResult::new)
+                .toList();
+    }
+
+    public List<Matchups> listMatchups(Long teamOneId, Long teamTwoId) {
+        List<Game> games = new ArrayList();
+        List<Game> game1 = gameRepo.listMatchupHometeamAwayTeam(teamOneId, teamTwoId);
+        List<Game> game2 = gameRepo.listMatchupHometeamAwayTeam(teamTwoId, teamOneId);
+        games.addAll(game1);
+        games.addAll(game2);
+
+        return games.stream().map(Matchups::new).toList();
+
+    }
+
+    public List<MatchupsWithResult> listMatchupsWithResult(Long teamOneId, Long teamTwoId) {
+        List<Game> games = new ArrayList();
+        List<Game> game1 = gameRepo.listMatchupHometeamAwayTeam(teamOneId, teamTwoId);
+        List<Game> game2 = gameRepo.listMatchupHometeamAwayTeam(teamTwoId, teamOneId);
+        games.addAll(game1);
+        games.addAll(game2);
+
+        return games.stream().map(MatchupsWithResult::new).toList();
+
+    }
+
 }

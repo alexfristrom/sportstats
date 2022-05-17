@@ -17,6 +17,9 @@ import sportstats.service.GameService;
 import sportstats.service.util.TeamGameWrapper;
 import sportstats.service.util.GameByTeam;
 import sportstats.service.util.GameWithResult;
+import sportstats.service.util.GameWithoutResult;
+import sportstats.service.util.Matchups;
+import sportstats.service.util.MatchupsWithResult;
 
 /**
  *
