@@ -88,7 +88,7 @@ public class GameTest {
     @Test
     public void spectatorTest() {
         Game game = new Game();
-        Long spectators = 100L;
+        int spectators = 100;
 
         game.setSpectators(spectators);
         assertEquals(spectators, game.getSpectators());
