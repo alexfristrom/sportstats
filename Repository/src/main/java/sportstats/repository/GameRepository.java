@@ -42,4 +42,7 @@ public interface GameRepository extends JpaRepository<Game, Long>{
     
     @Query("FROM Game game WHERE game.season.id = ?1")
     List<Game> listMatchesBySeasonId(Long seasonId);
+    
+    @Query("FROM Game game WHERE game.hometeam.id = ?1 AND game.awayteam.id = ?2")
+    List<Game> listMatchupHometeamAwayTeam(Long homeTeamId,Long awayTeamId);
 }
