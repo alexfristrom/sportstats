@@ -110,8 +110,8 @@ public class SeasonSummaryService {
         for (Game game : listOfGame) {
             Long gameId = game.getId();
             Result tempResult = game.getResult();
-            Long teamScore = null;
-            Long otherTeamScore = null;
+            int teamScore = 0;
+            int otherTeamScore = 0;
 
             if (game.getHomeTeam().getId().equals(teamID)) {
                 teamScore = tempResult.getHomeTeamScore();

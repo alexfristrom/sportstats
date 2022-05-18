@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import sportstats.domain.Arena;
 import sportstats.domain.Listable;
-import sportstats.service.ArenaService;
+import sportstats.service.ArenaService; 
 
 /**
  *
