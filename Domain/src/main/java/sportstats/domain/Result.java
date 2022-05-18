@@ -1,4 +1,4 @@
-    package sportstats.domain;
+        package sportstats.domain;
 
 import com.fasterxml.jackson.annotation.*;
 import java.io.Serializable;

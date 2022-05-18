@@ -42,6 +42,9 @@ public class GameService {
     }
 
     public Game saveGame(Game game) {
+        Result result = new Result();
+        resultRepo.save(result);
+        game.setResult(result);
         return gameRepo.save(game);
     }
 
