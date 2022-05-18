@@ -4,6 +4,8 @@
  */
 package sportstats.service;
 
+import java.time.LocalDateTime;
+import java.util.Date;
 import sportstats.service.util.TeamGameWrapper;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -119,6 +121,30 @@ public class GameService {
         game.setSpectators(spectators);
         gameRepo.save(game);
         return game.getSpectators();
+    };
+    
+    public List<Game> getGameByDateAndLeague(Long leagueId, LocalDateTime date){
+        
+        List<Season> seasonsWithLeague = seasonRepo.listByLeague(leagueId);
+        List<Game> gamesBySeason;
+        List<Game> gameList = null;
+        List<Game> gameByDate = null;
+        
+        for (Season season : seasonsWithLeague) {
+            
+         gamesBySeason = gameRepo.listMatchesBySeasonId(season.getId());
+            
+            for (Game listOfGame : gamesBySeason) {
+                gameList.add(listOfGame);
+            }
+        } 
+        
+        for (Game game : gameList) {
+            
+            gameByDate = gameRepo.listMatchesByDate(date, game.getSeason().getId());
+        }
+        
+       return gameByDate;
     };
 
 }

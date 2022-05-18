@@ -4,6 +4,8 @@
  */
 package sportstats.rest;
 
+import java.time.LocalDateTime;
+import java.util.Date;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -72,4 +74,8 @@ public class GameResource {
         return service.add(gameId, spectators);
     };
 
+    @GetMapping("/listGameByDateAndLeague/{date}/{leagueId}")
+    public List<Game> listGameByDateAndLeague(@PathVariable LocalDateTime date, @PathVariable Long leagueId){
+        return service.getGameByDateAndLeague(leagueId, date);
+    };
 }

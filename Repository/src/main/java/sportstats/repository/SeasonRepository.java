@@ -16,6 +16,8 @@ import sportstats.domain.Season;
  */
 @Repository
 public interface SeasonRepository extends JpaRepository<Season, Long> {
+
     @Query("FROM Season season WHERE season.league.id = ?1")
     List<Season> listByLeague(Long leagueId);
+
 }
