@@ -15,17 +15,47 @@ import sportstats.repository.GameRepository;
  * @author alexf
  */
 @Service
-public class AddResultData {
+public class AddResultService {
     
     private GameRepository gameR;
     
     @Autowired
-    public AddResultData(GameRepository gameRepository){
+    public AddResultService(GameRepository gameRepository){
         this.gameR = gameRepository;
     }
     
+    public Game addResultScore(Long gameId, int homeTeamScore, int awayTeamScore){  
+        Game game = gameR.getById(gameId);
+        Result result = game.getResult();
+        
+        result.setHomeTeamScore(homeTeamScore);
+        result.setAwayTeamScore(awayTeamScore);
+        
+        game.setResult(result);
+        gameR.save(game);
+        
+        return game;
+    }
+    
+    public Game addResultMeta(Long gameId, boolean overtime, Long endTime, 
+            boolean penalty){
+        
+        Game game = gameR.getById(gameId);
+        Result result = game.getResult();
+        
+        result.setOvertime(overtime);
+        result.setOvertimeMinutes(endTime);
+        result.setPenalty(penalty);
+        
+        game.setResult(result);
+        gameR.save(game);
+        
+        return game;
+    }
+    
+    
     public Game addGameResult(Long gameId, int homeTeamScore, int awayTeamScore, 
-            boolean overtime, int endTime, boolean penalty){
+            boolean overtime, Long endTime, boolean penalty){
         
         Game game = gameR.getById(gameId);
         Result result = game.getResult();
