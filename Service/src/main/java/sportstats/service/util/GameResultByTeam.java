@@ -4,6 +4,7 @@
  */
 package sportstats.service.util;
 
+import java.util.ArrayList;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import sportstats.domain.Game;
@@ -31,7 +32,7 @@ public class GameResultByTeam {
     public List<Result> getTeamGamesResult(Long teamId, String g) {
         this.resultCondition = g;
         List<Game> listOfTeamGames = gameR.listAllByTeam(teamId);
-        List<Result> listOfTeamGamesResult = null;
+        List<Result> listOfTeamGamesResult = new ArrayList<>();
         for (Game game : listOfTeamGames) {
             Result result = game.getResult();
             Game currGame = game;

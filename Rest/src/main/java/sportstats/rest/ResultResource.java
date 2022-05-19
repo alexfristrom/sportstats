@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 import sportstats.domain.Result;
 import sportstats.service.ResultService;
 
+
 /**
  *
  * @author annjohansson
@@ -44,4 +45,10 @@ public class ResultResource {
     public List<Result> getAllResult(){
         return service.getAllResult();
     }
+    
+    @GetMapping("/getTeamsResult/{teamId}/{winCondition}")
+    public List<Result> getTeamsResult(@PathVariable Long teamId, @PathVariable String winCondition){
+        return service.getTeamResults(teamId, winCondition);
+    }
+    
 }

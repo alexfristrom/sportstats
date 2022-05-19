@@ -8,7 +8,9 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import sportstats.domain.Result;
+import sportstats.repository.GameRepository;
 import sportstats.repository.ResultRepository;
+import sportstats.service.util.GameResultByTeam;
 
 /**
  *
@@ -18,11 +20,21 @@ import sportstats.repository.ResultRepository;
 public class ResultService {
 
     private final ResultRepository Repo;
+    private final GameRepository gameRepo;
 
+    
     @Autowired
+    public ResultService(ResultRepository Repo, GameRepository gameRepo) {
+        this.Repo = Repo;
+        this.gameRepo = gameRepo;
+    }
+    
     public ResultService(ResultRepository Repo) {
         this.Repo = Repo;
+        this.gameRepo = null;
     }
+    
+    
 
     public Result saveResult(Result result) {
         return Repo.save(result);
@@ -35,4 +47,10 @@ public class ResultService {
     public List<Result> getAllResult() {
         return Repo.findAll();
     }
+    
+    public List<Result> getTeamResults(Long teamId, String winCondition){
+        GameResultByTeam teamResults = new GameResultByTeam(gameRepo, Repo);
+        return teamResults.getTeamGamesResult(teamId, winCondition);
+    }
+    
 }
