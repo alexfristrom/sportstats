@@ -12,6 +12,8 @@ import org.junit.jupiter.api.Test;
 import static org.mockito.ArgumentMatchers.any;
 import org.mockito.Mockito;
 import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
 import sportstats.domain.Game;
 import sportstats.domain.Result;
 import sportstats.domain.Season;
@@ -25,6 +27,7 @@ import sportstats.service.GameService;
 import sportstats.service.util.CalcBiggestGoalDiffBetweenGames;
 import sportstats.service.util.GameByTeam;
 import sportstats.service.util.GameWithResult;
+import sportstats.service.util.Matchups;
 import sportstats.service.util.TeamGameWrapper;
 
 /**
@@ -238,7 +241,7 @@ public class GameServiceTest {
         
 
     }
-    @Test
+    
     public void testAddSpectator(){
         mockSetup();
         Game game = new Game();
@@ -249,6 +252,48 @@ public class GameServiceTest {
         assertEquals(game.getSpectators(),
                 gameService.add(1L, 34000));
     }
+
+    
+    @Test
+    public void testlistMatchesWithResultByRoundAndSeason() {
+        mockSetup();
+        List<Game> list = new ArrayList();
+
+        Mockito.when(gameRepository.listMatchesByRoundAndSeasonId(Byte.valueOf("1"), 1L)).thenReturn(list);
+        assertEquals(gameService.listMatchesWithResultByRoundAndSeason(Byte.valueOf("1"), 1L), list);
+        verify(gameRepository, times(1)).listMatchesByRoundAndSeasonId(Byte.valueOf("1"), 1L);
+
+    }
+
+    @Test
+    public void testlistMatchesWithoutResultByRoundAndSeason() {
+        mockSetup();
+        List<Game> list = new ArrayList();
+
+        Mockito.when(gameRepository.listMatchesByRoundAndSeasonId(Byte.valueOf("1"), 1L)).thenReturn(list);
+        assertEquals(gameService.listMatchesWithoutResultByRoundAndSeason(Byte.valueOf("1"), 1L), list);
+        verify(gameRepository, times(1)).listMatchesByRoundAndSeasonId(Byte.valueOf("1"), 1L);
+    }
+    
+    @Test
+    public void testlistMatchups(){
+        mockSetup();
+        List<Game> list = new ArrayList();
+        Mockito.when(gameRepository.listMatchupHometeamAwayTeam(1L, 2L)).thenReturn(list);
+        assertEquals(gameService.listMatchups(1L, 2L),list.stream().map(Matchups::new).toList());
+        verify(gameRepository,times(1)).listMatchupHometeamAwayTeam(1L,2L);
+        
+    }
+    
+    @Test
+    public void testlistMatchupsWithResult(){
+        mockSetup();
+        List<Game> list = new ArrayList();
+        Mockito.when(gameRepository.listMatchupHometeamAwayTeam(1L, 2L)).thenReturn(list);
+        assertEquals(gameService.listMatchups(1L, 2L),list.stream().map(Matchups::new).toList());
+        verify(gameRepository,times(1)).listMatchupHometeamAwayTeam(1L,2L);
+    }
+    
     
     /**
      * 
@@ -296,6 +341,4 @@ public class GameServiceTest {
         assertEquals(gameWResult.getSpectators(), result.getSpectators());
     }
     
-            
-
 }
