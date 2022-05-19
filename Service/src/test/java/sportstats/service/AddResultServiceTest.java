@@ -23,12 +23,13 @@ import sportstats.repository.GameRepository;
  * @author alexf
  */
 public class AddResultServiceTest {
-    
+
     @Mock
-    
+
     private GameRepository gameR;
 
-     AddResultService service;
+    AddResultService service;
+
     /**
      * Test of addResultScore method, of class AddResultService.
      */
@@ -36,20 +37,20 @@ public class AddResultServiceTest {
     public void testAddResultScore() {
         gameR = mock(GameRepository.class);
         service = new AddResultService(gameR);
-        
+
         Game tmpGame = new Game();
         Result tmpResult = new Result();
         tmpGame.setResult(tmpResult);
-        
+
         Long gameId = 1l;
-        
+
         Mockito.when(gameR.getById(gameId)).thenReturn(tmpGame);
-      
+
         Game game = service.addResultScore(1L, 5, 15);
-        
+
         assertEquals(15, game.getResult().getAwayTeamScore());
         assertEquals(5, game.getResult().getHomeTeamScore());
-        
+
     }
 
     /**
@@ -57,7 +58,22 @@ public class AddResultServiceTest {
      */
     @Test
     public void testAddResultMeta() {
-       
+        gameR = mock(GameRepository.class);
+        service = new AddResultService(gameR);
+
+        Game tmpGame = new Game();
+        Result tmpResult = new Result();
+        tmpGame.setResult(tmpResult);
+
+        Long gameId = 1l;
+
+        Mockito.when(gameR.getById(gameId)).thenReturn(tmpGame);
+        Game game = service.addResultMeta(gameId, true, 20L, true);
+
+        assertEquals(true, game.getResult().getOvertime());
+        assertEquals(true, game.getResult().getPenalty());
+        assertEquals(20L, game.getResult().getOvertimeMinutes());
+
     }
 
     /**
@@ -66,6 +82,24 @@ public class AddResultServiceTest {
     @Test
     public void testAddGameResult() {
         
+        gameR = mock(GameRepository.class);
+        service = new AddResultService(gameR);
+
+        Game tmpGame = new Game();
+        Result tmpResult = new Result();
+        tmpGame.setResult(tmpResult);
+
+        Long gameId = 1l;
+
+        Mockito.when(gameR.getById(gameId)).thenReturn(tmpGame);
+        Game game = service.addGameResult(gameId, 5, 15, true, 20L, true);
+        
+        assertEquals(15, game.getResult().getAwayTeamScore());
+        assertEquals(5, game.getResult().getHomeTeamScore());
+        assertEquals(true, game.getResult().getOvertime());
+        assertEquals(true, game.getResult().getPenalty());
+        assertEquals(20L, game.getResult().getOvertimeMinutes());
+        
     }
-    
+
 }
