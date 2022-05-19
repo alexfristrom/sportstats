@@ -113,7 +113,7 @@ public class SeasonSummaryService {
             int teamScore = 0;
             int otherTeamScore = 0;
 
-            if (game.getHomeTeam().getId() == teamID) {
+            if (game.getHomeTeam().getId().equals(teamID)) {
                 teamScore = tempResult.getHomeTeamScore();
                 otherTeamScore = tempResult.getAwayTeamScore();
                 scoredGoals += teamScore;
