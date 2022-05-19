@@ -8,10 +8,12 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import sportstats.service.SeasonSummaryService;
 import sportstats.service.season.holders.SeasonSumType;
+import sportstats.service.util.SeasonList22;
 
 /**
  *
@@ -31,5 +33,10 @@ public class SeasonSummaryResource {
     @GetMapping("getSeasonSummary/{seasonId}")
     public List<SeasonSumType> getSeasonSummary(@PathVariable Long seasonId){
         return service.getSeasonSummary(seasonId);
-    }    
+    } 
+    
+    @GetMapping("getSeasonsSummary/{seasonList}")
+    public List<SeasonSumType> getSeasonsSummary(@PathVariable List<Long>  seasonList22){
+        return service.getSeasonsSummary(seasonList22);
+    }
 }

@@ -5,7 +5,6 @@
 package sportstats.service;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
@@ -19,10 +18,8 @@ import sportstats.repository.ResultRepository;
 import sportstats.repository.SeasonRepository;
 import sportstats.repository.TeamRepository;
 import sportstats.service.season.holders.SeasonSumType;
-import sportstats.service.season.holders.Summary;
-import sportstats.service.season.holders.SummaryWithOvertime;
-import sportstats.service.season.holders.SummaryWithTies;
 import sportstats.service.season.holders.SportRuleHandler;
+import sportstats.service.util.SeasonList22;
 
 /**
  *
@@ -195,5 +192,17 @@ public class SeasonSummaryService {
 
         }
 
+    }
+    
+    public List<SeasonSumType> getSeasonsSummary(List<Long> seasonIds){
+//        List<Long> temp = new ArrayList();
+//        for(String id:seasonIds){
+//            temp.add(Long.parseLong(id));
+//        }
+        List<SeasonSumType> summaryHolder = new ArrayList();
+        for(Long id:seasonIds){
+            summaryHolder.addAll(getSeasonSummary(id));
+        }
+        return summaryHolder;
     }
 }
