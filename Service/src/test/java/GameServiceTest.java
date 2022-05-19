@@ -22,7 +22,9 @@ import sportstats.repository.ResultRepository;
 import sportstats.repository.SeasonRepository;
 import sportstats.repository.TeamRepository;
 import sportstats.service.GameService;
+import sportstats.service.util.CalcBiggestGoalDiffBetweenGames;
 import sportstats.service.util.GameByTeam;
+import sportstats.service.util.GameWithResult;
 import sportstats.service.util.TeamGameWrapper;
 
 /**
@@ -236,7 +238,7 @@ public class GameServiceTest {
         
 
     }
-    
+    @Test
     public void testAddSpectator(){
         mockSetup();
         Game game = new Game();
@@ -247,5 +249,53 @@ public class GameServiceTest {
         assertEquals(game.getSpectators(),
                 gameService.add(1L, 34000));
     }
+    
+    /**
+     * 
+     */
+    @Test
+    public void testFindBiggestGoalDiff(){
+        mockSetup();
+        Game game1 = new Game();
+        Game game2 = new Game();
+        game1.setSpectators(1000);
+        game2.setSpectators(2000);
+        Result result1 = new Result();
+        Result result2 = new Result();
+        game1.setResult(result1);
+        game2.setResult(result2);
+        result1.setHomeTeamScore(1);
+        result2.setHomeTeamScore(0);
+        result1.setAwayTeamScore(1);
+        result2.setAwayTeamScore(4);
+        
+        List<Game> games = new ArrayList();
+        games.add(game1);
+        games.add(game2);
+        
+        Team team1 = new Team();
+        Team team2 = new Team();
+        
+        Season season1 = new Season();
+        
+        CalcBiggestGoalDiffBetweenGames calc = mock(CalcBiggestGoalDiffBetweenGames.class);
+        GameWithResult gameWResult = mock(GameWithResult.class);
+        GameWithResult result;
+        
+        Mockito.when(gameRepository.listBiggestGoalDiffBySeason
+        (Long.MIN_VALUE, Long.MAX_VALUE, Long.MIN_VALUE)).thenReturn(games);
+        Mockito.when(calc.findBiggestGoalDiff(games)).thenReturn(game2);
+        Mockito.when(gameWResult.getSpectators()).thenReturn(2000);
+        Mockito.when(teamRepository.findById(Long.MIN_VALUE)).thenReturn(Optional.of(team1));
+        Mockito.when(teamRepository.findById(Long.MAX_VALUE)).thenReturn(Optional.of(team2));
+        Mockito.when(seasonRepository.findById(Long.MIN_VALUE)).thenReturn(Optional.of(season1));
+       
+        
+        result = gameService.findBiggestGoalDiff(Long.MIN_VALUE, Long.MAX_VALUE, Long.MIN_VALUE);
+        
+        assertEquals(gameWResult.getSpectators(), result.getSpectators());
+    }
+    
+            
 
 }
