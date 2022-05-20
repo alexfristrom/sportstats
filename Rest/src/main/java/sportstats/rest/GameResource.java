@@ -4,6 +4,8 @@
  */
 package sportstats.rest;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -65,53 +67,64 @@ public class GameResource {
     public List<GameByTeam> listHomeByTeam(@PathVariable Long teamId) {
         return service.listHomeByTeam(teamId);
     }
-    
-     @GetMapping("getBiggestGoalDiff/{team1Id}/{team2Id}/{seasonId}")
-     public GameWithResult getBiggestGoalDiff(@PathVariable Long team1Id,
-             @PathVariable Long team2Id,
-             @PathVariable Long seasonId){
-         return service.findBiggestGoalDiff(team1Id, team2Id, seasonId);
-     }
+
+    @GetMapping("getBiggestGoalDiff/{team1Id}/{team2Id}/{seasonId}")
+    public GameWithResult getBiggestGoalDiff(@PathVariable Long team1Id,
+            @PathVariable Long team2Id,
+            @PathVariable Long seasonId) {
+        return service.findBiggestGoalDiff(team1Id, team2Id, seasonId);
+    }
 
     @PostMapping("/addPlannedMatches")
     public List<Game> saveAllGames(@RequestBody TeamGameWrapper wrap) {
         return service.saveAllGames(wrap);
     }
-    
+
     @PostMapping("/addSpectators/{gameId}/{spectators}")
-    public int addSpectators(@PathVariable Long gameId,@PathVariable int spectators){
+    public int addSpectators(@PathVariable Long gameId, @PathVariable int spectators) {
         return service.add(gameId, spectators);
-    };
+    }
+
+    ;
 
     @GetMapping("listMatchesWithResultByRoundAndSeason/{round}/{seasonId}")
-    public List<GameWithResult> listMatchesWithResultByRoundAndSeason(@PathVariable byte round
-                                                ,@PathVariable Long seasonId){
-        return service.listMatchesWithResultByRoundAndSeason(round,seasonId);
+    public List<GameWithResult> listMatchesWithResultByRoundAndSeason(@PathVariable byte round,
+            @PathVariable Long seasonId) {
+        return service.listMatchesWithResultByRoundAndSeason(round, seasonId);
     }
-    
+
     @GetMapping("listMatchesWithoutResultByRoundAndSeason/{round}/{seasonId}")
-    public List<GameWithoutResult> listMatchesWithoutByRoundAndSeason(@PathVariable byte round
-                                                ,@PathVariable Long seasonId){
-        return service.listMatchesWithoutResultByRoundAndSeason(round,seasonId);
+    public List<GameWithoutResult> listMatchesWithoutByRoundAndSeason(@PathVariable byte round,
+            @PathVariable Long seasonId) {
+        return service.listMatchesWithoutResultByRoundAndSeason(round, seasonId);
     }
-    
+
     @GetMapping("listMatchesWithResultBySeason/{seasonId}")
-    public List<GameWithResult> listMatchesWithResultBySeason(@PathVariable Long seasonId){
+    public List<GameWithResult> listMatchesWithResultBySeason(@PathVariable Long seasonId) {
         return service.listMatchesWithResultBySeason(seasonId);
     }
-    
+
     @GetMapping("listMatchesWithoutResultBySeason/{seasonId}")
-    public List<GameWithoutResult> listMatchesWIthoutResultBySeason(@PathVariable Long seasonId){
+    public List<GameWithoutResult> listMatchesWIthoutResultBySeason(@PathVariable Long seasonId) {
         return service.listMatchesWithoutResultBySeason(seasonId);
     }
-    
+
     @GetMapping("listMatchups/{teamOneId}/{teamTwoId}")
-    public List<Matchups> listMatchups(@PathVariable Long teamOneId,@PathVariable Long teamTwoId){
-        return service.listMatchups(teamOneId,teamTwoId);
+    public List<Matchups> listMatchups(@PathVariable Long teamOneId, @PathVariable Long teamTwoId) {
+        return service.listMatchups(teamOneId, teamTwoId);
     }
-    
+
     @GetMapping("listMatchupsWithResult/{teamOneId}/{teamTwoId}")
-    public List<MatchupsWithResult> listMatchupsWithResult(@PathVariable Long teamOneId,@PathVariable Long teamTwoId){
+    public List<MatchupsWithResult> listMatchupsWithResult(@PathVariable Long teamOneId, @PathVariable Long teamTwoId) {
         return service.listMatchupsWithResult(teamOneId, teamTwoId);
     }
+
+    @GetMapping("/listGameByDateAndLeague/{year}/{month}/{day}/{leagueId}")
+    public List<Game> listGameByDateAndLeague(@PathVariable short year,
+            @PathVariable byte month,
+            @PathVariable byte day,
+            @PathVariable Long leagueId) {
+        return service.getGameByDateAndLeague(leagueId, year, month, day);
+    }
+;
 }

@@ -4,6 +4,7 @@
  */
 package sportstats.service.util;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import sportstats.domain.Game;
 import sportstats.domain.Result;
@@ -46,7 +47,7 @@ public class GameByTeam {
         return delegate.getRound();
     }
      
-    public LocalDateTime getDate() {
+    public LocalDate getDate() {
         return delegate.getDate();
     }
       
