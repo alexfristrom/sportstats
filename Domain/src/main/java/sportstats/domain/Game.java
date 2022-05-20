@@ -2,13 +2,11 @@ package sportstats.domain;
 
 import com.fasterxml.jackson.annotation.*;
 import java.io.Serializable;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.time.LocalTime;
 import javax.persistence.*;
 
 /**
- * hometeam_id, awayteam_id, season_id, result_id, round, date_Match, spectators
+ * hometeam_id, awayteam_id, season_id, result_id, round, date, spectators
  *
  * @author danielw
  */
@@ -38,9 +36,7 @@ public class Game implements Serializable {
 
     private Byte round;
 
-    private LocalDate dateMatch;
-    
-    private LocalTime startTime;
+    private LocalDateTime dateMatch;
 
     private int spectators;
 
@@ -64,7 +60,7 @@ public class Game implements Serializable {
     }
 
     //Needed for the TeamGamWrapper +  saveAllGames() in resources to work / D.S
-    public Game(int round, LocalDate dateMatch) {
+    public Game(int round, LocalDateTime dateMatch) {
         this.setSpectators(0);
         if (round <= 127 && round > 0) {
             this.round = Integer.valueOf(round).byteValue();
@@ -74,7 +70,7 @@ public class Game implements Serializable {
         this.dateMatch = dateMatch;
     }
 
-    public Game(Byte round, LocalDate dateMatch) {
+    public Game(Byte round, LocalDateTime dateMatch) {
         this.setSpectators(0);
         this.round = round;
         this.dateMatch = dateMatch;
@@ -125,11 +121,11 @@ public class Game implements Serializable {
         this.round = round;
     }
 
-    public LocalDate getDate() {
+    public LocalDateTime getDate() {
         return dateMatch;
     }
 
-    public void setDate(LocalDate dateMatch) {
+    public void setDate(LocalDateTime dateMatch) {
         this.dateMatch = dateMatch;
     }
 
@@ -139,14 +135,6 @@ public class Game implements Serializable {
 
     public void setSpectators(int spectators) {
         this.spectators = spectators;
-    }
-    
-    public void setTime(LocalTime startTime){
-        this.startTime = startTime;
-    }
-    
-    public LocalTime getTime(){
-        return startTime;
     }
 
 }

@@ -4,7 +4,6 @@
  */
 package sportstats.service.util;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import sportstats.domain.Game;
 import sportstats.domain.Result;
@@ -24,7 +23,7 @@ public class GameWithoutResult {
         return delegate.getId();
     }
     
-    public LocalDate getDate(){
+    public LocalDateTime getDate(){
         return delegate.getDate();
     }
     

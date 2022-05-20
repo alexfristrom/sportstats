@@ -4,8 +4,6 @@
  */
 package sportstats.repository;
 
-import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.util.List;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -47,7 +45,4 @@ public interface GameRepository extends JpaRepository<Game, Long>{
     
     @Query("FROM Game game WHERE game.hometeam.id = ?1 AND game.awayteam.id = ?2")
     List<Game> listMatchupHometeamAwayTeam(Long homeTeamId,Long awayTeamId);
-    
-    @Query(value = "SELECT * FROM game WHERE game.date_match = ?1 AND game.season_id = ?2",nativeQuery = true)
-    List<Game> listMatchesByDate(LocalDate dateMatch, Long seasonId);
 }

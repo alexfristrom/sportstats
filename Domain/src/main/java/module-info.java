@@ -8,7 +8,6 @@ module sportstats.domain {
     requires java.persistence;
     requires com.fasterxml.jackson.annotation;
     
-    exports sportstats.handler;
     exports sportstats.domain;
 
 }

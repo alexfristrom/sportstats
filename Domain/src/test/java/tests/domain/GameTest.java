@@ -4,7 +4,6 @@
  */
 package tests.domain;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
@@ -80,9 +79,9 @@ public class GameTest {
         handler.addDate(year, month, day);
 
         Game game = new Game();
-        game.setDate(handler.getDate());
+        game.setDate(handler.getDateTime());
 
-        LocalDate refDate = LocalDate.of(year, month, day);
+        LocalDateTime refDate = LocalDateTime.of(year, month, day, hour, minute, second);
         assertEquals(refDate, game.getDate());
     }
 

@@ -11,6 +11,5 @@ module sportstats.service {
     requires spring.context;
     requires sportstats.repository;
     requires transitive sportstats.domain;
-    
 
 }
