@@ -4,7 +4,9 @@
  */
 package sportstats.repository;
 
+
 import org.springframework.data.jpa.repository.JpaRepository;
+
 import org.springframework.stereotype.Repository;
 import sportstats.domain.Result;
 
