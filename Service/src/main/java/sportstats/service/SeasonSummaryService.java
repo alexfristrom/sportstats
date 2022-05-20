@@ -63,6 +63,41 @@ public class SeasonSummaryService {
 
         return summaryHolder;
     }
+    
+        public List<SeasonSumType> getSeasonSummary23(Long seasonId,String homeOraway) {
+        List<Team> teamList = getAllTeamsInSeason(seasonId);
+        List<SeasonSumType> summaryHolder = new ArrayList<>();
+        for (Team team : teamList) {
+            Long teamId = team.getId();
+            String teamName = team.getName();
+            String sportName = team.getSport().getName();
+             List<Game> gameList = new ArrayList();
+            if(homeOraway.equals("home"))
+                gameList = getAllGamesForHomeTeam(teamId);
+            if(homeOraway.equals("away"))
+                gameList = getAllGamesForAwayTeam(teamId);
+            summaryHolder.add(calculateTeamGames(gameList, teamId, teamName, sportName));
+
+        }
+
+        //Sorting and points
+        Collections.sort(summaryHolder, new SortByPoints());
+        for (int i = 0; i < summaryHolder.size(); i++) {
+            summaryHolder.get(i).setRank(i + 1);
+        }
+
+        return summaryHolder;
+    }
+    
+    private List<Game> getAllGamesForHomeTeam(Long teamId){
+        return gameR.listHomeByTeam(teamId);
+    }
+    
+    private List<Game> getAllGamesForAwayTeam(Long teamId){
+        return gameR.listAwayByTeam(teamId);
+    }
+    
+    
 
     private List<Team> getAllTeamsInSeason(Long seasonId) {
         List<Team> listOfTeams = teamR.listBySeason(seasonId);
