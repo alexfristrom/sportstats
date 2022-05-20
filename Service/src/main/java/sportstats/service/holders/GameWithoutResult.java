@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package sportstats.service.util;
+package sportstats.service.holders;
 
 import java.time.LocalDateTime;
 import sportstats.domain.Game;
@@ -12,10 +12,10 @@ import sportstats.domain.Result;
  *
  * @author David Sjöblom
  */
-public class GameWithResult {
+public class GameWithoutResult {
     private final Game delegate;
     
-    public GameWithResult(Game delegate){
+    public GameWithoutResult(Game delegate){
         this.delegate = delegate;
     }
     
@@ -41,10 +41,6 @@ public class GameWithResult {
     
     public String getAwayTeam(){
         return delegate.getAwayTeam().getName();
-    }
-    
-    public Result getResult(){
-        return delegate.getResult();
     }
     
     public Long getSeasonId(){

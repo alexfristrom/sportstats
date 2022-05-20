@@ -8,7 +8,7 @@ import java.util.List;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 import sportstats.domain.Season;
-import sportstats.service.util.SeasonByLeague;
+import sportstats.service.holders.SeasonByLeague;
 import java.util.ArrayList;
 import java.util.List;
 import org.junit.jupiter.api.Test;

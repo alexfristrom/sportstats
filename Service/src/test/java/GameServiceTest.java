@@ -25,10 +25,10 @@ import sportstats.repository.SeasonRepository;
 import sportstats.repository.TeamRepository;
 import sportstats.service.GameService;
 import sportstats.service.util.CalcBiggestGoalDiffBetweenGames;
-import sportstats.service.util.GameByTeam;
-import sportstats.service.util.GameWithResult;
-import sportstats.service.util.Matchups;
-import sportstats.service.util.TeamGameWrapper;
+import sportstats.service.holders.GameByTeam;
+import sportstats.service.holders.GameWithResult;
+import sportstats.service.holders.Matchups;
+import sportstats.service.holders.TeamGameWrapper;
 
 /**
  *

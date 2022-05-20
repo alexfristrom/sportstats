@@ -46,7 +46,7 @@ public class GameResultByTeam {
                 if (result.getHomeTeamScore() == result.getAwayTeamScore()) {
                     listOfTeamGamesResult.add(result);
                 }
-            }else if(resultCondition.equalsIgnoreCase("loss")){
+            } else if (resultCondition.equalsIgnoreCase("loss")) {
                 if (currGame.getHomeTeam().getId().equals(teamId) && result.getHomeTeamScore() < result.getAwayTeamScore()) {
                     listOfTeamGamesResult.add(result);
                 } else if (currGame.getAwayTeam().getId().equals(teamId) && result.getAwayTeamScore() < result.getHomeTeamScore()) {
@@ -55,6 +55,6 @@ public class GameResultByTeam {
             }
 
         }
-            return listOfTeamGamesResult;
+        return listOfTeamGamesResult;
     }
 }

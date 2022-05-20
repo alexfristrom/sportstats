@@ -14,12 +14,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import sportstats.domain.Game;
 import sportstats.service.GameService;
-import sportstats.service.util.TeamGameWrapper;
-import sportstats.service.util.GameByTeam;
-import sportstats.service.util.GameWithResult;
-import sportstats.service.util.GameWithoutResult;
-import sportstats.service.util.Matchups;
-import sportstats.service.util.MatchupsWithResult;
+import sportstats.service.holders.TeamGameWrapper;
+import sportstats.service.holders.GameByTeam;
+import sportstats.service.holders.GameWithResult;
+import sportstats.service.holders.GameWithoutResult;
+import sportstats.service.holders.Matchups;
+import sportstats.service.holders.MatchupsWithResult;
 
 /**
  *

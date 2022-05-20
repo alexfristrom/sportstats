@@ -5,7 +5,7 @@
 package sportstats.service;
 
 import java.util.ArrayList;
-import sportstats.service.util.TeamGameWrapper;
+import sportstats.service.holders.TeamGameWrapper;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -19,12 +19,12 @@ import sportstats.repository.SeasonRepository;
 import sportstats.repository.TeamRepository;
 import sportstats.service.util.CheckId;
 import sportstats.service.util.CheckName;
-import sportstats.service.util.GameByTeam;
+import sportstats.service.holders.GameByTeam;
 import sportstats.service.util.CalcBiggestGoalDiffBetweenGames;
-import sportstats.service.util.GameWithResult;
-import sportstats.service.util.GameWithoutResult;
-import sportstats.service.util.Matchups;
-import sportstats.service.util.MatchupsWithResult;
+import sportstats.service.holders.GameWithResult;
+import sportstats.service.holders.GameWithoutResult;
+import sportstats.service.holders.Matchups;
+import sportstats.service.holders.MatchupsWithResult;
 
 /**
  *

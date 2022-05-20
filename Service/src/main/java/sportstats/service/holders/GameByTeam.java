@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package sportstats.service.util;
+package sportstats.service.holders;
 
 import java.time.LocalDateTime;
 import sportstats.domain.Game;

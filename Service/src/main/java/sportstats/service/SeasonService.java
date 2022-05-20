@@ -15,7 +15,7 @@ import sportstats.repository.LeagueRepository;
 import sportstats.repository.SeasonRepository;
 import sportstats.repository.SpanRepository;
 
-import sportstats.service.util.SeasonByLeague;
+import sportstats.service.holders.SeasonByLeague;
 
 /**
  * Functions for that refclets the backlog for league
@@ -39,10 +39,10 @@ public class SeasonService {
         this.leagueRepository = leagueRepository;
         this.spanRepository = spanRepository;
     }
-    
-    public Season saveSeason(int roundTot, Long leagueId, Long spanId){
-         league = leagueRepository.getById(leagueId);
-         span = spanRepository.getById(spanId);
+
+    public Season saveSeason(int roundTot, Long leagueId, Long spanId) {
+        league = leagueRepository.getById(leagueId);
+        span = spanRepository.getById(spanId);
         season = new Season(roundTot, league, span);
         return repository.save(season);
     }
