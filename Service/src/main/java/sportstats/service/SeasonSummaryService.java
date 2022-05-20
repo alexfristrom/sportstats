@@ -5,7 +5,6 @@
 package sportstats.service;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
@@ -19,9 +18,6 @@ import sportstats.repository.ResultRepository;
 import sportstats.repository.SeasonRepository;
 import sportstats.repository.TeamRepository;
 import sportstats.service.season.holders.SeasonSumType;
-import sportstats.service.season.holders.Summary;
-import sportstats.service.season.holders.SummaryWithOvertime;
-import sportstats.service.season.holders.SummaryWithTies;
 import sportstats.service.season.holders.SportRuleHandler;
 
 /**
@@ -62,7 +58,7 @@ public class SeasonSummaryService {
         //Sorting and points
         Collections.sort(summaryHolder, new SortByPoints());
         for (int i = 0; i < summaryHolder.size(); i++) {
-            summaryHolder.get(i).setRank(i+1);
+            summaryHolder.get(i).setRank(i + 1);
         }
 
         return summaryHolder;
@@ -76,7 +72,6 @@ public class SeasonSummaryService {
     private List<Game> getAllGamesForTeam(Long teamId) {
         return gameR.listAllByTeam(teamId);
     }
-
 
     private SeasonSumType calculateTeamGames(List<Game> gameList,
             Long teamID, String teamName, String sportName) {
@@ -195,5 +190,32 @@ public class SeasonSummaryService {
 
         }
 
+    }
+
+    public List<SeasonSumType> getSeasonsSummary(String seasonIds) {
+        String firstLong = "";
+        String secondLong = "";
+        boolean secondNumber = false;
+        List<SeasonSumType> summaryHolder = new ArrayList();
+        
+        //Collects start/end interval, expected input as string: long - character - long
+        for (char a : seasonIds.toCharArray()) {
+            if (Character.isDigit(a) && !secondNumber) {
+                firstLong = firstLong + a;
+            } else if (!secondNumber) {
+                secondNumber = true;
+            }
+            if (secondNumber && Character.isDigit(a)) {
+                secondLong = secondLong + a;
+            }
+        }
+
+        Long startInterval = Long.parseLong(firstLong);
+        Long endInterval = Long.parseLong(secondLong);
+        for (long i = startInterval; i < endInterval; i++) {
+            summaryHolder.addAll(getSeasonSummary(i));
+        }
+        
+        return summaryHolder;
     }
 }
