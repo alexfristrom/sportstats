@@ -81,7 +81,7 @@ public class AddResultServiceTest {
      */
     @Test
     public void testAddGameResult() {
-        
+
         gameR = mock(GameRepository.class);
         service = new AddResultService(gameR);
 
@@ -93,13 +93,13 @@ public class AddResultServiceTest {
 
         Mockito.when(gameR.getById(gameId)).thenReturn(tmpGame);
         Game game = service.addGameResult(gameId, 5, 15, true, 20L, true);
-        
+
         assertEquals(15, game.getResult().getAwayTeamScore());
         assertEquals(5, game.getResult().getHomeTeamScore());
         assertEquals(true, game.getResult().getOvertime());
         assertEquals(true, game.getResult().getPenalty());
         assertEquals(20L, game.getResult().getOvertimeMinutes());
-        
+
     }
 
 }

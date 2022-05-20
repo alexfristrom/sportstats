@@ -60,9 +60,4 @@ public class GameByTeam {
         return delegate.getStartTime();
     }
     
-// public String getTeamName(){
-//        Team newTeam = delegate.getHomeTeam();
-//        Team newTeam2 = delegate.getAwayTeam();
-//        return newTeam.getName();
-//    }
 }
