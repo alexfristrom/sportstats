@@ -49,4 +49,7 @@ public interface GameRepository extends JpaRepository<Game, Long>{
     
     @Query(value = "SELECT * FROM game WHERE game.date_match = ?1 AND game.season_id = ?2",nativeQuery = true)
     List<Game> listMatchesByDate(LocalDate dateMatch, Long seasonId);
+    
+     @Query(value = "SELECT * FROM game WHERE season_id = ?1 AND round BETWEEN ?2 AND ?3 ", nativeQuery = true)
+    List<Game> listMatchesBySeasonIdAndRoundFilter(Long seasonId, byte round1,byte round2);
 }

@@ -63,19 +63,21 @@ public class SeasonSummaryService {
 
         return summaryHolder;
     }
-    
-        public List<SeasonSumType> getSeasonSummaryResultFilter(Long seasonId,String homeOraway) {
+
+    public List<SeasonSumType> getSeasonSummaryResultFilter(Long seasonId, String homeOraway) {
         List<Team> teamList = getAllTeamsInSeason(seasonId);
         List<SeasonSumType> summaryHolder = new ArrayList<>();
         for (Team team : teamList) {
             Long teamId = team.getId();
             String teamName = team.getName();
             String sportName = team.getSport().getName();
-             List<Game> gameList = new ArrayList();
-            if(homeOraway.equals("home"))
+            List<Game> gameList = new ArrayList();
+            if (homeOraway.equals("home")) {
                 gameList = getAllGamesForHomeTeam(teamId);
-            if(homeOraway.equals("away"))
+            }
+            if (homeOraway.equals("away")) {
                 gameList = getAllGamesForAwayTeam(teamId);
+            }
             summaryHolder.add(calculateTeamGames(gameList, teamId, teamName, sportName));
 
         }
@@ -88,16 +90,51 @@ public class SeasonSummaryService {
 
         return summaryHolder;
     }
-    
-    private List<Game> getAllGamesForHomeTeam(Long teamId){
+
+    public List<SeasonSumType> getSeasonSummaryRoundFilter(Long seasonId, String interval) {
+        List<Team> teamList = getAllTeamsInSeason(seasonId);
+        List<SeasonSumType> summaryHolder = new ArrayList<>();
+
+        for (Team team : teamList) {
+            Long teamId = team.getId();
+            String teamName = team.getName();
+            String sportName = team.getSport().getName();
+           
+            boolean secondNumber = false;
+            String firstByte = "";
+            String secondByte = "";
+
+            for (char a : interval.toCharArray()) {
+                if (Character.isDigit(a) && !secondNumber) {
+                    firstByte = firstByte + a;
+                } else if (!secondNumber) {
+                    secondNumber = true;
+                }
+                if (secondNumber && Character.isDigit(a)) {
+                    secondByte = secondByte + a;
+                }
+            }
+             List<Game> gameList = gameR.listMatchesBySeasonIdAndRoundFilter(seasonId, Byte.parseByte(firstByte), Byte.parseByte(secondByte));
+            summaryHolder.add(calculateTeamGames(gameList, teamId, teamName, sportName));
+
+        }
+
+        //Sorting and points
+        Collections.sort(summaryHolder, new SortByPoints());
+        for (int i = 0; i < summaryHolder.size(); i++) {
+            summaryHolder.get(i).setRank(i + 1);
+        }
+
+        return summaryHolder;
+    }
+
+    private List<Game> getAllGamesForHomeTeam(Long teamId) {
         return gameR.listHomeByTeam(teamId);
     }
-    
-    private List<Game> getAllGamesForAwayTeam(Long teamId){
+
+    private List<Game> getAllGamesForAwayTeam(Long teamId) {
         return gameR.listAwayByTeam(teamId);
     }
-    
-    
 
     private List<Team> getAllTeamsInSeason(Long seasonId) {
         List<Team> listOfTeams = teamR.listBySeason(seasonId);
@@ -231,7 +268,7 @@ public class SeasonSummaryService {
         String secondLong = "";
         boolean secondNumber = false;
         List<SeasonSumType> summaryHolder = new ArrayList();
-        
+
         //Collects start/end interval, expected input as string: long - character - long
         for (char a : seasonIds.toCharArray()) {
             if (Character.isDigit(a) && !secondNumber) {
@@ -249,7 +286,7 @@ public class SeasonSummaryService {
         for (long i = startInterval; i <= endInterval; i++) {
             summaryHolder.addAll(getSeasonSummary(i));
         }
-        
+
         return summaryHolder;
     }
 }

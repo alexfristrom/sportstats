@@ -43,4 +43,11 @@ public class SeasonSummaryResource {
                                     ,@PathVariable String homeOraway){
         return service.getSeasonSummaryResultFilter(seasonId, homeOraway);
     }
+    
+    @GetMapping("getSeasonSummeryRoundIntervalFilter/{seasonId}/{interval}")
+    public List<SeasonSumType> getSeasonSummaryRoundIntervalFilter(@PathVariable Long seasonId
+                                    ,@PathVariable String interval){
+        return service.getSeasonSummaryRoundFilter(seasonId, interval);
+    }
+    
 }
