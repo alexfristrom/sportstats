@@ -64,7 +64,7 @@ public class SeasonSummaryService {
         return summaryHolder;
     }
     
-        public List<SeasonSumType> getSeasonSummary23(Long seasonId,String homeOraway) {
+        public List<SeasonSumType> getSeasonSummaryResultFilter(Long seasonId,String homeOraway) {
         List<Team> teamList = getAllTeamsInSeason(seasonId);
         List<SeasonSumType> summaryHolder = new ArrayList<>();
         for (Team team : teamList) {

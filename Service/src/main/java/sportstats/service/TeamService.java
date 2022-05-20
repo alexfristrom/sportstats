@@ -50,13 +50,8 @@ public class TeamService {
         CheckId.checkId(team.getId());
         String fixedName = CheckName.checkNameContent(team.getName());
         team.setName(fixedName);
-        System.out.println(team.getName() + "ajsdfjasjdfj");
         sport = sportRepo.getById(sportId);
         team.setSport(sport);
-
-//        if (team.getSport().getId() == null) {
-//            throw new NullPointerException("A team must include a sport");
-//        }
         return teamRepo.save(team);
 
     }

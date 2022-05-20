@@ -37,4 +37,10 @@ public class SeasonSummaryResource {
     public List<SeasonSumType> getSeasonsSummary(@PathVariable String  seasonIdInteval){
         return service.getSeasonsSummary(seasonIdInteval);
     }
+    
+    @GetMapping("getSeasonSummaryResultFilter/{seasonId}/{homeOraway}")
+    public List<SeasonSumType> getSeasonSummaryResultFilter(@PathVariable Long seasonId
+                                    ,@PathVariable String homeOraway){
+        return service.getSeasonSummaryResultFilter(seasonId, homeOraway);
+    }
 }
