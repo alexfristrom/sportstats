@@ -18,6 +18,7 @@ import sportstats.domain.Game;
 import sportstats.domain.Result;
 import sportstats.domain.Season;
 import sportstats.domain.Team;
+import sportstats.handler.DateHandler;
 
 import sportstats.repository.GameRepository;
 import sportstats.repository.ResultRepository;
@@ -339,6 +340,26 @@ public class GameServiceTest {
         result = gameService.findBiggestGoalDiff(Long.MIN_VALUE, Long.MAX_VALUE, Long.MIN_VALUE);
         
         assertEquals(gameWResult.getSpectators(), result.getSpectators());
+    }
+    
+    public void testGameByDateAndLeague(){
+        mockSetup();
+        
+        short year = 2022;
+        byte month = 01;
+        byte day = 01;
+        List<Season> seasonList = new ArrayList();
+        List<Game> gameList = new ArrayList();
+        DateHandler handler = new DateHandler();
+        handler.addDate(year, month, day);
+        List<Game> newList = new ArrayList();
+        List<Game> returnList = new ArrayList();
+                
+        Mockito.when(seasonRepository.listByLeague(1L)).thenReturn(seasonList);
+        Mockito.when(gameRepository.listMatchesBySeasonId(1L)).thenReturn(gameList);
+        Mockito.when(gameRepository.listMatchesByDate(handler.getDate(), 1L)).thenReturn(newList);
+        
+        assertEquals(returnList, gameService.getGameByDateAndLeague(1L, year, month, day));
     }
     
 }

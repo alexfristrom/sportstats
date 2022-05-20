@@ -4,46 +4,51 @@
  */
 package sportstats.service.holders;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
+import java.time.LocalTime;
 import sportstats.domain.Game;
-import sportstats.domain.Result;
 
 /**
  *
  * @author David Sjöblom
  */
 public class GameWithoutResult {
+
     private final Game delegate;
-    
-    public GameWithoutResult(Game delegate){
+
+    public GameWithoutResult(Game delegate) {
         this.delegate = delegate;
     }
-    
-    public Long getId(){
+
+    public Long getId() {
         return delegate.getId();
     }
-    
-    public LocalDateTime getDate(){
+
+    public LocalDate getDate() {
         return delegate.getDate();
     }
-    
-    public byte getRound(){
+
+    public byte getRound() {
         return delegate.getRound();
     }
-    
-    public int getSpectators(){
+
+    public int getSpectators() {
         return delegate.getSpectators();
     }
-    
-    public String getHomeTeam(){
+
+    public String getHomeTeam() {
         return delegate.getHomeTeam().getName();
     }
-    
-    public String getAwayTeam(){
+
+    public String getAwayTeam() {
         return delegate.getAwayTeam().getName();
     }
-    
-    public Long getSeasonId(){
+
+    public Long getSeasonId() {
         return delegate.getSeason().getId();
+    }
+    
+    public LocalTime getTime(){
+        return delegate.getStartTime();
     }
 }

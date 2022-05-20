@@ -114,4 +114,12 @@ public class GameResource {
     public List<MatchupsWithResult> listMatchupsWithResult(@PathVariable Long teamOneId,@PathVariable Long teamTwoId){
         return service.listMatchupsWithResult(teamOneId, teamTwoId);
     }
+    
+    @GetMapping("/listGameByDateAndLeague/{year}/{month}/{day}/{leagueId}")
+    public List<Game> listGameByDateAndLeague(@PathVariable short year,
+            @PathVariable byte month,
+            @PathVariable byte day,
+            @PathVariable Long leagueId) {
+        return service.getGameByDateAndLeague(leagueId, year, month, day);
+    }
 }
