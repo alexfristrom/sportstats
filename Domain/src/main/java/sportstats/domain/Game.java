@@ -2,7 +2,9 @@ package sportstats.domain;
 
 import com.fasterxml.jackson.annotation.*;
 import java.io.Serializable;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 import javax.persistence.*;
 
 /**
@@ -36,7 +38,9 @@ public class Game implements Serializable {
 
     private Byte round;
 
-    private LocalDateTime dateMatch;
+    private LocalDate dateMatch;
+    
+    private LocalTime startTime;
 
     private int spectators;
 
@@ -60,7 +64,7 @@ public class Game implements Serializable {
     }
 
     //Needed for the TeamGamWrapper +  saveAllGames() in resources to work / D.S
-    public Game(int round, LocalDateTime dateMatch) {
+    public Game(int round, LocalDate dateMatch) {
         this.setSpectators(0);
         if (round <= 127 && round > 0) {
             this.round = Integer.valueOf(round).byteValue();
@@ -70,7 +74,7 @@ public class Game implements Serializable {
         this.dateMatch = dateMatch;
     }
 
-    public Game(Byte round, LocalDateTime dateMatch) {
+    public Game(Byte round, LocalDate dateMatch) {
         this.setSpectators(0);
         this.round = round;
         this.dateMatch = dateMatch;
@@ -121,12 +125,20 @@ public class Game implements Serializable {
         this.round = round;
     }
 
-    public LocalDateTime getDate() {
+    public LocalDate getDate() {
         return dateMatch;
     }
 
-    public void setDate(LocalDateTime dateMatch) {
+    public void setDate(LocalDate dateMatch) {
         this.dateMatch = dateMatch;
+    }
+    
+    public LocalTime getStartTime(){
+        return startTime;
+    }
+    
+    public void setTime(LocalTime startTime) {
+        this.startTime = startTime;
     }
 
     public int getSpectators() {

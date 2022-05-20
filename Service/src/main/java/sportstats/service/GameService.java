@@ -9,6 +9,7 @@ import sportstats.service.util.TeamGameWrapper;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import sportstats.handler.DateHandler;
 import sportstats.domain.Game;
 import sportstats.domain.Result;
 import sportstats.domain.Season;
@@ -188,5 +189,32 @@ public class GameService {
         return games.stream().map(MatchupsWithResult::new).toList();
 
     }
+    
+    public List<Game> getGameByDateAndLeague(Long leagueId, short year, byte month, byte day){
+        
+        List<Season> seasonByLeague = seasonRepo.listByLeague(leagueId);
+        List<Game> gamesBySeason;
+        List<Game> gameList = new ArrayList();
+        List<Game> gameByDate = new ArrayList();
+        
+        for (Season season : seasonByLeague) {
+            
+         gamesBySeason = gameRepo.listMatchesBySeasonId(season.getId());
+            
+            for (Game game : gamesBySeason) {
+                gameList.add(game);
+            }
+        } 
+        
+        DateHandler handler = new DateHandler();
+        handler.addDate(year, month, day);
+        
+        for (Game game : gameList) {
+            
+            gameByDate = gameRepo.listMatchesByDate(handler.getDate(), game.getSeason().getId());
+        }
+        
+       return gameByDate;
+    };
 
 }
