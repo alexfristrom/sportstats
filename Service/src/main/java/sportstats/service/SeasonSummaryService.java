@@ -212,7 +212,7 @@ public class SeasonSummaryService {
 
         Long startInterval = Long.parseLong(firstLong);
         Long endInterval = Long.parseLong(secondLong);
-        for (long i = startInterval; i < endInterval; i++) {
+        for (long i = startInterval; i <= endInterval; i++) {
             summaryHolder.addAll(getSeasonSummary(i));
         }
         
