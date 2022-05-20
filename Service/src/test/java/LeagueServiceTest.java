@@ -17,7 +17,7 @@ import sportstats.domain.Sport;
 import sportstats.repository.LeagueRepository;
 import sportstats.repository.SportRepository;
 import sportstats.service.LeagueService;
-import sportstats.service.util.LeagueBySport;
+import sportstats.service.holders.LeagueBySport;
 
 /**
  * Test for League service

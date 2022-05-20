@@ -5,10 +5,11 @@
 package sportstats.service;
 
 import java.util.ArrayList;
-import sportstats.service.util.TeamGameWrapper;
+import sportstats.service.holders.TeamGameWrapper;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import sportstats.handler.DateHandler;
 import sportstats.domain.Game;
 import sportstats.domain.Result;
 import sportstats.domain.Season;
@@ -19,12 +20,12 @@ import sportstats.repository.SeasonRepository;
 import sportstats.repository.TeamRepository;
 import sportstats.service.util.CheckId;
 import sportstats.service.util.CheckName;
-import sportstats.service.util.GameByTeam;
+import sportstats.service.holders.GameByTeam;
 import sportstats.service.util.CalcBiggestGoalDiffBetweenGames;
-import sportstats.service.util.GameWithResult;
-import sportstats.service.util.GameWithoutResult;
-import sportstats.service.util.Matchups;
-import sportstats.service.util.MatchupsWithResult;
+import sportstats.service.holders.GameWithResult;
+import sportstats.service.holders.GameWithoutResult;
+import sportstats.service.holders.Matchups;
+import sportstats.service.holders.MatchupsWithResult;
 
 /**
  *
@@ -188,5 +189,32 @@ public class GameService {
         return games.stream().map(MatchupsWithResult::new).toList();
 
     }
+    
+    public List<Game> getGameByDateAndLeague(Long leagueId, short year, byte month, byte day){
+        
+        List<Season> seasonByLeague = seasonRepo.listByLeague(leagueId);
+        List<Game> gamesBySeason;
+        List<Game> gameList = new ArrayList();
+        List<Game> gameByDate = new ArrayList();
+        
+        for (Season season : seasonByLeague) {
+            
+         gamesBySeason = gameRepo.listMatchesBySeasonId(season.getId());
+            
+            for (Game game : gamesBySeason) {
+                gameList.add(game);
+            }
+        } 
+        
+        DateHandler handler = new DateHandler();
+        handler.addDate(year, month, day);
+        
+        for (Game game : gameList) {
+            
+            gameByDate = gameRepo.listMatchesByDate(handler.getDate(), game.getSeason().getId());
+        }
+        
+       return gameByDate;
+    };
 
 }

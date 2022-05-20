@@ -4,6 +4,8 @@
  */
 package sportstats.service.season.holders;
 
+import sportstats.service.season.holders.AbstractSeasonSum;
+
 /**
  *
  * @author alexf

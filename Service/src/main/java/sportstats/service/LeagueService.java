@@ -13,7 +13,7 @@ import sportstats.domain.Listable;
 import sportstats.domain.Sport;
 import sportstats.repository.LeagueRepository;
 import sportstats.repository.SportRepository;
-import sportstats.service.util.LeagueBySport;
+import sportstats.service.holders.LeagueBySport;
 import sportstats.service.util.ListableProxy;
 
 /**

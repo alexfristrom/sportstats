@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 import sportstats.domain.League;
 import sportstats.domain.Listable;
 import sportstats.service.LeagueService;
-import sportstats.service.util.LeagueBySport;
+import sportstats.service.holders.LeagueBySport;
 
 /**
  * Servlet class for Leagueservice

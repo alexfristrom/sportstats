@@ -9,5 +9,6 @@ module sportstats.domain {
     requires com.fasterxml.jackson.annotation;
     
     exports sportstats.domain;
+    exports sportstats.handler;
 
 }

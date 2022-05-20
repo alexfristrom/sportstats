@@ -17,8 +17,8 @@ import sportstats.domain.Listable;
 import sportstats.domain.Season;
 import sportstats.service.LeagueService;
 import sportstats.service.SeasonService;
-import sportstats.service.util.LeagueBySport;
-import sportstats.service.util.SeasonByLeague;
+import sportstats.service.holders.LeagueBySport;
+import sportstats.service.holders.SeasonByLeague;
 
 /**
  * Servlet class for Leagueservice

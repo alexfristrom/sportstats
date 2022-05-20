@@ -18,7 +18,7 @@ import sportstats.repository.ResultRepository;
 import sportstats.repository.SeasonRepository;
 import sportstats.repository.TeamRepository;
 import sportstats.service.season.holders.SeasonSumType;
-import sportstats.service.season.holders.SportRuleHandler;
+import sportstats.service.util.SportRuleHandler;
 
 /**
  *
@@ -112,7 +112,6 @@ public class SeasonSummaryService {
             Long teamID, String teamName, String sportName) {
 
         var listOfGame = gameList;
-        int numberOfGamesm = listOfGame.size();
         String sportN = sportName;
 
         String teamN = teamName;
@@ -143,7 +142,7 @@ public class SeasonSummaryService {
             int teamScore = 0;
             int otherTeamScore = 0;
 
-            if (game.getHomeTeam().getId() == teamID) {
+            if (game.getHomeTeam().getId().equals(teamID)) {
                 teamScore = tempResult.getHomeTeamScore();
                 otherTeamScore = tempResult.getAwayTeamScore();
                 scoredGoals += teamScore;

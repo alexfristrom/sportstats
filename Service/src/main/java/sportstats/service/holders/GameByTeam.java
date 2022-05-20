@@ -2,9 +2,11 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package sportstats.service.util;
+package sportstats.service.holders;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 import sportstats.domain.Game;
 import sportstats.domain.Result;
 import sportstats.domain.Season;
@@ -46,12 +48,16 @@ public class GameByTeam {
         return delegate.getRound();
     }
      
-    public LocalDateTime getDate() {
+    public LocalDate getDate() {
         return delegate.getDate();
     }
       
     public int getSpectators() {
         return delegate.getSpectators();
+    }
+    
+    public LocalTime getTime(){
+        return delegate.getStartTime();
     }
     
 // public String getTeamName(){

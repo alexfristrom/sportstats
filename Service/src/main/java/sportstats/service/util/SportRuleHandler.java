@@ -2,13 +2,14 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package sportstats.service.season.holders;
+package sportstats.service.util;
 
 import java.io.IOException;
 import java.io.InputStream;
 
 import java.util.Properties;
 import sportstats.service.season.holders.SeasonSumType;
+import sportstats.service.season.holders.Summary;
 import sportstats.service.season.holders.SummaryWithOvertime;
 import sportstats.service.season.holders.SummaryWithTies;
 
@@ -28,8 +29,8 @@ public class SportRuleHandler {
     //private String league;
     public SportRuleHandler(String sportName) {
         this.sport = sportName;
-        sport.toLowerCase();
-        sport.trim();
+        sport = sport.toLowerCase();
+        sport = sport.trim();
 
         try (InputStream input = SportRuleHandler.class.getClassLoader()
                 .getResourceAsStream("rules.properties")) {
