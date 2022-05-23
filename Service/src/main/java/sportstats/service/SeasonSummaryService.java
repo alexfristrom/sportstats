@@ -4,6 +4,7 @@
  */
 package sportstats.service;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -13,6 +14,7 @@ import org.springframework.stereotype.Service;
 import sportstats.domain.Game;
 import sportstats.domain.Result;
 import sportstats.domain.Team;
+import sportstats.handler.DateHandler;
 import sportstats.repository.GameRepository;
 import sportstats.repository.ResultRepository;
 import sportstats.repository.SeasonRepository;
@@ -56,7 +58,7 @@ public class SeasonSummaryService {
 
         }
 
-        return common(summaryHolder);
+        return sortPoints(summaryHolder);
     }
 
     public List<SeasonSumType> getSeasonSummaryResultFilter(Long seasonId, String homeOraway) {
@@ -77,7 +79,7 @@ public class SeasonSummaryService {
 
         }
 
-        return common(summaryHolder);
+        return sortPoints(summaryHolder);
     }
 
     public List<SeasonSumType> getSeasonSummaryRoundFilter(Long seasonId, String interval) {
@@ -108,7 +110,7 @@ public class SeasonSummaryService {
 
         }
 
-        return common(summaryHolder);
+        return sortPoints(summaryHolder);
     }
 
     public List<SeasonSumType> getSeasonsSummary(String seasonIds) {
@@ -138,7 +140,40 @@ public class SeasonSummaryService {
         return summaryHolder;
     }
 
-    private List<SeasonSumType> common(List<SeasonSumType> summaryHolder) {
+    public List<SeasonSumType> getSeasonSummaryByDateInterval(Long seasonId, String dateInterval) {
+
+        short year1 = Short.parseShort(dateInterval.substring(0, 4));
+        short year2 = Short.parseShort(dateInterval.substring(11, 15));
+
+        byte month1 = Byte.parseByte(dateInterval.substring(5, 7));
+        byte month2 = Byte.parseByte(dateInterval.substring(16, 18));
+
+        byte day1 = Byte.parseByte(dateInterval.substring(8, 10));
+        byte day2 = Byte.parseByte(dateInterval.substring(19, 21));
+
+        var handler1 = new DateHandler();
+        var handler2 = new DateHandler();
+        handler1.addDate(year1, month1, day1);
+        handler2.addDate(year2, month2, day2);
+
+        List<Team> teamList = getAllTeamsInSeason(seasonId);
+        List<SeasonSumType> summaryHolder = new ArrayList<>();
+        for (Team team : teamList) {
+            Long teamId = team.getId();
+            String teamName = team.getName();
+            String sportName = team.getSport().getName();
+
+            List<Game> gameList = getAllGamesDateInterval(handler1.getDate(),
+                    handler2.getDate(), seasonId);
+
+            summaryHolder.add(calculateTeamGames(gameList, teamId, teamName, sportName));
+
+        }
+
+        return sortPoints(summaryHolder);
+    }
+
+    private List<SeasonSumType> sortPoints(List<SeasonSumType> summaryHolder) {
 
         //Sorting and points
         Collections.sort(summaryHolder, new SortByPoints());
@@ -149,6 +184,9 @@ public class SeasonSummaryService {
         return summaryHolder;
     }
 
+    private List<Game> getAllGamesDateInterval(LocalDate date1,LocalDate date2,Long seasonId){
+        return gameR.listMatchesByDateInterval(date1,date2,seasonId);
+    }
     private List<Game> getAllGamesForHomeTeam(Long teamId) {
         return gameR.listHomeByTeam(teamId);
     }
@@ -173,7 +211,7 @@ public class SeasonSummaryService {
         String sportN = sportName;
 
         SummaryStats stats = new SummaryStats(teamName);
-      
+
         for (Game game : listOfGame) {
             Long gameId = game.getId();
             Result tempResult = game.getResult();
