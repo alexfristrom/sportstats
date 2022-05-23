@@ -10,6 +10,7 @@ import java.io.InputStream;
 import java.util.Properties;
 import sportstats.service.season.holders.SeasonSumType;
 import sportstats.service.season.holders.Summary;
+import sportstats.service.season.holders.SummaryStats;
 import sportstats.service.season.holders.SummaryWithOvertime;
 import sportstats.service.season.holders.SummaryWithTies;
 
@@ -46,91 +47,90 @@ public class SportRuleHandler {
         }
     }
 
-    public SeasonSumType getPointsByRules(String teamName, int gamesWon, int gamesLost,
-            int scoredGoals, int concededGoals, int goalDiff, int winsOvertimeOrPenalties,
-            int losesOvertimeOrPenalites, int gamesTied, int wins3to0, int wins3to1,
-            int wins3to2, int lose2to3, int lose1to3, int lose0to3) {
+    public SeasonSumType getPointsByRules(SummaryStats stats) {
 
         switch (sport) {
             case "hockey":
-                int tempGamesWon = gamesWon - winsOvertimeOrPenalties;
+                int tempGamesWon = stats.getGamesWon() - stats.getWinsOverTime();
                 points = (tempGamesWon * Integer.parseInt(prop.getProperty("hockey.win.normal.points")));
-                int tempGamesLost = gamesLost - losesOvertimeOrPenalites;
+                int tempGamesLost = stats.getGamesLost() - stats.getLosesOverTime();
                 points += (tempGamesLost * Integer.parseInt(prop.getProperty("hockey.lose.normal.points")));
 
-                points += (winsOvertimeOrPenalties * Integer.parseInt(prop.getProperty("hockey.win.overtime.points")));
-                points += (losesOvertimeOrPenalites * Integer.parseInt(prop.getProperty("hockey.lose.overtime.points")));
+                points += (stats.getWinsOverTime() * Integer.parseInt(prop.getProperty("hockey.win.overtime.points")));
+                points += (stats.getLosesOverTime() * Integer.parseInt(prop.getProperty("hockey.lose.overtime.points")));
 
                 SummaryWithOvertime hockeyHolder = new SummaryWithOvertime(
-                        teamName, gamesWon, gamesLost, scoredGoals,
-                        concededGoals, goalDiff, points);
-                hockeyHolder.setLosesOverTimeOrPenalites(losesOvertimeOrPenalites);
-                hockeyHolder.setWinsOverTimeOrPenalties(winsOvertimeOrPenalties);
+                        stats.getTeamN(), stats.getGamesWon(), stats.getGamesLost(), stats.getScoredGoals(),
+                        stats.getConcededGoals(), stats.getGoalDiff(), points);
+                hockeyHolder.setLosesOverTimeOrPenalites(stats.getLosesOverTime());
+                hockeyHolder.setWinsOverTimeOrPenalties(stats.getWinsOverTime());
 
                 return hockeyHolder;
             case "bandy":
-                points += (gamesWon * Integer.parseInt(prop.getProperty("bandy.win.normal.points")));
-                points += (gamesLost * Integer.parseInt(prop.getProperty("bandy.lose.normal.points")));
-                points += (gamesTied * Integer.parseInt(prop.getProperty("bandy.tied.points")));
+                points += (stats.getGamesWon() * Integer.parseInt(prop.getProperty("bandy.win.normal.points")));
+                points += (stats.getGamesLost() * Integer.parseInt(prop.getProperty("bandy.lose.normal.points")));
+                points += (stats.getGamesTied() * Integer.parseInt(prop.getProperty("bandy.tied.points")));
 
-                SummaryWithTies bandyHolder = new SummaryWithTies(teamName,
-                        gamesWon, gamesLost, scoredGoals, concededGoals,
-                        goalDiff, points);
-                bandyHolder.setGamesTied(gamesTied);
+                SummaryWithTies bandyHolder = new SummaryWithTies(stats.getTeamN(), 
+                        stats.getGamesWon(), stats.getGamesLost(), stats.getScoredGoals(),
+                        stats.getConcededGoals(), stats.getGoalDiff(), points);
+                bandyHolder.setGamesTied(stats.getGamesTied());
 
                 return bandyHolder;
             case "floorball":
-                int winsNoOverTime = gamesWon - winsOvertimeOrPenalties;
+                int winsNoOverTime = stats.getGamesWon() - stats.getWinsOverTime();
                 points += (winsNoOverTime * Integer.parseInt(prop.getProperty("floorball.win.normal.points=3")));
-                int loseNoOverTime = gamesLost - losesOvertimeOrPenalites;
+                int loseNoOverTime = stats.getGamesLost() - stats.getLosesOverTime();
                 points += (loseNoOverTime * Integer.parseInt(prop.getProperty("floorball.lose.normal.points=0")));
 
-                points += (winsOvertimeOrPenalties * Integer.parseInt(prop.getProperty("floorball.win.overtime.points=2")));
-                points += (losesOvertimeOrPenalites * Integer.parseInt(prop.getProperty("floorball.lose.overtime.points=1")));
+                points += (stats.getWinsOverTime() * Integer.parseInt(prop.getProperty("floorball.win.overtime.points=2")));
+                points += (stats.getLosesOverTime() * Integer.parseInt(prop.getProperty("floorball.lose.overtime.points=1")));
 
                 SummaryWithOvertime floorballHolder = new SummaryWithOvertime(
-                        teamName, gamesWon, gamesLost, scoredGoals,
-                        concededGoals, goalDiff, points);
-                floorballHolder.setWinsOverTimeOrPenalties(winsOvertimeOrPenalties);
-                floorballHolder.setLosesOverTimeOrPenalites(losesOvertimeOrPenalites);
+                        stats.getTeamN(), stats.getGamesWon(), stats.getGamesLost(), stats.getScoredGoals(),
+                        stats.getConcededGoals(), stats.getGoalDiff(), points);
+                floorballHolder.setWinsOverTimeOrPenalties(stats.getWinsOverTime());
+                floorballHolder.setLosesOverTimeOrPenalites(stats.getLosesOverTime());
 
                 return floorballHolder;
             case "fotball":
-                points += (gamesWon * Integer.parseInt(prop.getProperty("fotball.win.points")));
-                points += (gamesTied * Integer.parseInt(prop.getProperty("fotball.tied.points")));
-                points += (gamesLost * Integer.parseInt(prop.getProperty("fotball.lose.points")));
+                points += (stats.getGamesWon() * Integer.parseInt(prop.getProperty("fotball.win.points")));
+                points += (stats.getGamesTied() * Integer.parseInt(prop.getProperty("fotball.tied.points")));
+                points += (stats.getGamesLost()* Integer.parseInt(prop.getProperty("fotball.lose.points")));
 
-                SummaryWithTies fotballHolder = new SummaryWithTies(teamName,
-                        gamesWon, gamesLost, scoredGoals, concededGoals,
-                        goalDiff, points);
-                fotballHolder.setGamesTied(gamesTied);
+                SummaryWithTies fotballHolder = new SummaryWithTies(
+                        stats.getTeamN(), stats.getGamesWon(), stats.getGamesLost(), stats.getScoredGoals(),
+                        stats.getConcededGoals(), stats.getGoalDiff(), points);
+                fotballHolder.setGamesTied(stats.getGamesTied());
 
                 return fotballHolder;
             case "basket":
-                points += (gamesWon * Integer.parseInt(prop.getProperty("basket.win.normal.points")));
-                points += (gamesLost * Integer.parseInt(prop.getProperty("basket.lose.normal.points")));
-                Summary basketHolder = new Summary(teamName, gamesWon, gamesLost,
-                        scoredGoals, concededGoals, goalDiff, points);
+                points += (stats.getGamesWon() * Integer.parseInt(prop.getProperty("basket.win.normal.points")));
+                points += (stats.getGamesLost() * Integer.parseInt(prop.getProperty("basket.lose.normal.points")));
+                Summary basketHolder = new Summary(stats.getTeamN(), 
+                        stats.getGamesWon(), stats.getGamesLost(), stats.getScoredGoals(),
+                        stats.getConcededGoals(), stats.getGoalDiff(), points);
 
                 return basketHolder;
             case "handball":
-                points += (gamesWon * Integer.parseInt(prop.getProperty("handball.win.normal.points")));
-                points += (gamesLost * Integer.parseInt(prop.getProperty("handball.lose.normal.points")));
-                points += (gamesTied * Integer.parseInt(prop.getProperty("handball.tied.points")));
-                SummaryWithTies handballHolder = new SummaryWithTies(teamName,
-                        gamesWon, gamesLost, scoredGoals, concededGoals,
-                        goalDiff, points);
+                points += (stats.getGamesWon() * Integer.parseInt(prop.getProperty("handball.win.normal.points")));
+                points += (stats.getGamesLost() * Integer.parseInt(prop.getProperty("handball.lose.normal.points")));
+                points += (stats.getGamesTied() * Integer.parseInt(prop.getProperty("handball.tied.points")));
+                SummaryWithTies handballHolder = new SummaryWithTies(stats.getTeamN(), 
+                        stats.getGamesWon(), stats.getGamesLost(), stats.getScoredGoals(),
+                        stats.getConcededGoals(), stats.getGoalDiff(), points);
 
                 return handballHolder;
             case "volleyball":
-                points += (wins3to0 * Integer.parseInt(prop.getProperty("volleyball.win.threetozero.points")));
-                points += (wins3to1 * Integer.parseInt(prop.getProperty("volleyball.win.threetoone.points")));
-                points += (wins3to2 * Integer.parseInt(prop.getProperty("volleyball.win.threetotwo.points")));
-                points += (lose2to3 * Integer.parseInt(prop.getProperty("volleyball.lose.twotothree.points")));
-                points += (lose1to3 * Integer.parseInt(prop.getProperty("volleyball.lose.onetothree.points")));
-                points += (lose0to3 * Integer.parseInt(prop.getProperty("volleyball.lose.zerotothree.points")));
-                Summary volleyballHolder = new Summary(teamName, gamesWon,
-                        gamesLost, scoredGoals, concededGoals, goalDiff, points);
+                points += (stats.getWins3to0() * Integer.parseInt(prop.getProperty("volleyball.win.threetozero.points")));
+                points += (stats.getWins3to1() * Integer.parseInt(prop.getProperty("volleyball.win.threetoone.points")));
+                points += (stats.getWins3to2() * Integer.parseInt(prop.getProperty("volleyball.win.threetotwo.points")));
+                points += (stats.getLose2to3() * Integer.parseInt(prop.getProperty("volleyball.lose.twotothree.points")));
+                points += (stats.getLose1to3() * Integer.parseInt(prop.getProperty("volleyball.lose.onetothree.points")));
+                points += (stats.getLose0to3() * Integer.parseInt(prop.getProperty("volleyball.lose.zerotothree.points")));
+                Summary volleyballHolder = new Summary(stats.getTeamN(), 
+                        stats.getGamesWon(), stats.getGamesLost(), stats.getScoredGoals(),
+                        stats.getConcededGoals(), stats.getGoalDiff(), points);
                 
                 return volleyballHolder;
             default:

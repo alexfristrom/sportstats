@@ -16,6 +16,10 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.any;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.times;
+import sportstats.domain.Game;
+import sportstats.domain.Result;
+import sportstats.domain.Sport;
+import sportstats.domain.Team;
 import sportstats.repository.ResultRepository;
 import sportstats.repository.SeasonRepository;
 import sportstats.service.season.holders.SeasonSumType;
@@ -31,8 +35,10 @@ public class SeasonSummaryServiceTest {
     private SeasonRepository seasonRepo;
     private ResultRepository resultRepo;
     private SeasonSummaryService service;
+    
     public SeasonSummaryServiceTest() {
     }
+    
     private void mockSetupWithoutServiceMock(){
         teamRepo = mock(TeamRepository.class);
         gameRepo = mock(GameRepository.class);
@@ -49,5 +55,37 @@ public class SeasonSummaryServiceTest {
         
         service.getSeasonsSummary("1,3");
         verify(teamRepo,times(3)).listBySeason(any(Long.class));
+    }
+    
+    @Test
+    public void testGetSeasonSummary(){
+        mockSetupWithoutServiceMock();
+        List<Team> listOfTeam = new ArrayList<>();
+        List<Game> listofGame = new ArrayList<>();
+        Team team = mock(Team.class);
+        Result result = new Result(1L, 10, 5);
+        Game game = new Game();
+        game.setHomeTeam(team);
+        game.setAwayTeam(team);
+        game.setResult(result);
+        Sport sport = new Sport(1L, "bandy");
+        
+        listOfTeam.add(team);
+        listofGame.add(game);
+        
+        Long seasonId = 1L;
+        Long teamId = 1L;
+        
+        Mockito.when(team.getName()).thenReturn("name");
+        Mockito.when(team.getSport()).thenReturn(sport);
+        Mockito.when(team.getId()).thenReturn(teamId);
+        Mockito.when(teamRepo.listBySeason(seasonId)).thenReturn(listOfTeam);
+        Mockito.when(gameRepo.listAllByTeam(teamId)).thenReturn(listofGame);
+        
+        List<SeasonSumType> sum = new ArrayList<>();
+        
+        sum = service.getSeasonSummary(seasonId);
+        assertEquals("name", sum.get(0).getTeamName());
+        
     }
 }

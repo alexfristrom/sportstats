@@ -18,6 +18,7 @@ import sportstats.repository.ResultRepository;
 import sportstats.repository.SeasonRepository;
 import sportstats.repository.TeamRepository;
 import sportstats.service.season.holders.SeasonSumType;
+import sportstats.service.season.holders.SummaryStats;
 import sportstats.service.util.SportRuleHandler;
 
 /**
@@ -171,28 +172,8 @@ public class SeasonSummaryService {
         var listOfGame = gameList;
         String sportN = sportName;
 
-        String teamN = teamName;
-        int gamesWon = 0;
-        int gamesLost = 0;
-        int scoredGoals = 0;
-        int concededGoals = 0;
-
-        //Används vid sortering
-        int goalDiff = 0;
-
-        //Beroende på sport
-        int winsOverTime = 0;
-        int losesOverTime = 0;
-        int gamesTied = 0;
-
-        // Enbart för volleyball
-        int wins3to0 = 0;
-        int wins3to1 = 0;
-        int wins3to2 = 0;
-        int lose2to3 = 0;
-        int lose1to3 = 0;
-        int lose0to3 = 0;
-
+        SummaryStats stats = new SummaryStats(teamName);
+      
         for (Game game : listOfGame) {
             Long gameId = game.getId();
             Result tempResult = game.getResult();
@@ -202,59 +183,57 @@ public class SeasonSummaryService {
             if (game.getHomeTeam().getId().equals(teamID)) {
                 teamScore = tempResult.getHomeTeamScore();
                 otherTeamScore = tempResult.getAwayTeamScore();
-                scoredGoals += teamScore;
-                concededGoals += otherTeamScore;
+                stats.setScoredGoals(teamScore);
+                stats.setConcededGoals(otherTeamScore);
             } else {
                 teamScore = tempResult.getAwayTeamScore();
                 otherTeamScore = tempResult.getHomeTeamScore();
-                scoredGoals += teamScore;
-                concededGoals += otherTeamScore;
+                stats.setScoredGoals(teamScore);
+                stats.setConcededGoals(otherTeamScore);
             }
 
             if (teamScore > otherTeamScore) {
-                gamesWon++;
+                stats.incGamesWon();
                 if (tempResult.getOvertime() || tempResult.getPenalty()) {
-                    winsOverTime++;
+                    stats.incWinsOverTime();
                 }
 
                 //Bara för volleyball. kankse kan implemnteras på ett annats sätt
                 if (sportN.equalsIgnoreCase("volleball")) {
                     if ((teamScore == 3) && (otherTeamScore == 0)) {
-                        wins3to0++;
+                        stats.incWins3to0();
                     } else if ((teamScore == 3) && (otherTeamScore == 1)) {
-                        wins3to1++;
+                        stats.incsWins3to1();
                     } else {
-                        wins3to2++;
+                        stats.incWins3to2();
                     }
                 }
 
             } else if (teamScore == otherTeamScore) {
-                gamesTied++;
+                stats.incGamesTied();
 
             } else {
-                gamesLost++;
+                stats.incGamesLost();
                 if (tempResult.getOvertime() || tempResult.getPenalty()) {
-                    losesOverTime++;
+                    stats.incLosesOverTime();
                 }
 
                 //Bara för volleyball
                 if (sportN.equalsIgnoreCase("volleball")) {
                     if ((teamScore == 2) && (otherTeamScore == 3)) {
-                        lose2to3++;
+                        stats.incLose2to3();
                     } else if ((teamScore == 1) && (otherTeamScore == 3)) {
-                        lose1to3++;
+                        stats.incLose1to3();
                     } else {
-                        lose0to3++;
+                        stats.incLose0to3();
                     }
                 }
             }
         }
-        goalDiff = scoredGoals - concededGoals;
+        stats.calcGoalDiff();
 
         SportRuleHandler ruleHandler = new SportRuleHandler(sportN);
-        return ruleHandler.getPointsByRules(teamName, gamesWon, gamesLost, scoredGoals,
-                concededGoals, goalDiff, winsOverTime, losesOverTime, gamesTied,
-                wins3to0, wins3to1, wins3to2, lose2to3, lose1to3, lose0to3);
+        return ruleHandler.getPointsByRules(stats);
 
     }
 
