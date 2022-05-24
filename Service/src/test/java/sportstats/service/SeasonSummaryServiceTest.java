@@ -62,7 +62,9 @@ public class SeasonSummaryServiceTest {
         List<Team> listOfTeam = new ArrayList<>();
         List<Game> listofGame = new ArrayList<>();
         Team team = mock(Team.class);
-        Result result = new Result(1L, 10, 5);
+        short homeTeamScore = 10;
+        short awayTeamScore = 5;
+        Result result = new Result(1L, homeTeamScore, awayTeamScore);
         Game game = new Game();
         game.setHomeTeam(team);
         game.setAwayTeam(team);

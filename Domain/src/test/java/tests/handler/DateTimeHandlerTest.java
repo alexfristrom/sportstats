@@ -9,7 +9,7 @@ import java.time.LocalDateTime;
 import java.time.LocalTime;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
-import sportstats.handler.DateHandler;
+import sportstats.handler.DateTimeHandler;
 
 /**
  * Test for handler of LocalDate/Time Involves test for Metohds for LocalDate,
@@ -17,11 +17,11 @@ import sportstats.handler.DateHandler;
  *
  * @author alexf
  */
-public class DateHandlerTest {
+public class DateTimeHandlerTest {
 
     @Test
     public void testDate() {
-        DateHandler handler = new DateHandler();
+        DateTimeHandler handler = new DateTimeHandler();
         short year = 2022;
         byte month = 5;
         byte day = 15;
@@ -37,7 +37,7 @@ public class DateHandlerTest {
 
     @Test
     public void testTime() {
-        DateHandler handler = new DateHandler();
+        DateTimeHandler handler = new DateTimeHandler();
         byte hour = 20;
         byte minute = 15;
         byte second = 0;
@@ -52,7 +52,7 @@ public class DateHandlerTest {
 
     @Test
     public void testDateTime() {
-        DateHandler handler = new DateHandler();
+        DateTimeHandler handler = new DateTimeHandler();
         byte hour = 20;
         byte minute = 15;
         byte second = 0;
@@ -72,7 +72,7 @@ public class DateHandlerTest {
 
     @Test
     public void getDateExcludeTimeFromDateTime() {
-        DateHandler handler = new DateHandler();
+        DateTimeHandler handler = new DateTimeHandler();
         byte hour = 20;
         byte minute = 15;
         byte second = 0;
@@ -92,7 +92,7 @@ public class DateHandlerTest {
 
     @Test
     public void getTimeExcludeDateFromDateTime() {
-        DateHandler handler = new DateHandler();
+        DateTimeHandler handler = new DateTimeHandler();
         byte hour = 20;
         byte minute = 15;
         byte second = 0;
@@ -118,7 +118,7 @@ public class DateHandlerTest {
                     byte hour = 25;
                     byte minute = 15;
                     byte second = 0;
-                    DateHandler dateHandler = new DateHandler();
+                    DateTimeHandler dateHandler = new DateTimeHandler();
                     dateHandler.addTime(hour, minute, second);
                 });
         assertThrows(IllegalArgumentException.class,
@@ -126,7 +126,7 @@ public class DateHandlerTest {
                     byte hour = 24;
                     byte minute = -2;
                     byte second = 0;
-                    DateHandler dateHandler = new DateHandler();
+                    DateTimeHandler dateHandler = new DateTimeHandler();
                     dateHandler.addTime(hour, minute, second);
                 });
         assertThrows(IllegalArgumentException.class,
@@ -134,7 +134,7 @@ public class DateHandlerTest {
                     byte hour = 23;
                     byte minute = 15;
                     byte second = 70;
-                    DateHandler dateHandler = new DateHandler();
+                    DateTimeHandler dateHandler = new DateTimeHandler();
                     dateHandler.addTime(hour, minute, second);
                 });
     }
@@ -146,7 +146,7 @@ public class DateHandlerTest {
                     short year = 25;
                     byte month = 12;
                     byte day = 1;
-                    DateHandler dateHandler = new DateHandler();
+                    DateTimeHandler dateHandler = new DateTimeHandler();
                     dateHandler.addDate(year, month, day);
                 });
         assertThrows(IllegalArgumentException.class,
@@ -154,7 +154,7 @@ public class DateHandlerTest {
                     short year = 2000;
                     byte month = 14;
                     byte day = 1;
-                    DateHandler dateHandler = new DateHandler();
+                    DateTimeHandler dateHandler = new DateTimeHandler();
                     dateHandler.addDate(year, month, day);
                 });
         assertThrows(IllegalArgumentException.class,
@@ -162,7 +162,7 @@ public class DateHandlerTest {
                     short year = 2000;
                     byte month = 11;
                     byte day = 0;
-                    DateHandler dateHandler = new DateHandler();
+                    DateTimeHandler dateHandler = new DateTimeHandler();
                     dateHandler.addDate(year, month, day);
                 });
     }

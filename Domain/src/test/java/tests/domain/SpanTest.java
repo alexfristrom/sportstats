@@ -13,7 +13,7 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 import sportstats.domain.Span;
-import sportstats.handler.DateHandler;
+import sportstats.handler.DateTimeHandler;
 
 /**
  *
@@ -24,7 +24,7 @@ public class SpanTest {
     @Test
     public void testSpanSetGetStartDate(){
         Span span = new Span();
-        DateHandler handler = new DateHandler();
+        DateTimeHandler handler = new DateTimeHandler();
         short year = 2022;
         byte month = 5;
         byte day = 15;
@@ -36,7 +36,7 @@ public class SpanTest {
     @Test
     public void testSpanSetGetEndDate(){
         Span span = new Span();
-        DateHandler handler = new DateHandler();
+        DateTimeHandler handler = new DateTimeHandler();
         short year = 2022;
         byte month = 5;
         byte day = 15;

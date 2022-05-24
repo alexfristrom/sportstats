@@ -4,13 +4,8 @@
  */
 package sportstats.service;
 
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.AfterAll;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.ArgumentMatchers.any;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import static org.mockito.Mockito.mock;
@@ -43,10 +38,11 @@ public class AddResultServiceTest {
         tmpGame.setResult(tmpResult);
 
         Long gameId = 1l;
-
+        short homeTeamScore = 5;
+        short awayTeamScore = 15;
         Mockito.when(gameR.getById(gameId)).thenReturn(tmpGame);
-
-        Game game = service.addResultScore(1L, 5, 15);
+        
+        Game game = service.addResultScore(1L, homeTeamScore, awayTeamScore);
 
         assertEquals(15, game.getResult().getAwayTeamScore());
         assertEquals(5, game.getResult().getHomeTeamScore());
@@ -92,7 +88,9 @@ public class AddResultServiceTest {
         Long gameId = 1l;
 
         Mockito.when(gameR.getById(gameId)).thenReturn(tmpGame);
-        Game game = service.addGameResult(gameId, 5, 15, true, 20L, true);
+        short homeTeamScore = 5;
+        short awayTeamScore = 15;
+        Game game = service.addGameResult(gameId, homeTeamScore, awayTeamScore, true, 20L, true);
 
         assertEquals(15, game.getResult().getAwayTeamScore());
         assertEquals(5, game.getResult().getHomeTeamScore());

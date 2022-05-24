@@ -28,7 +28,7 @@ public class AddResultResource {
     
     @PostMapping("score/{gameId}/{homeTeamScore}/{awayTeamScore}")
     public Game addResultScore(@PathVariable Long gameId, 
-            @PathVariable int homeTeamScore, @PathVariable int awayTeamScore){
+            @PathVariable short homeTeamScore, @PathVariable short awayTeamScore){
         
         return service.addResultScore(gameId, homeTeamScore, awayTeamScore);
     }
@@ -44,7 +44,7 @@ public class AddResultResource {
     
     @PostMapping("all/{gameId}/{homeTeamScore}/{awayTeamScore}/{overTime}/{endTime}/{penalty}")
     public Game addAllData(@PathVariable Long gameId, 
-            @PathVariable int homeTeamScore, @PathVariable int awayTeamScore,
+            @PathVariable short homeTeamScore, @PathVariable short awayTeamScore,
             @PathVariable boolean overTime, @PathVariable Long endTime, 
             @PathVariable boolean penalty){
         

@@ -12,7 +12,7 @@ import sportstats.domain.Game;
 import sportstats.domain.Result;
 import sportstats.domain.Season;
 import sportstats.domain.Team;
-import sportstats.handler.DateHandler;
+import sportstats.handler.DateTimeHandler;
 
 /**
  * Test class for domain object Game. Includes Test for getters and setters for
@@ -69,7 +69,7 @@ public class GameTest {
 
     @Test
     public void dateTest() {
-        DateHandler handler = new DateHandler();
+        DateTimeHandler handler = new DateTimeHandler();
         byte hour = 20;
         byte minute = 15;
         byte second = 0;

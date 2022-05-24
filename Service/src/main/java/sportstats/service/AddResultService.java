@@ -24,7 +24,7 @@ public class AddResultService {
         this.gameR = gameRepository;
     }
     
-    public Game addResultScore(Long gameId, int homeTeamScore, int awayTeamScore){  
+    public Game addResultScore(Long gameId, short homeTeamScore, short awayTeamScore){  
         Game game = gameR.getById(gameId);
         Result result = game.getResult();
         
@@ -54,7 +54,7 @@ public class AddResultService {
     }
     
     
-    public Game addGameResult(Long gameId, int homeTeamScore, int awayTeamScore, 
+    public Game addGameResult(Long gameId, short homeTeamScore, short awayTeamScore, 
             boolean overtime, Long endTime, boolean penalty){
         
         Game game = gameR.getById(gameId);

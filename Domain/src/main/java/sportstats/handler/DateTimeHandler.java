@@ -12,23 +12,23 @@ import java.time.LocalTime;
  *
  * @author alexf
  */
-public class DateHandler {
+public class DateTimeHandler {
 
     private LocalTime time;
     private LocalDate date;
     private LocalDateTime dateTime;
 
-    public DateHandler() {
+    public DateTimeHandler() {
     }
 
-    public DateHandler(short year, byte month, byte day) {
+    public DateTimeHandler(short year, byte month, byte day) {
         this.addDate(year, month, day);
     }
     
-    public DateHandler(byte hour, byte minute, byte second){
+    public DateTimeHandler(byte hour, byte minute, byte second){
         this.addTime(hour, minute, second);
     }
-    public DateHandler(short year, byte month, byte day, byte hour, byte minute, byte second) {
+    public DateTimeHandler(short year, byte month, byte day, byte hour, byte minute, byte second) {
         this.addDate(year, month, day);
         this.addTime(hour, minute, second);
     }

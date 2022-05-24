@@ -9,7 +9,7 @@ import sportstats.service.holders.TeamGameWrapper;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import sportstats.handler.DateHandler;
+import sportstats.handler.DateTimeHandler;
 import sportstats.domain.Game;
 import sportstats.domain.Result;
 import sportstats.domain.Season;
@@ -206,7 +206,7 @@ public class GameService {
             }
         } 
         
-        DateHandler handler = new DateHandler();
+        DateTimeHandler handler = new DateTimeHandler();
         handler.addDate(year, month, day);
         
         for (Game game : gameList) {

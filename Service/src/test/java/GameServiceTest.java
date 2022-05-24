@@ -18,7 +18,7 @@ import sportstats.domain.Game;
 import sportstats.domain.Result;
 import sportstats.domain.Season;
 import sportstats.domain.Team;
-import sportstats.handler.DateHandler;
+import sportstats.handler.DateTimeHandler;
 
 import sportstats.repository.GameRepository;
 import sportstats.repository.ResultRepository;
@@ -310,10 +310,11 @@ public class GameServiceTest {
         Result result2 = new Result();
         game1.setResult(result1);
         game2.setResult(result2);
-        result1.setHomeTeamScore(1);
-        result2.setHomeTeamScore(0);
-        result1.setAwayTeamScore(1);
-        result2.setAwayTeamScore(4);
+        
+        result1.setHomeTeamScore((short)1);
+        result2.setHomeTeamScore((short)0);
+        result1.setAwayTeamScore((short)1);
+        result2.setAwayTeamScore((short)4);
         
         List<Game> games = new ArrayList();
         games.add(game1);
@@ -350,7 +351,7 @@ public class GameServiceTest {
         byte day = 01;
         List<Season> seasonList = new ArrayList();
         List<Game> gameList = new ArrayList();
-        DateHandler handler = new DateHandler();
+        DateTimeHandler handler = new DateTimeHandler();
         handler.addDate(year, month, day);
         List<Game> newList = new ArrayList();
         List<Game> returnList = new ArrayList();

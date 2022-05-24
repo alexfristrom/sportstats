@@ -14,7 +14,7 @@ import org.springframework.stereotype.Service;
 import sportstats.domain.Game;
 import sportstats.domain.Result;
 import sportstats.domain.Team;
-import sportstats.handler.DateHandler;
+import sportstats.handler.DateTimeHandler;
 import sportstats.repository.GameRepository;
 import sportstats.repository.ResultRepository;
 import sportstats.repository.SeasonRepository;
@@ -151,8 +151,8 @@ public class SeasonSummaryService {
         byte day1 = Byte.parseByte(dateInterval.substring(8, 10));
         byte day2 = Byte.parseByte(dateInterval.substring(19, 21));
 
-        var handler1 = new DateHandler();
-        var handler2 = new DateHandler();
+        var handler1 = new DateTimeHandler();
+        var handler2 = new DateTimeHandler();
         handler1.addDate(year1, month1, day1);
         handler2.addDate(year2, month2, day2);
 
